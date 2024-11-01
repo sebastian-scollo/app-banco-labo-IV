@@ -3,19 +3,14 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<%@ include file="MenuCliente.jsp" %>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar</title>
+    <title>Document</title>
     <style>
-        
 
-
-    
-        /* Estilos para el formulario */
-        .form-container {
+.form-container {
             max-width: 700px;
-            margin:  auto;
+            margin: 100px auto;
             padding: 20px;
             border: 1px solid #ddd;
             border-radius: 5px;
@@ -83,7 +78,6 @@
         }
         .submit-btn:hover {
             background-color: #246da8;
-           
         }
 
         /* Estilo para la flecha del select */
@@ -95,17 +89,9 @@
 
             
         }
-        .form-group {
-            flex: 1; /* Las columnas ocupan el mismo espacio */
-            margin-right: 10px; /* Espacio entre columnas */
-        }
-        .form-group-pair {
-            display: flex; /* Usar flexbox para dos columnas */
-            justify-content: space-between; /* Espaciado entre columnas */
-        }
 
         .form-group::after {
-            content: '^';
+            content: '▾';
             position: absolute;
             right: 10px;
             top: 50%;
@@ -113,67 +99,75 @@
             pointer-events: none;
         }
 
-     
         .form-group:not(:has(select))::after {
             content: ''; /* Esto elimina el contenido, es decir, la flecha */
         }
         .form-group.email-group {
             margin-bottom: 20px; /* Ajusta este valor para más o menos espacio */
         }
-        .menu-image {
-            
-            padding-top: 10px;
-            height: 150px; /* Tamaño de la imagen */
-    
-            
-            margin-right: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Borde esfumado */
-            border-radius: 5px; /* Suaviza las esquinas */
-        }
+        
+
+ 
 
     </style>
 </head>
+<%@ include file="MenuCliente.jsp" %>
 <body>
     <div class="form-container">
         <div class="header">
-            <h1>Edicion de clientes</h1>
+            <h1>Registrar una nueva Cuenta</h1>
+            
         </div>
 
         <!-- Campos en dos columnas -->
         <form action="submitForm" method="post">
         <div class="form-group-pair">
-            <div class="form-group">
-                <input type="text" id="nombres" placeholder="Nombre" required pattern="[A-Za-z\s]+" title="Solo se permiten letras y espacios" class="form-input"  >
-            </div>
-            <div class="form-group">
-                <input type="text" id="apellidos" placeholder="Apellido" class="form-input"  required >
-            </div>
+            <!--   <div class="form-group">
+                <input type="text" id="Cuentas" placeholder="Cuentas" class="form-input" >
+            </div> -->
+           <!-- <div class="form-group">
+                <input type="number" id="CBU" placeholder="CBU" class="form-input" >
+            </div>-->
         </div>
-
-       
 
         <div class="form-group-pair">
             <div class="form-group">
-                <label for="fecha-nacimiento" class="form-label">Fecha de nacimiento</label>
-                <input type="date" id="fecha-nacimiento" class="form-input" required>
+                <input type="text" id="CodigoTipoCuenta" placeholder="CodigoTipoCuenta" class="form-input" >
             </div>
-           <div class="form-group">
-                <label for="sexo-dni" class="form-label">Sexo segun tu DNI</label>
-                <select id="sexo-dni" class="form-input">
-                    <option value="femenino">Femenino</option>
-                    <option value="masculino">Masculino</option>
-                </select>
+            <div class="form-group">
+                <input type="text" id="IdCliente" placeholder="IdCliente" class="form-input" >
             </div>
         </div>
 
-        <!-- Campo de correo electrónico en una columna completa -->
-        <div class="form-group email-group">
-            <input type="email" id="email" placeholder="Email" class="form-input" required pattern="^[\w.-]+@[\w.]+.\w{2,4}$" title="Por favor, ingresa un correo electrónico válido, como usuario@ejemplo.com"  >
+
+       
+
+
+        <div class="form-group-pair">
+            <div class="form-group">
+                <label for="fechaCreacion" class="form-label">Fecha de creacion</label>
+                <input type="date" id="fechaCreacion" class="form-input" required>
+            </div>
+            <div class="form-group">
+                <input type="text" id="saldo" placeholder="saldo" class="form-input" >
+            </div>
+           
         </div>
+
+
+        <div class="form-group-pair">
+            
+            <!-- <div class="form-group">
+                <input type="text" id="activo" placeholder="activo" class="form-input" >
+            </div> -->
+        </div>
+
+     
 
         <!-- Boton de envio -->
-        <input type="submit" class="submit-btn" value="Enviar Solicitud"> </input>
-       </form> 
+
+        <input type="submit" class="submit-btn" value="agregar cuentas"> </input>
+        </form> 
     </div>
 </body>
 </html>
