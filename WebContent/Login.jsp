@@ -5,118 +5,87 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
-
 <style>
-       
-        .form-container {
-            max-width: 700px;
-            margin: 100px auto;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            font-family: Arial, Helvetica, sans-serif;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .form-group-pair {
+        /* Estilos generales */
+        body {
             display: flex;
-            gap: 20px;
-            margin-bottom: 15px;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #246da8, #043263);
+            margin: 0;
+        }
+            
+        /* Contenedor del formulario de login */
+        .login-container {
+            width: 350px;
+            padding: 30px;
+            background-color: #fff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            border-radius: 10px;
+            text-align: center;
         }
 
-        .form-group {
-            position: relative;
-            flex: 1;
-            background-color: #f5f5f5;
-            border: 1px solid #ddd;
-            padding: 10px;
-            border-radius: 4px;
+        .login-container h2 {
+            font-size: 24px;
+            margin-bottom: 10px;
+            color: #333;
         }
 
-        .form-label {
-            position: absolute;
-            top: 6px;
-            left: 10px;
-            font-size: 12px;
-            color: #666;
-            pointer-events: none;
-        }
-
-        .form-input {
+        /* Estilos de los inputs */
+        .login-container input[type="text"],
+        .login-container input[type="password"] {
             width: 100%;
-            padding: 20px 10px 6px;
-            font-size: 16px;
+            padding: 10px;
+            margin: 8px 0;
             border: none;
-            background-color: transparent;
+            border-bottom: 2px solid #ccc;
             outline: none;
-            box-sizing: border-box;
-            color: #666;
+            font-size: 16px;
         }
 
-        .submit-btn {
+        .login-container input[type="text"]:focus,
+        .login-container input[type="password"]:focus {
+            border-bottom-color: #043263;
+        }
+
+        /* Botón de iniciar sesión */
+        .login-container .btn-login {
             width: 100%;
             padding: 10px;
-            background-color: #1464a5;
-            color: white;
+            margin-top: 20px;
+            background: linear-gradient(135deg, #246da8, #043263);
+            color: #fff;
             border: none;
-            border-radius: 5px;
-            cursor: pointer;
+            border-radius: 25px;
             font-size: 16px;
-            margin-bottom: 15px;
-        }
-        .submit-btn:hover {
-            background-color: #246da8;
+            cursor: pointer;
         }
 
+        .login-container .btn-login:hover {
+            opacity: 0.9;
+        }
+        .login-container img {
+            width: 200px; /* Ajusta el tamaño según sea necesario */
+            margin-bottom: 10px;
+        }
+
+
+   
        
-        .form-group select {
-            appearance: none;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            padding-right: 20px;
-        }
-
-        .form-group::after {
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            color: #007bff;
-            pointer-events: none;
-        }
-
-        .form-group:not(:has(select))::after {
-            content: ''; 
-        }
-
-        .form-group.email-group {
-            margin-bottom: 20px;
-        }
     </style>
 </head>
+
 <body>
-
- <div class="form-container">
-        <div class="header">
-            <h1>Login</h1>
-            <p>Ingrese su usario y contraseña.</p>
-        </div>
-        
-        <div class="form-group-pair">
-            <div class="form-group">
-                <input type="text" id="usuario" name="txtUsuario" placeholder="Usuario" class="form-input">
-            </div>
-            <div class="form-group">
-                <input type="password" id="contraseña" txt="txtContraseña" placeholder="Contraseña" class="form-input">
-            </div>
-        </div>
-        
-        <button type="submit" class="submit-btn">Ingresar</button>
- </div>
-
+<div class="login-container">
+        <img src="SLOGAN.png" alt="Logo">
+        <h2>Bienvenido a Banca Online</h2>
+        <input name="txtContrasenia1" type="text" placeholder="Usuario">
+        <input name="txtContrasenia2"type="password" placeholder="Contraseña">
+        <input type="password" placeholder="Confirmar contraseña">
+        <button name="btnIniciarSesion" class="btn-login">Ingresar</button>
+       
+    </div>
 </body>
 </html>

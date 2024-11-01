@@ -99,12 +99,6 @@
 </head>
 <body>
     <%@ include file="MenuCliente.jsp" %>
-
-    
-    
-    
-    
-   
     <div class="form-container">
         <div class="header">
             <h1>Registrar Cliente</h1>

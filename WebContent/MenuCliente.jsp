@@ -6,7 +6,7 @@
     <title>Insert title here</title>
     <style>
         
-        .menu-bar {
+      /*  .menu-bar {
            background-color: #4CAF50;
             overflow: hidden;
         }
@@ -21,22 +21,44 @@
         .menu-bar a:hover {
             background-color: #ddd;
             color: black;
+        }*/
+        .menu-bar {
+            background-color: #1464a5;
+            overflow: hidden;
+            text-align: center;
+            font-family: Arial, Helvetica, sans-serif;
         }
+        .menu-bar a {
+            color: white;
+            padding: 14px 20px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .menu-bar a:hover {
+            background-color: #1b2025;
+        }
+        .menu-image {
+
+            padding-top: 10px;
+            height: 100px; /* Tamaño de la imagen /
+
+
+            margin-right: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); / Borde esfumado /
+            border-radius: 5px; / Suaviza las esquinas */
+        }
+        
     </style>
 </head>
 <body>
 
     
     <div class="menu-bar">
+        <img src="SLOGAN.png" alt="Logo"   class="menu-image" ></a>
         <a href="home.jsp">Cuenta</a>
         <a href="about.jsp">Clientes</a>
         <a href="services.jsp">Prestamos</a>
         <a href="contact.jsp">Transacciones</a>
     </div>
-
-  
-    
-    
-
 </body>
 </html>
