@@ -172,7 +172,7 @@
         </div>
 
         <!-- Boton de envio -->
-        <input type="submit" class="submit-btn" value="Enviar Solicitud"> </input>
+        <input type="submit" class="submit-btn" value="Aceptar"> </input>
        </form> 
     </div>
 </body>
