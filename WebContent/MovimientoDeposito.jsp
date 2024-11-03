@@ -65,7 +65,7 @@
 <%@ include file="MenuCliente.jsp" %>
     <div class="form-container">
         <div class="header">
-            <h1>Movimientos</h1>
+            <h1>Depositar a otra cuenta</h1>
         </div>
 
         <!-- Formulario simplificado en diseño vertical -->
