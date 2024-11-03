@@ -83,7 +83,7 @@
                     <td>Dato 6</td>
                     <td>Dato 7</td>
                     <td>
-                        <button onclick="window.location.href='index.html'">
+                        <button onclick="window.location.href='EditarCuenta.jsp'">
                             <i class="bi bi-pencil">Editar</i>
                         </button>
                         <button onclick="window.location.href='index.html'">

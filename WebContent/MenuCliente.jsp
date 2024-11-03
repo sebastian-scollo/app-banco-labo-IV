@@ -56,7 +56,7 @@
     <div class="menu-bar">
         <img src="SLOGAN.png" alt="Logo"   class="menu-image" ></a>
         <a href="home.jsp">Eleccion Cuentas</a>
-        <a href="about.jsp">Cuenta</a>
+        <a href="CuentaElegida.jsp">Administrar Cuenta</a>
         <a href="services.jsp">Solicitud Prestamo</a>
         <a href="contact.jsp">Transacciones</a>
         <a href="contact.jsp">Realizar pago de Cuotas</a>
