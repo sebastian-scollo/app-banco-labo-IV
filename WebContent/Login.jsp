@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Insert title here</title>
+<title>Login</title>
 <style>
         /* Estilos generales */
         body {
@@ -13,7 +13,8 @@
             align-items: center;
             height: 100vh;
             font-family: Arial, sans-serif;
-            background: linear-gradient(135deg, #246da8, #043263);
+            background: url(BancoNejo.png) no-repeat center center fixed; /* Agrega la imagen de fondo */
+            background-size: cover; /* Asegura que la imagen cubra todo el fondo */
             margin: 0;
         }
             
@@ -21,15 +22,16 @@
         .login-container {
             width: 350px;
             padding: 30px;
-            background-color: #fff;
+            background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco con transparencia */
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
             border-radius: 10px;
             text-align: center;
+            backdrop-filter: blur(10px); /* Desenfoque del fondo */
         }
 
         .login-container h2 {
             font-size: 24px;
-            margin-bottom: 10px;
+            margin-bottom: 20px; /* Mayor espacio entre el título y el contenido */
             color: #333;
         }
 
@@ -38,7 +40,7 @@
         .login-container input[type="password"] {
             width: 100%;
             padding: 10px;
-            margin: 8px 0;
+            margin: 10px 0; /* Mayor separación entre inputs */
             border: none;
             border-bottom: 2px solid #ccc;
             outline: none;
@@ -66,26 +68,22 @@
         .login-container .btn-login:hover {
             opacity: 0.9;
         }
+        
         .login-container img {
             width: 200px; /* Ajusta el tamaño según sea necesario */
-            margin-bottom: 10px;
+            margin-bottom: 20px; /* Mayor espacio debajo del logo */
         }
-
-
-   
-       
     </style>
 </head>
 
 <body>
 <div class="login-container">
-        <img src="SLOGAN.png" alt="Logo">
+        
         <h2>Bienvenido a Banca Online</h2>
         <input name="txtContrasenia1" type="text" placeholder="Usuario">
-        <input name="txtContrasenia2"type="password" placeholder="Contraseña">
-        <input type="password" placeholder="Confirmar contraseña">
+        <input name="txtContrasenia2" type="password" placeholder="Contraseña">
+        
         <button name="btnIniciarSesion" class="btn-login">Ingresar</button>
-       
     </div>
 </body>
 </html>
