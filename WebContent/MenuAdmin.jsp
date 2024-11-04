@@ -57,22 +57,25 @@
             background-color: #45a049; 
             transform: scale(1.05);
         }
-        .content {
-            margin-left: 220px; 
-            padding: 20px; 
-            flex-grow: 1; 
-            background-image: url(BancoNejo.png); 
-            background-size: cover; 
-            background-position: center; 
-            min-height: calc(100vh - 70px); 
-        }
+      .content {
+    margin-left: 220px; 
+    padding: 20px; 
+    flex-grow: 1; 
+    background-image: url(BancoNejo.png); 
+    background-size: cover; /* Asegura que la imagen cubra todo el contenedor */
+    background-repeat: no-repeat; /* Evita que se repita la imagen */
+    background-position: center; /* Centra la imagen en el contenedor */
+    min-height: calc(100vh - 70px); /* Asegúrate de que el contenido ocupe el espacio restante */
+    padding-top: 70px; /* Añade espacio superior para evitar que la imagen sea cubierta por la cabecera */
+}
+
     </style>
 </head>
 <body>
 
     <div class="header">
         <img src="SLOGAN.png" alt="Logo">
-        <h1>MENU ADMINISTRADOR</h1>
+        <h1>  MENU ADMINISTRADOR</h1>
         <div class="user-info">Usuario: <strong>acá va el usuario logueado</strong></div>
     </div>
     
@@ -86,9 +89,9 @@
     
     <div class="content">
         
-        <p> BANCO-NEJO</p>
-        <img src="BancoNejo.png" alt="Logo">
-        <h1>ADMINISTRADOR</h1>
+        <p> </p>
+        
+        <h1></h1>
     </div>
     
 </body>
