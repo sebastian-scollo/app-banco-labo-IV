@@ -1,26 +1,52 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
-<html>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<!DOCTYPE html>
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Agregar Cuenta</title>
     <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
 
-.form-container {
+        .header {
+            background-color: #1464a5; /* Color del encabezado */
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            width: 100%;
+            position: fixed; /* Mantener el encabezado fijo */
+            top: 0;
+            left: 0;
+            z-index: 1000; /* Para que esté sobre otros elementos */
+        }
+
+        .header img {
+            height: 60px; /* Ajusta el tamaño según sea necesario */
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+
+        .user-info {
+            font-size: 16px;
+        }
+
+        .form-container {
             max-width: 700px;
-            margin: 100px auto;
+            margin: 100px auto; /* Espacio superior para el header */
             padding: 20px;
             border: 1px solid #ddd;
             border-radius: 5px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            font-family: Arial, Helvetica, sans-serif;
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 20px;
+            background-color: white; /* Fondo blanco para el formulario */
         }
 
         .form-group-pair {
@@ -36,7 +62,6 @@ pageEncoding="ISO-8859-1"%>
             border: 1px solid #ddd;
             padding: 10px;
             border-radius: 4px;
-           
         }
 
         .form-label {
@@ -57,15 +82,9 @@ pageEncoding="ISO-8859-1"%>
             outline: none;
             box-sizing: border-box;
             color: #666;
-           
-          
-      
-           
-           
         }
 
         .submit-btn {
-            
             width: 100%;
             padding: 10px;
             background-color: #1464a5;
@@ -76,6 +95,7 @@ pageEncoding="ISO-8859-1"%>
             font-size: 16px;
             margin-bottom: 15px;
         }
+
         .submit-btn:hover {
             background-color: #246da8;
         }
@@ -86,8 +106,6 @@ pageEncoding="ISO-8859-1"%>
             -webkit-appearance: none;
             -moz-appearance: none;
             padding-right: 20px;
-
-            
         }
 
         .form-group::after {
@@ -100,74 +118,43 @@ pageEncoding="ISO-8859-1"%>
         }
 
         .form-group:not(:has(select))::after {
-            content: ''; /* Esto elimina el contenido, es decir, la flecha */
+            content: ''; /* Eliminar la flecha si no es un select */
         }
-        .form-group.email-group {
-            margin-bottom: 20px; /* Ajusta este valor para más o menos espacio */
-        }
-        
-
- 
-
     </style>
 </head>
-<%@ include file="MenuCliente.jsp" %>
+
 <body>
+    <div class="header">
+        <img src="SLOGAN.png" alt="Logo">
+        <h1>AGREGAR CUENTA</h1> 
+        <div class="user-info">Usuario: <strong>aca va el usuario logueado</strong></div>
+    </div>
+    
     <div class="form-container">
-        <div class="header">
-            <h1>Registrar una nueva Cuenta</h1>
-            
-        </div>
+        <h2>Registrar una nueva Cuenta</h2>
 
-        <!-- Campos en dos columnas -->
         <form action="submitForm" method="post">
-        <div class="form-group-pair">
-            <!--   <div class="form-group">
-                <input type="text" id="Cuentas" placeholder="Cuentas" class="form-input" >
-            </div> -->
-           <!-- <div class="form-group">
-                <input type="number" id="CBU" placeholder="CBU" class="form-input" >
-            </div>-->
-        </div>
-
-        <div class="form-group-pair">
-            <div class="form-group">
-                <input type="text" id="CodigoTipoCuenta" placeholder="CodigoTipoCuenta" class="form-input" >
+            <div class="form-group-pair">
+                <div class="form-group">
+                    <input type="text" id="CodigoTipoCuenta" placeholder="Código Tipo Cuenta" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="IdCliente" placeholder="ID Cliente" class="form-input" required>
+                </div>
             </div>
-            <div class="form-group">
-                <input type="text" id="IdCliente" placeholder="IdCliente" class="form-input" >
+
+            <div class="form-group-pair">
+                <div class="form-group">
+                    <label for="fechaCreacion" class="form-label">Fecha de Creación</label>
+                    <input type="date" id="fechaCreacion" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="saldo" placeholder="Saldo" class="form-input" required>
+                </div>
             </div>
-        </div>
 
-
-       
-
-
-        <div class="form-group-pair">
-            <div class="form-group">
-                <label for="fechaCreacion" class="form-label">Fecha de creacion</label>
-                <input type="date" id="fechaCreacion" class="form-input" required>
-            </div>
-            <div class="form-group">
-                <input type="text" id="saldo" placeholder="saldo" class="form-input" >
-            </div>
-           
-        </div>
-
-
-        <div class="form-group-pair">
-            
-            <!-- <div class="form-group">
-                <input type="text" id="activo" placeholder="activo" class="form-input" >
-            </div> -->
-        </div>
-
-     
-
-        <!-- Boton de envio -->
-
-        <input type="submit" class="submit-btn" value="agregar cuentas"> </input>
-        </form> 
+            <input type="submit" class="submit-btn" value="Agregar Cuenta">
+        </form>
     </div>
 </body>
 </html>
