@@ -4,35 +4,56 @@
 <head>
     <meta charset="ISO-8859-1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movimientos</title>
+    <title>Transferencias</title>
     <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            flex-direction: column; /* Para evitar solapamiento */
+        }
+        .header {
+            background-color: #1464a5;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            width: 100%; /* Asegura que el header ocupe todo el ancho */
+            position: fixed; /* Mantener el encabezado fijo en la parte superior */
+            top: 0;
+            left: 0;
+            z-index: 1000; /* Para que esté sobre otros elementos */
+        }
+        .header img {
+            height: 60px; /* Ajusta el tamaño según sea necesario */
+        }
+        .header h1 {
+            margin: 0;
+            font-size: 24px;
+        }
+        .user-info {
+            font-size: 16px;
+        }
         .form-container {
             max-width: 400px;
-            margin: 100px auto;
+            margin: 100px auto 20px; /* Ajusta el margen superior para evitar solapamiento */
             padding: 20px;
             border: 1px solid #ddd;
             border-radius: 5px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            font-family: Arial, Helvetica, sans-serif;
         }
-
-        .header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
         .form-group {
             margin-bottom: 15px;
             position: relative;
         }
-
         .form-label {
             font-size: 12px;
             color: #666;
             margin-bottom: 5px;
             display: block;
         }
-
         .form-input {
             width: 100%;
             padding: 10px;
@@ -43,7 +64,6 @@
             outline: none;
             color: #666;
         }
-
         .submit-btn {
             width: 100%;
             padding: 10px;
@@ -62,10 +82,15 @@
 </head>
 
 <body>
-<%@ include file="MenuCliente.jsp" %>
+    <div class="header">
+        <img src="SLOGAN.png" alt="Logo">
+        <h1>TRANSFERENCIAS</h1>
+        <div class="user-info">Usuario: <strong>acá va el usuario logueado</strong></div>
+    </div>
+
     <div class="form-container">
         <div class="header">
-            <h1>Depositar a otra cuenta</h1>
+            <h1>TRANSFERENCIAS</h1>
         </div>
 
         <!-- Formulario simplificado en diseño vertical -->

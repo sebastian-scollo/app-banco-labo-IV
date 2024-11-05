@@ -126,12 +126,12 @@
 <body>
     <div class="header">
         <img src="SLOGAN.png" alt="Logo">
-        <h1>AGREGAR CUENTA</h1> 
+        <h1>AGREGAR NUEVA CUENTA</h1> 
         <div class="user-info">Usuario: <strong>aca va el usuario logueado</strong></div>
     </div>
     
     <div class="form-container">
-        <h2>Registrar una nueva Cuenta</h2>
+        <h2>INGRESE DATOS DE CUENTA</h2>
 
         <form action="submitForm" method="post">
             <div class="form-group-pair">
@@ -145,7 +145,7 @@
 
             <div class="form-group-pair">
                 <div class="form-group">
-                    <label for="fechaCreacion" class="form-label">Fecha de Creación</label>
+                    <label for="fechaCreacion" class="form-label">Fecha de Creacion</label>
                     <input type="date" id="fechaCreacion" class="form-input" required>
                 </div>
                 <div class="form-group">

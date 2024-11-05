@@ -1,25 +1,57 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>Formulario para registrar nuevo Clientes</title>
-
+    <title>Registro alta Cliente</title>
     <style>
-       
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
         .form-container {
             max-width: 700px;
-            margin: 100px auto;
+            width: 100%;
+            background-color: #ffffff;
             padding: 20px;
             border: 1px solid #ddd;
             border-radius: 5px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            font-family: Arial, Helvetica, sans-serif;
+            margin-top: 100px; /* Ajustar si es necesario */
         }
 
         .header {
+            background-color: #1464a5;
+            color: white;
+            display: flex;
+            align-items: center;
+            padding: 10px 20px;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 1000;
+        }
+
+        .header img {
+            height: 60px;
+        }
+
+        .header h1 {
+            margin: 0;
+            flex-grow: 1;
             text-align: center;
-            margin-bottom: 20px;
+            font-size: 24px;
+        }
+
+        .user-info {
+            font-size: 16px;
         }
 
         .form-group-pair {
@@ -68,50 +100,41 @@
             font-size: 16px;
             margin-bottom: 15px;
         }
+
         .submit-btn:hover {
             background-color: #246da8;
         }
 
-       
         .form-group select {
             appearance: none;
-            -webkit-appearance: none;
-            -moz-appearance: none;
             padding-right: 20px;
-        }
-
-        .form-group::after {
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            color: #007bff;
-            pointer-events: none;
-        }
-
-        .form-group:not(:has(select))::after {
-            content: ''; 
         }
 
         .form-group.email-group {
             margin-bottom: 20px;
         }
+
+        .footer {
+            margin-top: 20px;
+            text-align: center;
+        }
     </style>
 </head>
 <body>
-    <%@ include file="MenuCliente.jsp" %>
-    <div class="form-container">
-        <div class="header">
-            <h1>Registrar Cliente</h1>
-            <p>Complete los siguiente campos</p>
-        </div>
+    <div class="header">
+        <img src="SLOGAN.png" alt="Logo">
+        <h1>ALTA NUEVO CLIENTE</h1>
+        <div class="user-info">Usuario: <strong>acá va el usuario logueado</strong></div>
+    </div>
 
-       
+    <div class="form-container">
+        <p>Complete los siguientes campos</p>
         <div class="form-group-pair">
             <div class="form-group">
                 <input type="text" id="nombres" name="txtNombre" placeholder="Nombre" class="form-input">
             </div>
             <div class="form-group">
-                <input type="text" id="apellidos" txt="txtApellido" placeholder="Apellido" class="form-input">
+                <input type="text" id="apellidos" name="txtApellido" placeholder="Apellido" class="form-input">
             </div>
         </div>
 
@@ -139,7 +162,6 @@
             </div>
         </div>
 
-        
         <div class="form-group-pair">
             <div class="form-group">
                 <input type="text" id="numero-telefono" name="txtTelefono" placeholder="Numero Telefono" class="form-input">
@@ -149,14 +171,14 @@
             </div>
         </div>
 
-        
         <div class="form-group email-group">
             <input type="email" id="email" placeholder="Email" class="form-input">
         </div>
 
-       
         <button type="submit" class="submit-btn">Registrar</button>
+        <div class="footer">
+            <span>¿Ya estás registrado? <a href="Login.jsp">Inicia Sesión</a></span>
+        </div>
     </div>
-    <span>Ya estabas registrado? <a href="Login.jsp">Inicia Sesion</a></span>
 </body>
 </html>

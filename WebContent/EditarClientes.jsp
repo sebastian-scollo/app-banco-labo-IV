@@ -136,7 +136,7 @@
 <body>
     <div class="form-container">
         <div class="header">
-            <h1>Edicion de clientes</h1>
+            <h1>EDITAR INFORMACION DE CLIENTE</h1>
         </div>
 
         <!-- Campos en dos columnas -->

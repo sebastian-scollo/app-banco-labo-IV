@@ -6,7 +6,7 @@
 <%@ include file="MenuCliente.jsp" %>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar</title>
+    <title>EditarContraseña</title>
     <style>
         
 
