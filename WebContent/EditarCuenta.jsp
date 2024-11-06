@@ -111,7 +111,7 @@
 
     </style>
 </head>
-<%@ include file="MenuCliente.jsp" %>
+<%@ include file="BarraMenuAdmin.jsp" %>
 <body>
     <div class="form-container">
         <div class="header">

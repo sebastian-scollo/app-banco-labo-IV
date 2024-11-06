@@ -103,13 +103,10 @@
 </head>
 <body>
 
-    <div class="header">
-        <img src="SLOGAN.png" alt="Logo">
-        <h1>ADMINISTRAR CLIENTES</h1> 
-        <div class="user-info">Usuario: <strong>acá va el usuario logueado</strong></div>
-    </div>
+    
     
     <div class="table-container">
+    <%@ include file="BarraMenuAdmin.jsp" %>
         <!-- Campo de búsqueda por DNI -->
         <div class="search-container">
             <input type="text" class="form-input" placeholder="Buscar por DNI">

@@ -95,11 +95,7 @@
     </style>
 </head>
 <body>
-    <div class="header">
-        <img src="SLOGAN.png" alt="Logo">
-        <h1>SOLICITUD DE PRÉSTAMO</h1>
-        <div class="user-info">Usuario: <strong>acá va el usuario logueado</strong></div>
-    </div>
+     <%@ include file="MenuCliente.jsp" %>
 
     <div class="form-container">
         <form action="ProcesarPrestamo.jsp" method="post">
