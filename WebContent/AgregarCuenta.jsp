@@ -124,11 +124,7 @@
 </head>
 
 <body>
-    <div class="header">
-        <img src="SLOGAN.png" alt="Logo">
-        <h1>AGREGAR NUEVA CUENTA</h1> 
-        <div class="user-info">Usuario: <strong>aca va el usuario logueado</strong></div>
-    </div>
+    <%@ include file="BarraMenuAdmin.jsp" %>
     
     <div class="form-container">
         <h2>INGRESE DATOS DE CUENTA</h2>
@@ -136,7 +132,7 @@
         <form action="submitForm" method="post">
             <div class="form-group-pair">
                 <div class="form-group">
-                    <input type="text" id="CodigoTipoCuenta" placeholder="Código Tipo Cuenta" class="form-input" required>
+                    <input type="text" id="CodigoTipoCuenta" placeholder="Codigo Tipo Cuenta" class="form-input" required>
                 </div>
                 <div class="form-group">
                     <input type="text" id="IdCliente" placeholder="ID Cliente" class="form-input" required>

@@ -84,9 +84,10 @@
 </head>
 <body>
    <%@ include file="BarraMenuAdmin.jsp" %>
-
+      
     <div class="table-container">
         <div class="search-container">
+    <h1>Solicitudes de Prestamo</h1>
             
           
         </div>

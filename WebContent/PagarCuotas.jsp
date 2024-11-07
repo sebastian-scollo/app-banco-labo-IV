@@ -71,6 +71,7 @@
 <body>
 <%@ include file="MenuCliente.jsp" %>
     <div class="form-group-pair">
+    <h1>Efectuar Cuotas</h1>
         <div class="form-group">
             <input type="text" id="codigo de Prestamo" placeholder="codigo de Prestamo" class="form-input" required>
         </div>

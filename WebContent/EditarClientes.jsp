@@ -8,7 +8,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Editar</title>
     <style>
-        
+       
+          /* Agregar margen superior al cuerpo para espacio entre menú y formulario */
+        body {
+            margin-top: 120px; /* Ajusta según la altura de BarraMenuAdmin.jsp */
+        }
 
 
     

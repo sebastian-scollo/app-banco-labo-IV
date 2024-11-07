@@ -12,16 +12,17 @@
 
 
     
-        /* Estilos para el formulario */
-        .form-container {
-            max-width: 700px;
-            margin:  auto;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            font-family: Arial, Helvetica, sans-serif;
-        }
+        
+       .form-container {
+    max-width: 700px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, Helvetica, sans-serif;
+    margin-top: 200px; 
+}
 
         .header {
             text-align: center;
@@ -135,9 +136,7 @@
 </head>
 <body>
     <div class="form-container">
-        <div class="header">
-            <h1>Cambie su contraseña</h1>
-        </div>
+        
 
         <!-- Campos en dos columnas -->
         <form action="submitForm" method="post">

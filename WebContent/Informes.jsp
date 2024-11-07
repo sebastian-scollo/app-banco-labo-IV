@@ -37,10 +37,12 @@
    
 </head>
 <body>
-<%@ include file="BarraMenuAdmin.jsp" %>
 
+<%@ include file="BarraMenuAdmin.jsp" %>
+    
 
     <div class="search-container">
+    <h1>INFORMES</h1>
         <input type="text" class="form-input" placeholder="Buscar por Id Provincia">
         <button class="search-button">
             <i class="bi bi-search"></i> Buscar por Id Provincia

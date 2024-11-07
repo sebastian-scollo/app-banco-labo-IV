@@ -121,11 +121,7 @@
     </style>
 </head>
 <body>
-    <div class="header">
-        <img src="SLOGAN.png" alt="Logo">
-        <h1>ALTA NUEVO CLIENTE</h1>
-        <div class="user-info">Usuario: <strong>acá va el usuario logueado</strong></div>
-    </div>
+    <%@ include file="BarraMenuAdmin.jsp" %>
 
     <div class="form-container">
         <p>Complete los siguientes campos</p>

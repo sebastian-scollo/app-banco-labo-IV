@@ -82,9 +82,10 @@
     <div class="menu-container">
         <a href="AdministrarCuenta.jsp">Administrar Cuenta</a>
         <a href="AdministrarClientes.jsp">Administrar Clientes</a>
-        <a href="services.jsp">Reportes de cuentas</a>
-        <a href="contact.jsp">Solicitudes de préstamos</a>
-        <a href="contact.jsp">Informes de préstamos</a>
+        <a href="services.jsp">Reportes de Clientes</a>
+        <a href="contact.jsp">Ver Solicitudes de préstamos</a>
+        <a href="contact.jsp">Agregar Cliente</a>
+        <a href="contact.jsp">Agregar Cuenta</a>
     </div>
     
     <div class="content">

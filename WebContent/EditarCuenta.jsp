@@ -5,18 +5,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>EdicionCuenta</title>
     <style>
+ /* Agregar margen superior al cuerpo para espacio entre menú y formulario */
+        body {
+            margin-top: 120px; /* Ajusta según la altura de BarraMenuAdmin.jsp */
+        }
 
 .form-container {
-            max-width: 700px;
-            margin: 100px auto;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            font-family: Arial, Helvetica, sans-serif;
-        }
+    max-width: 700px;
+    margin: 150px auto; /* Agregar espacio adicional en la parte superior */
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: Arial, Helvetica, sans-serif;
+}
 
         .header {
             text-align: center;
@@ -113,11 +117,7 @@
 </head>
 <%@ include file="BarraMenuAdmin.jsp" %>
 <body>
-    <div class="form-container">
-        <div class="header">
-            <h1>Edicion de Cuenta</h1>
-            
-        </div>
+  
 
         <!-- Campos en dos columnas -->
         <form action="submitForm" method="post">

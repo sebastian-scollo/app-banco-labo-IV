@@ -20,29 +20,27 @@
             justify-content: space-between;
             align-items: center;
             padding: 10px 20px;
-            width: 100%; /* Asegura que el header ocupe todo el ancho */
-            position: fixed; /* Mantener el encabezado fijo en la parte superior */
+            width: 100%;
+            position: fixed;
             top: 0;
             left: 0;
-            z-index: 1000; /* Para que esté sobre otros elementos */
+            z-index: 1000;
         }
         .header img {
-            height: 60px; /* Ajusta el tamaño según sea necesario */
+            height: 60px;
         }
         .header h1 {
             margin: 0;
             font-size: 24px;
-            
         }
         .user-info {
             font-size: 16px;
         }
         .table-container {
-            margin-top: 70px; /* Para que el contenido no quede debajo del header */
+            margin-top: 70px;
             padding: 20px;
-            flex-grow: 1; /* Para que el contenido ocupe el espacio restante */
+            flex-grow: 1;
         }
-        /* Estilo para los campos de entrada */
         .form-input {
             width: 100%;
             padding: 10px;
@@ -53,16 +51,12 @@
             box-sizing: border-box;
             color: #666;
         }
-
-        /* Contenedor de búsqueda */
         .search-container {
             display: flex;
             gap: 5px;
             margin-bottom: 15px;
             align-items: center;
         }
-
-        /* Estilo para el botón verde */
         .search-button {
             background-color: #28a745;
             color: white;
@@ -72,41 +66,38 @@
             cursor: pointer;
             font-size: 14px;
         }
-        
         .search-button i {
             margin-right: 3px;
         }
-        
         .search-button:hover {
             background-color: #218838;
         }
-
         table {
             width: 100%;
             border-collapse: collapse;
         }
-
         th, td {
             border: 1px solid #ccc;
             padding: 8px;
             text-align: left;
         }
-
         th {
             background-color: #f2f2f2;
         }
-
         #pagination {
             margin-top: 20px;
         }
     </style>
 </head>
 <body>
-
-    
-    
     <div class="table-container">
-    <%@ include file="BarraMenuAdmin.jsp" %>
+        <%@ include file="BarraMenuAdmin.jsp" %>
+        
+        <!-- Botón "Mostrar todo" -->
+        <form action="MostrarTodo" method="post">
+            <input type="submit" value="Mostrar todo" class="search-button">
+        </form>
+        
         <!-- Campo de búsqueda por DNI -->
         <div class="search-container">
             <input type="text" class="form-input" placeholder="Buscar por DNI">
