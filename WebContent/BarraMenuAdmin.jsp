@@ -60,8 +60,8 @@
             <a href="AdministrarCuenta.jsp">Administrar Cuentas</a>
             <a href="AceptarPrestamo.jsp">Ver solicitud Prestamo</a>
             <a href="Informes.jsp">Informes</a>
-            <a href="Agregar Cliente.jsp">Informes</a>
-            <a href="Agregar Cuenta.jsp">Informes</a>
+            <a href="Agregar Cliente.jsp">Agregar Cliente</a>
+            <a href="Agregar Cuenta.jsp">Agregar Cuenta</a>
         </div>
         <div class="user-info">Usuario: <strong>acá va el usuario logueado</strong></div>
     </div>

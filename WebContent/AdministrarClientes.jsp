@@ -13,26 +13,8 @@
             background-color: #f4f4f4;
             display: flex;
         }
-        .header {
-            background-color: #1464a5;
-            color: white;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 20px;
-            width: 100%;
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: 1000;
-        }
-        .header img {
-            height: 60px;
-        }
-        .header h1 {
-            margin: 0;
-            font-size: 24px;
-        }
+        
+        
         .user-info {
             font-size: 16px;
         }
@@ -75,14 +57,6 @@
         table {
             width: 100%;
             border-collapse: collapse;
-        }
-        th, td {
-            border: 1px solid #ccc;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
         }
         #pagination {
             margin-top: 20px;

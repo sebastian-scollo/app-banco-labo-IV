@@ -116,7 +116,7 @@
                     <td>Dato 7</td>
                     <td>
                         <button class="action-button accept-button" onclick="window.location.href='.jsp'">
-                            <i class="bi bi-check-circle"></i> Aceptar
+                            <i class="btn btn-success"></i> Aceptar
                         </button>
                         <button class="action-button reject-button" onclick="window.location.href='RechazarCuenta.jsp'">
                             <i class="bi bi-x-circle"></i> Rechazar

@@ -70,9 +70,9 @@
            
         }
 
-        .submit-btn {
-            
-            width: 100%;
+       .submit-btn {
+
+            width: 50%;
             padding: 10px;
             background-color: #1464a5;
             color: white;
@@ -81,6 +81,9 @@
             cursor: pointer;
             font-size: 16px;
             margin-bottom: 15px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
         }
         .submit-btn:hover {
             background-color: #246da8;
@@ -137,7 +140,6 @@
 <body>
     <div class="form-container">
         
-
         <!-- Campos en dos columnas -->
         <form action="submitForm" method="post">
         <div class="form-group-pair">

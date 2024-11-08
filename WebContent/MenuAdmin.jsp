@@ -67,7 +67,7 @@
     background-position: center; /* Centra la imagen en el contenedor */
     min-height: calc(100vh - 70px); /* Asegúrate de que el contenido ocupe el espacio restante */
     padding-top: 70px; /* Añade espacio superior para evitar que la imagen sea cubierta por la cabecera */
-}
+
 
     </style>
 </head>

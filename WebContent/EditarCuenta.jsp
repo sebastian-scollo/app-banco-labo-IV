@@ -13,7 +13,7 @@
         }
 
 .form-container {
-    max-width: 700px;
+    max-width: 500px;
     margin: 150px auto; /* Agregar espacio adicional en la parte superior */
     padding: 20px;
     border: 1px solid #ddd;
@@ -22,10 +22,7 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 
-        .header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
+    
 
         .form-group-pair {
             display: flex;
@@ -35,12 +32,11 @@
 
         .form-group {
             position: relative;
-            flex: 1;
-            background-color: #f5f5f5;
-            border: 1px solid #ddd;
-            padding: 10px;
-            border-radius: 4px;
-           
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 15px; /* Espaciado entre los campos */
         }
 
         .form-label {
@@ -68,9 +64,10 @@
            
         }
 
+   
         .submit-btn {
             
-            width: 100%;
+            width: 50%;
             padding: 10px;
             background-color: #1464a5;
             color: white;
@@ -79,6 +76,9 @@
             cursor: pointer;
             font-size: 16px;
             margin-bottom: 15px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
         }
         .submit-btn:hover {
             background-color: #246da8;
@@ -119,55 +119,35 @@
 <body>
   
 
-        <!-- Campos en dos columnas -->
+    <div class="form-container">
         <form action="submitForm" method="post">
-        <div class="form-group-pair">
-           <!--  <div class="form-group">
-                <input type="text" id="Cuentas" placeholder="Cuentas" class="form-input" >
-            </div>-->
-           <!--  <div class="form-group">
-                <input type="number" id="CBU" placeholder="CBU" class="form-input" >
-            </div>-->
-        </div>
-
-        <div class="form-group-pair">
+      
+   
             <div class="form-group">
                 <input type="text" id="CodigoTipoCuenta" placeholder="CodigoTipoCuenta" class="form-input" >
             </div>
             <div class="form-group">
                 <input type="text" id="IdCliente" placeholder="IdCliente" class="form-input" >
             </div>
-        </div>
-
-
        
 
-
-        <div class="form-group-pair">
             <div class="form-group">
                 <label for="fechaCreacion" class="form-label">Fecha de creacion</label>
                 <input type="date" id="fechaCreacion" class="form-input" required>
             </div>
+
             <div class="form-group">
                 <input type="text" id="saldo" placeholder="saldo" class="form-input" >
             </div>
            
-        </div>
+        
 
-
-        <div class="form-group-pair">
-            
-            <!-- <div class="form-group">
-                <input type="text" id="activo" placeholder="activo" class="form-input" >
-            </div> -->
-        </div>
-
-     
-
-        <!-- Boton de envio -->
-
-        <input type="submit" class="submit-btn" value="Aceptar"> </input>
+             <input type="submit" class="submit-btn" value="Aceptar"> </input>
         </form> 
     </div>
+
+
+
+
 </body>
 </html>
