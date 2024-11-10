@@ -28,23 +28,33 @@ public class ServletListarCliente extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
     	 negocioCliente negC = new negocioClienteImpl();
-    	    
-    	    // Verificar si se presionó el botón "Mostrar Todos"
+
+    	    if (request.getParameter("btnBuscarDni") != null) {
+    	    	 String dni = request.getParameter("txtDni").trim();
+
+    	         ArrayList<Cliente> resultado = negC.ListarDni(dni);
+    	         request.setAttribute("listaClientes", resultado);
+    	         RequestDispatcher rd = request.getRequestDispatcher("AdministrarClientes.jsp");
+    	         rd.forward(request, response);
+    	    }
+    	    if(request.getParameter("btnBuscarNombre")!=null) {
+    	    	String enter_Nombre = request.getParameter("txtNombre").trim();
+    	    	ArrayList<Cliente>resultado = negC.ListarNombre(enter_Nombre);
+    	    	request.setAttribute("listaClientes", resultado);
+    	    	RequestDispatcher rd = request.getRequestDispatcher("AdministrarClientes.jsp");
+    	    	rd.forward(request,response);
+    	    }
+
     	    if (request.getParameter("btnMostrarTodos") != null) {
     	        try {
-  
     	            ArrayList<Cliente> listaClientes = negC.ListarCliente();
-    	            
-    	           
     	            request.setAttribute("listaClientes", listaClientes != null ? listaClientes : new ArrayList<>());
-    	            
-    	            
     	            RequestDispatcher rd = request.getRequestDispatcher("AdministrarClientes.jsp");
     	            rd.forward(request, response);
     	        } catch (Exception e) {
     	            e.printStackTrace();
-    	            
     	        }
     	    }
-    }
+      }
+    
 }

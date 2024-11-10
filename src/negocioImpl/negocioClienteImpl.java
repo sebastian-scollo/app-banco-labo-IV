@@ -22,6 +22,17 @@ public class negocioClienteImpl implements negocioCliente {
 		return dao.ListarCl();
 	}
 
+	@Override
+	public ArrayList<Cliente>ListarDni(String paramDni) {
+		return dao.ListarDni(paramDni);
+	}
+
+	@Override
+	public ArrayList<Cliente> ListarNombre(String paramNombre) {
+	
+		return dao.ListarNombre(paramNombre);
+	}
+
 	
 	
 }

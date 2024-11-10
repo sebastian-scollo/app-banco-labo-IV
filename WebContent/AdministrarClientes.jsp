@@ -68,28 +68,32 @@
 <body>
     <div class="table-container">
         <%@ include file="BarraMenuAdmin.jsp" %>
-        
-        <!-- Botón "Mostrar todo" -->
-       <form action="ServletListarCliente" method="post">
-    <input type="submit" value="Mostrar todo" name="btnMostrarTodos" class="search-button">
-</form>
-        
-        <!-- Campo de búsqueda por DNI -->
+
+        <!-- Boton "Mostrar todo" -->
+        <form action="ServletListarCliente" method="post">
+            <input type="submit" value="Mostrar todo" name="btnMostrarTodos" class="search-button">
+        </form>
+
+        <!-- Campos para ingresar y buscar por DNI Nro Documento.-->
+        <form action="ServletListarCliente" method="post">
+            <div class="search-container">
+                <input type="text" class="form-input" name="txtDni" placeholder="Buscar por DNI">
+                <button type="submit" class="search-button" name="btnBuscarDni">
+                    <i class="bi bi-search"></i> Buscar DNI
+                </button>
+            </div>
+        </form>
+
+        <!--Campo para ingresar y buscar por NAME NOMBRE. -->
+        <form action="ServletListarCliente" method="post">
         <div class="search-container">
-            <input type="text" class="form-input" placeholder="Buscar por DNI">
-            <button class="search-button">
-                <i class="bi bi-search"></i> Buscar DNI
-            </button>
-        </div>
-        
-        <!-- Campo de búsqueda por Nombre -->
-        <div class="search-container">
-            <input type="text" class="form-input" placeholder="Buscar por Nombre">
-            <button class="search-button">
+            <input type="text" class="form-input" name="txtNombre" placeholder="Buscar por Nombre">
+            <button type="submit" name="btnBuscarNombre" class="search-button">
                 <i class="bi bi-search"></i> Buscar Nombre
             </button>
         </div>
-
+          </form>
+          <!-- Importante recordar de que siempre va ver un form para poder vincular a nuestros SV/servlet requeridos. -->
         <table id="miTabla">
             <thead>
                 <tr>
