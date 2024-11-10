@@ -27,11 +27,9 @@ public class conexion {
 	protected Connection cn;
 	
 	public Statement getStatement() {
-		
-	
-		
-		
+
 		try {
+	
 	
 			cn=obtenerConexion();
 			Statement st=cn.createStatement();
@@ -45,7 +43,7 @@ public class conexion {
 	
 	public Connection obtenerConexion() {
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
+        	Class.forName("com.mysql.jdbc.Driver");
             cn= DriverManager.getConnection(host + bdname, user, pass);
             return cn;
         } catch (Exception e) {

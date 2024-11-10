@@ -1,16 +1,33 @@
 package entidades;
 
+import java.util.Date;
+
 public class Cliente {
+	private int idCliente;
 	private String dni;
 	private String cuil;
 	private String nombre;
 	private String apellido;
 	private String sexo;
 	private String nacionalidad;
+	private Date fechaNacimiento;
+	private String telefono;
 	private String correo;
 	private int idUsuario;
 	private boolean activo;
+	public Date getFechaNacimiento() {
+		return fechaNacimiento;
+	}
+	public void setFechaNacimiento(Date fechaNac) {
+		this.fechaNacimiento = fechaNac;
+	}
 	
+	public int getIdCliente() {
+		return idCliente;
+	}
+	public void setIdCliente(int idCliente) {
+		this.idCliente = idCliente;
+	}
 	public int getIdUsuario() {
 		return idUsuario;
 	}
@@ -23,16 +40,24 @@ public class Cliente {
 	public void setActivo(boolean activo) {
 		this.activo = activo;
 	}
-	public Cliente(String dni, String cuil, String nombre, String apellido, String sexo, String nacionalidad,
-			String correo, Integer idUsurio) {
+	public Cliente(int id,String dni, String cuil, String nombre, String apellido, String sexo, String nacionalidad,
+			
+			String correo,String _telefono ,Integer idUsurio,Date fNacimiento) {
+		
+		this.idCliente=id;
 		this.dni = dni;
 		this.cuil = cuil;
 		this.nombre = nombre;
 		this.apellido = apellido;
 		this.sexo = sexo;
 		this.nacionalidad = nacionalidad;
+		this.fechaNacimiento= fNacimiento;
 		this.correo = correo;
-		idUsuario = idUsurio;
+		this.telefono= _telefono;
+		this.idUsuario = idUsurio;
+	}
+	public Cliente() {
+		
 	}
 	public String getDni() {
 		return dni;
@@ -81,6 +106,12 @@ public class Cliente {
 	}
 	public void setIdUsurio(Integer idUsurio) {
 		this.idUsuario = idUsurio;
+	}
+	public String getTelefono() {
+		return telefono;
+	}
+	public void setTelefono(String telefono) {
+		this.telefono = telefono;
 	}
 	
 	

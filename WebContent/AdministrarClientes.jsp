@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="entidades.Cliente" %>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -68,9 +70,9 @@
         <%@ include file="BarraMenuAdmin.jsp" %>
         
         <!-- Botón "Mostrar todo" -->
-        <form action="MostrarTodo" method="post">
-            <input type="submit" value="Mostrar todo" class="search-button">
-        </form>
+       <form action="ServletListarCliente" method="post">
+    <input type="submit" value="Mostrar todo" name="btnMostrarTodos" class="search-button">
+</form>
         
         <!-- Campo de búsqueda por DNI -->
         <div class="search-container">
@@ -104,25 +106,34 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Dato 1</td>
-                    <td>Dato 2</td>
-                    <td>Dato 3</td>
-                    <td>Dato 4</td>
-                    <td>Dato 5</td>
-                    <td>Dato 6</td>
-                    <td>Dato 7</td>
-                    <td>Dato 8</td>
-                    <td>Dato 9</td>
-                    <td>
-                        <button onclick="window.location.href='ClienteAgregar.jsp'">
-                            <i class="bi bi-pencil"></i> Editar
-                        </button>
-                        <button onclick="window.location.href='index.html'">
-                            <i class="bi bi-trash"></i>
-                        </button>
-                    </td>
-                </tr>
+                <%
+                    ArrayList<Cliente> listaClientes = (ArrayList<Cliente>) request.getAttribute("listaClientes");
+                    if (listaClientes != null) {
+                        for (Cliente cliente : listaClientes) {
+                %>
+                    <tr>
+                        <td><%= cliente.getNombre() %></td>
+                        <td><%= cliente.getApellido() %></td>
+                        <td><%= cliente.getCuil() %></td>
+                        <td><%= cliente.getDni() %></td>
+                        <td><%= cliente.getFechaNacimiento() %></td>
+                        <td><%= cliente.getSexo() %></td>
+                        <td><%= cliente.getTelefono() %></td>
+                        <td><%= cliente.getNacionalidad() %></td>
+                        <td><%= cliente.getCorreo() %></td>
+                        <td>
+                            <button onclick="window.location.href='ClienteEditar.jsp?id=<%= cliente.getIdCliente() %>'">
+                                <i class="bi bi-pencil"></i> Editar
+                            </button>
+                            <button onclick="window.location.href='ClienteEliminar?id=<%= cliente.getIdCliente() %>'">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </td>
+                    </tr>
+                <%
+                        }
+                    }
+                %>
             </tbody>
         </table>
 
@@ -131,6 +142,5 @@
             <button onclick="nextPage()">Siguiente</button>
         </div>
     </div>
-
 </body>
 </html>
