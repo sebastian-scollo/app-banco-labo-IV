@@ -1,7 +1,6 @@
-create database BancoGestionLab4;
 
 use BancoGestionLab4;
-DROP DATABASE  BancoGestionLab4
+
 create table Usuarios(
 	IDUsuario  INT not null,
     NombreUsuario varchar (20) not null,

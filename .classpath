@@ -3,7 +3,11 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+<<<<<<< HEAD
 	<classpathentry kind="lib" path="C:/Users/nahue/Downloads/mysql-connector-java-5.1.47.jar">
+=======
+	<classpathentry kind="lib" path="C:/Users/marti/Desktop/Documentos/UTN/Labo 4/LaboIV-material alumno/_TPs/5-Personas/MySQL Conectors/mysql-connector-java-5.1.49/mysql-connector-java-5.1.49-bin.jar">
+>>>>>>> 77b731a7fdf0ed19ada3287271d12ef2bde77a75
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>

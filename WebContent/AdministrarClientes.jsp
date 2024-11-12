@@ -74,7 +74,7 @@
             <input type="submit" value="Mostrar todo" name="btnMostrarTodos" class="search-button">
         </form>
 
-        <!-- Campos para ingresar y buscar por DNI Nro Documento.-->
+        <!-- Campos para ingresar y buscar por DNI Nro Document0.-->
         <form action="ServletListarCliente" method="post">
             <div class="search-container">
                 <input type="text" class="form-input" name="txtDni" placeholder="Buscar por DNI">
@@ -84,7 +84,7 @@
             </div>
         </form>
 
-        <!--Campo para ingresar y buscar por NAME NOMBRE. -->
+        <!--Campo para ingresar y buscar por NAME/NOMBRE. -->
         <form action="ServletListarCliente" method="post">
         <div class="search-container">
             <input type="text" class="form-input" name="txtNombre" placeholder="Buscar por Nombre">

@@ -66,6 +66,7 @@ public class ServletListarCliente extends HttpServlet {
     	            e.printStackTrace();
     	        }
     	    }
+    	    
       }
     
 }

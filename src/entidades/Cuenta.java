@@ -1,14 +1,24 @@
 package entidades;
 
+import java.util.Date;
+
 public class Cuenta {
 	private int idCuenta;
+	
 	private String NroCuenta;
 	private double saldo;
 	private int clienteId;
 	private int tipoCuentaId;
-	private String fechaCreacion;
+	private Date fechaCreacion;
+	private String CBU;
 	private boolean estado;
 	
+	public String getCBU() {
+		return CBU;
+	}
+	public void setCBU(String cBU) {
+		CBU = cBU;
+	}
 	public int getIdCuenta() {
 		return idCuenta;
 	}
@@ -39,10 +49,10 @@ public class Cuenta {
 	public void setTipoCuentaId(int tipoCuentaId) {
 		this.tipoCuentaId = tipoCuentaId;
 	}
-	public String getFechaCreacion() {
+	public Date getFechaCreacion() {
 		return fechaCreacion;
 	}
-	public void setFechaCreacion(String fechaCreacion) {
+	public void setFechaCreacion(Date fechaCreacion) {
 		this.fechaCreacion = fechaCreacion;
 	}
 	public boolean isEstado() {
@@ -51,7 +61,7 @@ public class Cuenta {
 	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}
-	public Cuenta(int idCuenta, String nroCuenta, double saldo, int clienteId, int tipoCuentaId, String fechaCreacion,
+	public Cuenta(int idCuenta, String nroCuenta, double saldo, int clienteId, int tipoCuentaId, Date fechaCreacion,
 			boolean estado) {
 		this.idCuenta = idCuenta;
 		NroCuenta = nroCuenta;
@@ -60,6 +70,9 @@ public class Cuenta {
 		this.tipoCuentaId = tipoCuentaId;
 		this.fechaCreacion = fechaCreacion;
 		this.estado = estado;
+	}
+	public Cuenta() {
+		
 	}
 	
 
