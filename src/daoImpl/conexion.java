@@ -52,5 +52,15 @@ public class conexion {
         return null;
     }
 	
+	public PreparedStatement getPreparedStatement(String sql) {
+	    try {
+	        cn = obtenerConexion();
+	        return cn.prepareStatement(sql);
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	    return null;
+	}
+	
 	
 }

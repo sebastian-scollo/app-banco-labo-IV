@@ -56,7 +56,6 @@
                     <select class="form-control" name="nacionalidad" id="nacionalidad" required>
                         <option value="">Seleccione</option>
                         <option value="Argentina">Argentina</option>
-                        <option value="Argentina">Argentina</option>
 	                    <option value="Australia">Australia</option>
 	                    <option value="Alemania">Alemania</option>
 	                    <option value="Austria">Austria</option>
@@ -140,16 +139,22 @@
 	            </div>
 	        </div>
 	
-	        <div class="row mb-3">
-	            <div class="col-md-6">
-	                <label for="localidad" class="form-label">Localidad</label>
-	                <input type="text" class="form-control" id="localidad" name="localidad" required>
-	            </div>
-	            <div class="col-md-6">
-	                <label for="provincia" class="form-label">Provincia</label>
-	                <input type="text" class="form-control" id="provincia" name="provincia" required>
-	            </div>
-	        </div>
+		    <div class="row mb-3">
+		        <div class="col-md-6">
+		            <label for="provincia" class="form-label">Provincia</label>
+		            <select class="form-control" id="provincia" name="provincia" required>
+		                <option value="">Seleccione una provincia</option>
+		                <!-- Las provincias se cargarán aquí desde el servlet -->
+		            </select>
+		        </div>
+		        <div class="col-md-6">
+		            <label for="localidad" class="form-label">Localidad</label>
+		            <select class="form-control" id="localidad" name="localidad" required>
+		                <option value="">Seleccione una localidad</option>
+		                <!-- Las localidades se cargarán aquí dinámicamente según la provincia seleccionada -->
+		            </select>
+		        </div>
+		    </div>
 
             <button type="button" class="btn btn-primary" onclick="mostrarSeccionUsuario()">Continuar</button>
         </div>
