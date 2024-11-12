@@ -148,8 +148,9 @@
                     <input type="text" id="saldo" placeholder="Saldo" class="form-input" required>
                 </div>
             </div>
-
-            <input type="submit" class="submit-btn" value="Agregar Cuenta">
+			<form action="ServletAgregarCuenta" method="post">
+            	<input type="submit" class="submit-btn" value="Agregar Cuenta">
+            </form>
         </form>
     </div>
 </body>

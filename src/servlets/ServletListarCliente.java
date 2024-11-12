@@ -22,7 +22,18 @@ public class ServletListarCliente extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-      
+    	negocioCliente negC = new negocioClienteImpl();
+    	
+    		if(request.getParameter("Param")!=null) {
+    			try {
+    	            ArrayList<Cliente> listaClientes = negC.ListarCliente();
+    	            request.setAttribute("listaClientes", listaClientes != null ? listaClientes : new ArrayList<>());
+    	            RequestDispatcher rd = request.getRequestDispatcher("AdministrarClientes.jsp");
+    	            rd.forward(request, response);
+    	        } catch (Exception e) {
+    	            e.printStackTrace();
+    	        }
+    		}
     }
 
 
