@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="entidades.Cuenta" %>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -79,58 +81,73 @@
   <%@ include file="BarraMenuAdmin.jsp" %>
     
     <div class="table-container">
-        
-        <!-- Botón para mostrar todo -->
-        <button class="show-all-button" type="submit">
-            <i class="bi bi-eye"></i> Mostrar todo
-        </button>
-
-        <!-- Contenedor de búsqueda -->
+       <form action="servletCuenta" method="post">
+        	<button class="show-all-button" name="btnMostrarTodo" type="submit">
+            	<i class="bi bi-eye"></i> Mostrar todo
+        	</button>
+       </form> 
+       
         <div class="search-container">
+        <form action="servletCuenta" method="post" >
             <input type="text" name="txtBuscarIdCliente" class="search-input" placeholder="Buscar por ID cliente">
-            <button class="search-button">
+            <button class="search-button" name="btnBuscarID" >
                 <i class="bi bi-search"></i> Aplicar
             </button>
-            
+            </form>
+            <form action="servletCuenta" method="post"  >
             <input type="text" name="txtBuscarTipoCuenta" class="search-input" placeholder="Búsqueda por tipo de cuenta">
-            <button class="search-button">
+            <button class="search-button" name="btnBuscarTipoCuenta" type="submit" >
                 <i class="bi bi-search"></i> Aplicar
             </button>
+            </form>
         </div>
-
-        <table id="miTabla">
-            <thead>
-                <tr>
-                    <th>CBU</th>
-                    <th>CUIT</th>
-                    <th>Código TipoCuenta</th>
-                    <th>IdCliente</th>
-                    <th>Fecha Creación</th>
-                    <th>Saldo</th>
-                    <th>Activo</th>
-                    <th>Opciones</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Dato 1</td>
-                    <td>Dato 2</td>
-                    <td>Dato 3</td>
-                    <td>Dato 4</td>
-                    <td>Dato 5</td>
-                    <td>Dato 6</td>
-                    <td>Dato 7</td>
-                    <td>
-                        <button onclick="window.location.href='EditarCuenta.jsp'">
-                            <i class="bi bi-pencil"></i> Editar
-                        </button>
-                        <button onclick="window.location.href='index.html'">
-                            <i class="bi bi-trash"></i>
-                        </button>
-                     </td>
-                </tr>
-            </tbody>
-        </table>
+<table id="miTabla">
+    <thead>
+        <tr>
+            <th>ID Cuenta</th>
+            <th>Número de Cuenta</th>
+            <th>CBU</th>
+            <th>Saldo</th>
+            <th>Cliente ID</th>
+            <th>Tipo Cuenta ID</th>
+            <th>Fecha Creación</th>
+            <th>Opciones</th>
+        </tr>
+    </thead>
+    <tbody>
+      
+        <%
+            ArrayList<Cuenta> listadoCuenta = (ArrayList<Cuenta>) request.getAttribute("listadoCuenta");
+            if (listadoCuenta != null && !listadoCuenta.isEmpty()) {
+                for (Cuenta cuenta : listadoCuenta) {
+        %>
+        <tr>
+            <td><%= cuenta.getIdCuenta()%></td>
+            <td><%= cuenta.getNroCuenta() %></td>
+            <td><%= cuenta.getCBU() %></td>
+            <td><%= cuenta.getSaldo() %></td>
+            <td><%= cuenta.getClienteId() %></td>
+            <td><%= cuenta.getTipoCuentaId() %></td>
+            <td><%= cuenta.getFechaCreacion() %></td>
+            <td>
+                <button onclick="window.location.href='EditarCuenta.jsp?id=<%= cuenta.getIdCuenta()%>'">
+                    <i class="bi bi-pencil"></i> Editar
+                </button>
+                <button onclick="window.location.href='EliminarCuenta.jsp?id=<%= cuenta.getIdCuenta()%>'">
+                    <i class="bi bi-trash"></i>
+                </button>
+            </td>
+        </tr>
+        <% 
+                }
+            } else { 
+        %>
+        <tr>
+            <td colspan="8">No se encontraron cuentas.</td>
+        </tr>
+        <% } %>
+    </tbody>
+</table>
         
         <div id="pagination">
             <button onclick="previousPage()">Anterior</button>
@@ -138,4 +155,5 @@
         </div>
     </div>
 </body>
+
 </html>
