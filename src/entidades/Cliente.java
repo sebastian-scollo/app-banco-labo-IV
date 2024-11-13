@@ -2,7 +2,7 @@ package entidades;
 
 import java.util.Date;
 
-public class Cliente {
+public class Cliente extends Usuario {
 	private int idCliente;
 	private String dni;
 	private String cuil;
@@ -44,6 +44,7 @@ public class Cliente {
 			
 			String correo,String _telefono ,Integer idUsurio,Date fNacimiento) {
 		
+		super();
 		this.idCliente=id;
 		this.dni = dni;
 		this.cuil = cuil;
@@ -57,7 +58,7 @@ public class Cliente {
 		this.idUsuario = idUsurio;
 	}
 	public Cliente() {
-		
+		super();
 	}
 	public String getDni() {
 		return dni;

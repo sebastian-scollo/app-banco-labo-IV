@@ -18,7 +18,7 @@
 	<header>
 	    <jsp:include page="componentes/navbar-home.jsp"></jsp:include>
 	</header>
-
+	<form method="POST" action="ServletSignIn">
         <div id="datosPersonales" class="card p-5 mx-auto col-4" >
         <h3 class="card-title text-center mb-4">Datos personales</h3>
             <div class="row mb-3">
@@ -144,14 +144,12 @@
 		            <label for="provincia" class="form-label">Provincia</label>
 		            <select class="form-control" id="provincia" name="provincia" required>
 		                <option value="">Seleccione una provincia</option>
-		                <!-- Las provincias se cargarán aquí desde el servlet -->
 		            </select>
 		        </div>
 		        <div class="col-md-6">
 		            <label for="localidad" class="form-label">Localidad</label>
 		            <select class="form-control" id="localidad" name="localidad" required>
 		                <option value="">Seleccione una localidad</option>
-		                <!-- Las localidades se cargarán aquí dinámicamente según la provincia seleccionada -->
 		            </select>
 		        </div>
 		    </div>
@@ -160,21 +158,22 @@
         </div>
 		
        <div id="crearUsuario" style="display: none;" class="card p-4 mx-auto col-4" style="max-width: 300px; width: 100%; border-radius: 10px;">
-    <h3 class="card-title text-center mb-4">Crear Usuario</h3>
-    <div class="mb-3">
-        <label for="usuario" class="form-label">Usuario</label>
-        <input type="text" class="form-control" id="usuario" name="usuario" required>
-    </div>
-    <div class="mb-3">
-        <label for="contrasena" class="form-label">Contraseña</label>
-        <input type="password" class="form-control" id="contrasena" name="contrasena" required>
-    </div>
-    <div class="mb-3">
-        <label for="confirmarContrasena" class="form-label">Confirmar Contraseña</label>
-        <input type="password" class="form-control" id="confirmarContrasena" name="confirmarContrasena" required>
-    </div>
-    <button type="submit" class="btn btn-primary w-100">Registrarse</button>
+		    <h3 class="card-title text-center mb-4">Crear Usuario</h3>
+		    <div class="mb-3">
+		        <label for="usuario" class="form-label">Usuario</label>
+		        <input type="text" class="form-control" id="usuario" name="usuario" required>
+		    </div>
+		    <div class="mb-3">
+		        <label for="contrasena" class="form-label">Contraseña</label>
+		        <input type="password" class="form-control" id="contrasena" name="contrasena" required>
+		    </div>
+		    <div class="mb-3">
+		        <label for="confirmarContrasena" class="form-label">Confirmar Contraseña</label>
+		        <input type="password" class="form-control" id="confirmarContrasena" name="confirmarContrasena" required>
+		    </div>
+		    <button type="submit" class="btn btn-primary w-100">Registrarse</button>
 	</div>
+	</form>
 
 	<jsp:include page="componentes/footer.jsp" />
 
