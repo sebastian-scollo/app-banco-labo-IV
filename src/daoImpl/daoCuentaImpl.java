@@ -26,7 +26,7 @@ public class daoCuentaImpl implements daoCuenta {
 		conexion bd = new conexion();
 		Connection cnn = bd.obtenerConexion();
 		if(cnn==null) {
-			  System.out.println("Conexión fallida: la conexión es null.");
+			  System.out.println("Conexiï¿½n fallida: la conexiï¿½n es null.");
 		        
 		}
 		
@@ -73,7 +73,7 @@ public class daoCuentaImpl implements daoCuenta {
 		 conexion bd = new conexion();
 		 Connection cnn = bd.obtenerConexion();
 		 if(cnn==null) {
-			  System.out.println("Conexión fallida: la conexión es null.");
+			  System.out.println("Conexiï¿½n fallida: la conexiï¿½n es null.");
 		        
 		}
 		 String consulta="SELECT IDCuenta,NumeroCuenta,CBU,Saldo,ClienteID,TipoCuentaID,FechaCreacion FROM Cuentas WHERE Estado=1 AND IDCuenta="+idCliente;
@@ -131,6 +131,75 @@ public class daoCuentaImpl implements daoCuenta {
 	        System.out.println("falla en buscar por Nombre." + ex);
 		}
 		return listado;
+	}
+	
+	public int NuevaId() {
+		int id = -1;
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		}
+		
+		catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		try {
+			conexion bd = new conexion();
+			Connection connection = bd.obtenerConexion();
+			
+			String query = "SELECT MAX(IDCuenta) + 1 FROM Cuentas";
+			PreparedStatement mtt = connection.prepareStatement(query);
+			
+			ResultSet rs = mtt.executeQuery(query);
+			rs.next();
+			
+			id = rs.getInt("IDCuenta");
+		}
+		
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return id;
+	}
+	
+	public boolean AgregarCuenta(Cuenta cuenta) {
+		boolean exito = true;
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		}
+		
+		catch (ClassNotFoundException e) {
+			exito = false;
+			e.printStackTrace();
+		}
+		
+		try {
+			conexion bd = new conexion();
+			Connection connection = bd.obtenerConexion();
+			
+			String query = "INSERT INTO Cuentas (NumeroCuenta, CBU, Saldo, ClienteID, TipoCuentaID)"
+					+ "VALUES (	"
+					+ cuenta.getNroCuenta() + ", "
+					+ cuenta.getCBU() + ", "
+					+ cuenta.getSaldo() + ", "
+					+ cuenta.getClienteId() + ", "
+					+ cuenta.getTipoCuentaId()
+ 					+ ");";
+			
+			PreparedStatement mtt = connection.prepareStatement(query);
+			
+			mtt.execute();
+		}
+		
+		catch (Exception e) {
+			exito = false;
+			e.printStackTrace();
+		}
+		
+		return exito;
 	}
 
 }

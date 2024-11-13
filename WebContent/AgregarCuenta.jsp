@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page import="entidades.Cuenta, negocio.negocioCuenta, negocioImpl.negocioCuentaImpl, java.util.Date" %>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -129,29 +130,28 @@
     <div class="form-container">
         <h2>INGRESE DATOS DE CUENTA</h2>
 
-        <form action="submitForm" method="post">
+        <form action="ServletAgregarCuenta" method="post">
             <div class="form-group-pair">
                 <div class="form-group">
-                    <input type="text" id="CodigoTipoCuenta" placeholder="Codigo Tipo Cuenta" class="form-input" required>
+                    <input type="text" id="CodigoTipoCuenta" name="CodigoTipoCuenta" placeholder="Codigo Tipo Cuenta" class="form-input" required>
                 </div>
                 <div class="form-group">
-                    <input type="text" id="IdCliente" placeholder="ID Cliente" class="form-input" required>
+                    <input type="text" id="IdCliente" name="IdCliente" placeholder="ID Cliente" class="form-input" required>
+                </div>
+            </div>
+            
+            <div class="form-group-pair">
+                <div class="form-group">
+                    <input type="text" id="CBU" name="CBU" placeholder="CBU" class="form-input" required>
+                </div>
+                <div class="form-group">
+                    <input type="text" id="NumCuenta" name="NumCuenta" placeholder="Número de cuenta" class="form-input" required>
                 </div>
             </div>
 
-            <div class="form-group-pair">
-                <div class="form-group">
-                    <label for="fechaCreacion" class="form-label">Fecha de Creacion</label>
-                    <input type="date" id="fechaCreacion" class="form-input" required>
-                </div>
-                <div class="form-group">
-                    <input type="text" id="saldo" placeholder="Saldo" class="form-input" required>
-                </div>
-            </div>
-			<form action="ServletAgregarCuenta" method="post">
-            	<input type="submit" class="submit-btn" value="Agregar Cuenta">
-            </form>
+            <input type="submit" class="submit-btn" name="btnAceptar" value="Agregar Cuenta">
         </form>
     </div>
 </body>
 </html>
+

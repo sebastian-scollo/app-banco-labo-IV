@@ -29,5 +29,12 @@ public class negocioCuentaImpl implements negocioCuenta {
 		// TODO Auto-generated method stub
 		return dao.ListarXidCl(idCliente);
 	}
+	
+	public int NuevaId() {
+		return dao.NuevaId();
+	}
 
+	public boolean AgregarCuenta(Cuenta cuenta) {
+		return dao.AgregarCuenta(cuenta);
+	}
 }
