@@ -13,12 +13,12 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/ezejo/Downloads/mysql-connector-j-9.0.0/mysql-connector-j-9.0.0/mysql-connector-j-9.0.0.jar">
+	<classpathentry kind="lib" path="lib/gson-2.11.0.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="lib/gson-2.11.0.jar">
+	<classpathentry kind="lib" path="D:/mysql-connector-java-5.1.47/mysql-connector-java-5.1.47/mysql-connector-java-5.1.47-bin.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>

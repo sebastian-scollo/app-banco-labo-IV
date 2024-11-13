@@ -15,6 +15,16 @@ public class Cliente extends Usuario {
 	private String correo;
 	private int idUsuario;
 	private boolean activo;
+	private Provincia provincia;
+	
+	
+	 public Provincia getProvincia() {
+	        return provincia;
+	    }
+
+	 public void setProvincia(Provincia provincia) {
+	        this.provincia = provincia;
+	    }
 	public Date getFechaNacimiento() {
 		return fechaNacimiento;
 	}
