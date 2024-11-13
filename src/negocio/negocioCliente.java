@@ -9,5 +9,5 @@ public interface negocioCliente {
 	public ArrayList<Cliente>ListarCliente();
 	public ArrayList<Cliente>ListarDni(String paramDni);
 	public ArrayList<Cliente>ListarNombre(String paramNombre);
-	
+	public boolean eliminarCliente(int paraIdcliente);
 }

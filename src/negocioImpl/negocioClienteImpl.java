@@ -33,6 +33,12 @@ public class negocioClienteImpl implements negocioCliente {
 		return dao.ListarNombre(paramNombre);
 	}
 
+	@Override
+	public boolean eliminarCliente(int paraIdcliente) {
+		
+		return dao.eliminarCliente(paraIdcliente);
+	}
+
 	
 	
 }

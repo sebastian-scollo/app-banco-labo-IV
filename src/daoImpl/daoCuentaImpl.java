@@ -202,4 +202,31 @@ public class daoCuentaImpl implements daoCuenta {
 		return exito;
 	}
 
+
+
+	@Override
+	public boolean eliminarCuenta(int idCuenta) {
+		  try {
+		        Class.forName("com.mysql.jdbc.Driver"); 
+		        System.out.println("Driver MySQL cargado correctamente.");
+		    } catch(ClassNotFoundException e) {
+		        System.out.println("Error al cargar el driver MySQL.");
+		        e.printStackTrace();
+		     
+		   }
+		try {
+			conexion bd = new conexion();
+			Connection cnn = bd.obtenerConexion();
+			String consulta = "update Cuentas SET Estado = 0 WHERE IDCuenta=?";
+		         PreparedStatement ps = cnn.prepareStatement(consulta);
+		         ps.setInt(1,idCuenta);
+		         int actualizado = ps.executeUpdate();
+		         return actualizado>0;
+		
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		return false;
+	}
+
 }

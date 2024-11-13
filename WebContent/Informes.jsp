@@ -68,14 +68,7 @@
                 <% 
                 List<Cliente> listaClientes = (List<Cliente>) request.getAttribute("listaClientes");
                 if (listaClientes != null) {
-                    out.println("Clientes encontrados: " + listaClientes.size());
-                } else {
-                    out.println("No se encontraron clientes.");
-                }
-                    
-
-                    if (listaClientes != null) {
-                        for (Cliente cliente : listaClientes) {
+                    for (Cliente cliente : listaClientes) {
                 %>
                     <tr>
                         <td><%= cliente.getDni() %></td>
@@ -90,24 +83,60 @@
                         <td><%= cliente.getCuil() %></td>
                     </tr>
                 <% 
-                        }
-                    } else {
+                    }
+                } else {
                 %>
                     <tr>
                         <td colspan="10">No se encontraron resultados.</td>
                     </tr>
                 <% 
-                    }
+                }
                 %>
             </tbody>
         </table>
 
+        <!-- Controles de Paginación -->
         <div id="pagination">
-            <button onclick="previousPage()">Anterior</button>
-            <button onclick="nextPage()">Siguiente</button>
+            <button onclick="changePage(-1)">Anterior</button>
+            <span id="pageInfo"></span>
+            <button onclick="changePage(1)">Siguiente</button>
         </div>
     </div>
 </div>
+
+<script>
+    const rowsPerPage = 2; 
+    let currentPage = 1;
+
+    function showPage(page) {
+        const table = document.getElementById('miTabla');
+        const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+        const totalPages = Math.ceil(rows.length / rowsPerPage);
+
+        if (page < 1) page = 1;
+        if (page > totalPages) page = totalPages;
+
+       
+        for (let i = 0; i < rows.length; i++) {
+            rows[i].style.display = 'none';
+        }
+
+       
+        for (let i = (page - 1) * rowsPerPage; i < (page * rowsPerPage) && i < rows.length; i++) {
+            rows[i].style.display = '';
+        }
+
+       
+        document.getElementById('pageInfo').innerText = `Página ${page} de ${totalPages}`;
+        currentPage = page;
+    }
+
+    function changePage(direction) {
+        showPage(currentPage + direction);
+    }
+
+    showPage(currentPage);
+</script>
 
 </body>
 </html>

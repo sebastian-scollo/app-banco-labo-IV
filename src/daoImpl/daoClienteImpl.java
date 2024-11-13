@@ -171,6 +171,51 @@ public ArrayList<Cliente> ListarNombre(String paramNombre) {
 	    }
 	    return listaClientes;
 }
+/*@Override
+    public boolean eliminarCliente(String dni) {
+        try {
+            Class.forName("com.mysql.cj.jdbc.Driver");
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        String sql = "UPDATE clientes SET Baja_CL = 1 WHERE Admin_CL = 0 AND DNI_CL = ? ";
+        try {
+            conexion cn = new conexion();
+            Connection cnn = cn.obtenerConexion();
+            PreparedStatement ps = cnn.prepareStatement(sql);
+            ps.setString(1, dni);
+            int resultado = ps.executeUpdate();
+            return resultado > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }*/
+@Override
+public boolean eliminarCliente(int paraIdcliente) {
+	  try {
+	        Class.forName("com.mysql.jdbc.Driver"); 
+	        System.out.println("Driver MySQL cargado correctamente.");
+	    } catch(ClassNotFoundException e) {
+	        System.out.println("Error al cargar el driver MySQL.");
+	        e.printStackTrace();
+	     
+	    }
+	  String consulta = "update Clientes set activo = 0 WHERE IDCliente = ?";
+	  try {
+		  conexion bd = new conexion();
+		  Connection cnn = bd.obtenerConexion();
+		  PreparedStatement ps = cnn.prepareStatement(consulta);
+		  ps.setInt(1, paraIdcliente);
+		  int actualizado = ps.executeUpdate();
+		  return actualizado>0;
+	  }catch(Exception ex) {
+		  ex.printStackTrace();
+	  }
+	  return false;
+}
 	
 
 }

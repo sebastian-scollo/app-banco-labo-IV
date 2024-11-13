@@ -37,4 +37,9 @@ public class negocioCuentaImpl implements negocioCuenta {
 	public boolean AgregarCuenta(Cuenta cuenta) {
 		return dao.AgregarCuenta(cuenta);
 	}
+
+	@Override
+	public boolean eliminarCuenta(int iDcuenta) {
+		return dao.eliminarCuenta(iDcuenta);
+	}
 }

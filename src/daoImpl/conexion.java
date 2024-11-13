@@ -44,6 +44,7 @@ public class conexion {
 	public Connection obtenerConexion() {
         try {
         	Class.forName("com.mysql.jdbc.Driver");
+        	
             cn= DriverManager.getConnection(host + bdname, user, pass);
             return cn;
         } catch (Exception e) {

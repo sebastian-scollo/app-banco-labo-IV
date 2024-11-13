@@ -126,10 +126,10 @@
                         <td><%= cliente.getNacionalidad() %></td>
                         <td><%= cliente.getCorreo() %></td>
                         <td>
-                            <button onclick="window.location.href='ClienteEditar.jsp?id=<%= cliente.getIdCliente() %>'">
+                            <button onclick="window.location.href='EditarClientes.jsp'">
                                 <i class="bi bi-pencil"></i> Editar
                             </button>
-                            <button onclick="window.location.href='ClienteEliminar?id=<%= cliente.getIdCliente() %>'">
+                            <button onclick="window.location.href='EliminarCliente.jsp'">
                                 <i class="bi bi-trash"></i>
                             </button>
                         </td>

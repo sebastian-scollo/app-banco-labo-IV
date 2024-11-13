@@ -1,30 +1,28 @@
 package servlets;
 
 import java.io.IOException;
-import java.util.List;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import entidades.Cliente;
-import negocio.negocioReporte;
-import negocioImpl.negocioReporteImpl;
+import negocio.negocioCliente;
+import negocio.negocioCuenta;
+import negocioImpl.negocioClienteImpl;
+import negocioImpl.negocioCuentaImpl;
 
 /**
- * Servlet implementation class servletReporte
+ * Servlet implementation class servletEliminarCuenta
  */
-@WebServlet("/servletReporte")
-public class servletReporte extends HttpServlet {
+@WebServlet("/servletEliminarCuenta")
+public class servletEliminarCuenta extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public servletReporte() {
+    public servletEliminarCuenta() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,17 +39,16 @@ public class servletReporte extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		if (request.getParameter("btnBuscarIdp") != null) {
-	           
-			int provinciaID = Integer.parseInt(request.getParameter("txtBuscarIdProvincia"));
-			System.out.println("Provincia ID recibido en servlet: " + provinciaID);
-            negocioReporte negocio = new negocioReporteImpl();
-            List<Cliente> listaClientes = negocio.obtenerClientesPorProvincia(provinciaID);
-
-            request.setAttribute("listaClientes", listaClientes);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("Informes.jsp");
-            dispatcher.forward(request, response);
-        }
+	
+		negocioCuenta negCuenta = new negocioCuentaImpl();
+		String enter_idCuenta = request.getParameter("idCuenta");
+		int idCuenta =Integer.parseInt(enter_idCuenta);
+		boolean eliminado = negCuenta.eliminarCuenta(idCuenta);
+		if(eliminado) {
+			response.sendRedirect("AdministrarCuenta.jsp"); 
+		}else {
+			 response.sendRedirect("EliminarCuenta.jsp?error=NoSePudoEliminar");
+		}
 		
 	}
 

@@ -11,5 +11,6 @@ public interface negocioCuenta {
 	  public ArrayList<Cuenta>ListarXidCl(int idCliente);
 	public int NuevaId();
 	public boolean AgregarCuenta(Cuenta cuenta);
+	public boolean eliminarCuenta(int iDcuenta);
 	
 }
