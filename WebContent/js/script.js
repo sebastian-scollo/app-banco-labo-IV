@@ -21,7 +21,7 @@
     
  //// Función para cargar las provincias
     function cargarProvincias() {
-        fetch('ObtenerProvinciasServlet')  // Llamada al servlet de provincias
+        fetch('/app-banco-labo-IV/ObtenerProvinciasServlet')  // Llamada al servlet de provincias
             .then(response => {
                 console.log("Respuesta del servidor:", response);  // Verifica el contenido de la respuesta
                 if (!response.ok) {
@@ -53,7 +53,7 @@
     function cargarLocalidades() {
         let provinciaId = document.getElementById('provincia').value;
         if (provinciaId) {
-            fetch('ObtenerLocalidadesServlet?provinciaID=' + provinciaId)  // Llamada al servlet de localidades
+            fetch('/app-banco-labo-IV/ObtenerLocalidadesServlet?provinciaID=' + provinciaId)  // Llamada al servlet de localidades
                 .then(response => response.json())
                 .then(localidades => {
                     let localidadSelect = document.getElementById('localidad');

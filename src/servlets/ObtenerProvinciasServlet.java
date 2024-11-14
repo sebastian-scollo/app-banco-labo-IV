@@ -37,13 +37,21 @@ public class ObtenerProvinciasServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		negocioProvincia = new negocioProvinciaImpl();
 		response.setContentType("application/json;charset=UTF-8");
-        PrintWriter out = response.getWriter();
         
         ArrayList<Provincia> provincias = negocioProvincia.listarProvincias();
-        Gson gson = new Gson();
-        out.print(gson.toJson(provincias));
-        out.flush();
+        if (provincias != null && !provincias.isEmpty()) {
+            Gson gson = new Gson();
+            String jsonProvincias = gson.toJson(provincias);
+            System.out.println("JSON generado: " + jsonProvincias);  // Depuración
 
+            try (PrintWriter out = response.getWriter()) {
+                out.print(jsonProvincias);
+                out.flush();
+            }
+        } else {
+            System.out.println("Error: La lista de provincias está vacía o es nula.");
+            response.sendError(HttpServletResponse.SC_NO_CONTENT, "No hay provincias disponibles.");
+        }
 	}
 
 	/**

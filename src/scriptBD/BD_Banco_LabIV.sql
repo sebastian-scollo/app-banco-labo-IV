@@ -2,7 +2,7 @@
 use BancoGestionLab4;
 
 create table Usuarios(
-	IDUsuario  INT not null,
+	IDUsuario  INT auto_increment,
     NombreUsuario varchar (20) not null,
     Contrasenia varchar (100) not null,
     TipoUsuario tinyint not null,

@@ -16,7 +16,7 @@ import entidades.Cliente;
 
 public class daoClienteImpl implements daoCliente{
  /**/
-	
+	 
 	@Override
 	public ArrayList<Cliente> ListarCl() {
 		  ArrayList<Cliente> ListaCliente = new ArrayList<>();
@@ -171,6 +171,7 @@ public ArrayList<Cliente> ListarNombre(String paramNombre) {
 	    }
 	    return listaClientes;
 }
+<<<<<<< Updated upstream
 /*@Override
     public boolean eliminarCliente(String dni) {
         try {
@@ -216,6 +217,164 @@ public boolean eliminarCliente(int paraIdcliente) {
 	  }
 	  return false;
 }
+=======
+
+@Override
+public boolean RegistrarCliente(Cliente cliente) {
+    PreparedStatement pstUsuario = null;
+    PreparedStatement pstCliente = null;
+    PreparedStatement pstDireccion = null;
+    conexion cn = new conexion();
+    Connection connection = cn.obtenerConexion();
+
+    ResultSet rs = null;
+    int usuarioID = 0;
+    int clienteID = 0;
+
+    try {
+        if(cliente == null) {
+            System.out.println("Se ha detectado un error al querer registrar al cliente.");
+            return false;
+        }
+
+        connection.setAutoCommit(false); // Inicia la transacción
+
+        // Insertar en la tabla Usuarios
+        String insertUsuario = "INSERT INTO Usuarios (NombreUsuario, Contrasenia, TipoUsuario, Estado) VALUES (?, ?, ?, ?)";
+        pstUsuario = connection.prepareStatement(insertUsuario, Statement.RETURN_GENERATED_KEYS); // Asegúrate de usar RETURN_GENERATED_KEYS
+        pstUsuario.setString(1, cliente.getNombreUsuario());
+        pstUsuario.setString(2, cliente.getPassword());
+        pstUsuario.setInt(3, 2); // Tipo de usuario
+        pstUsuario.setBoolean(4, true);  // Estado activo
+        pstUsuario.executeUpdate();
+        
+        // Obtener el ID generado para el usuario
+        rs = pstUsuario.getGeneratedKeys();
+        if (rs.next()) {
+            usuarioID = rs.getInt(1); // Obtiene el ID generado
+        }
+        rs.close();
+
+        // Insertar en la tabla Clientes
+        String insertCliente = "INSERT INTO Clientes (DNI, CUIL, Nombre, Apellido, Sexo, Nacionalidad, FechaNacimiento, Telefono, CorreoElectronico, UsuarioID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        pstCliente = connection.prepareStatement(insertCliente, Statement.RETURN_GENERATED_KEYS); // Agregar RETURN_GENERATED_KEYS aquí
+        pstCliente.setString(1, cliente.getDni());
+        pstCliente.setString(2, cliente.getCuil());
+        pstCliente.setString(3, cliente.getNombre());
+        pstCliente.setString(4, cliente.getApellido());
+        pstCliente.setString(5, cliente.getSexo());
+        pstCliente.setString(6, cliente.getNacionalidad());
+        pstCliente.setDate(7, new java.sql.Date(cliente.getFechaNacimiento().getTime()));
+        pstCliente.setString(8, cliente.getTelefono());
+        pstCliente.setString(9, cliente.getCorreo());
+        pstCliente.setInt(10, usuarioID); // Usar el ID generado para el usuario
+        pstCliente.executeUpdate();
+        
+        // Obtener el ID generado para el cliente
+        rs = pstCliente.getGeneratedKeys();
+        if (rs.next()) {
+            clienteID = rs.getInt(1); // Obtiene el ID generado
+        }
+        rs.close();
+
+        // Insertar en la tabla Direcciones
+        String sqlDireccion = "INSERT INTO Direcciones (Calle, Numero, Piso, Departamento, LocalidadID, ClienteID) VALUES (?, ?, ?, ?, ?, ?)";
+        pstDireccion = connection.prepareStatement(sqlDireccion);
+        pstDireccion.setString(1, cliente.getDireccion().getNombrecalle());
+        pstDireccion.setInt(2, cliente.getDireccion().getNroLocalidad());
+        if (cliente.getDireccion().getPiso() >= 0) {
+            pstDireccion.setInt(3, cliente.getDireccion().getPiso());
+        } else {
+            pstDireccion.setNull(3, java.sql.Types.INTEGER);
+        }
+        if (cliente.getDireccion().getDepartamento() != null) {
+            pstDireccion.setString(4, cliente.getDireccion().getDepartamento());
+        } else {
+            pstDireccion.setNull(4, java.sql.Types.VARCHAR);
+        }
+        pstDireccion.setInt(5, cliente.getDireccion().getNroLocalidad());
+        pstDireccion.setInt(6, clienteID); // Usar el ID generado para el cliente
+        pstDireccion.executeUpdate();
+
+        connection.commit(); // Confirma la transacción si todo ha ido bien
+        return true;
+
+    } catch (SQLException e) {
+        System.err.println("Error en la inserción del cliente: " + e.getMessage());
+        e.printStackTrace();
+        try {
+            if (connection != null) connection.rollback(); // Deshace todas las inserciones en caso de error
+        } catch (SQLException rollbackEx) {
+            rollbackEx.printStackTrace();
+        }
+        return false;
+
+    } finally {
+        // Cierra los recursos
+        try {
+            if (rs != null) rs.close();
+            if (pstUsuario != null) pstUsuario.close();
+            if (pstCliente != null) pstCliente.close();
+            if (pstDireccion != null) pstDireccion.close();
+            if (connection != null) connection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+@Override
+public boolean verificarDNI(String DNI) {
+	boolean existe = false;
+	try {
+		conexion cn = new conexion();
+	    Connection connection = cn.obtenerConexion();
+	    String consulta = "select *  from clientes where DNI = ?";
+	    PreparedStatement pst = cn.getPreparedStatement(consulta);
+        pst.setString(1, DNI);
+        ResultSet rs = pst.executeQuery();
+        if (rs.next()) {
+            existe = true; 
+        }
+        rs.close();
+        pst.close();
+        connection.close();
+	   
+	    
+	}catch (Exception e)
+	{
+		e.printStackTrace();
+	}
+	return existe;
+}
+
+@Override
+public boolean verificarCUIL(String CUIL) {
+	boolean existe = false;
+	try {
+		conexion cn = new conexion();
+	    Connection connection = cn.obtenerConexion();
+	    String consulta = "select *  from clientes where CUIL = ?";
+	    PreparedStatement pst = cn.getPreparedStatement(consulta);
+        pst.setString(1, CUIL);
+        ResultSet rs = pst.executeQuery();
+        if (rs.next()) {
+            existe = true; 
+        }
+        rs.close();
+        pst.close();
+        connection.close();
+	   
+	    
+	}catch (Exception e)
+	{
+		e.printStackTrace();
+	}
+	return existe;
+}
+
+
+>>>>>>> Stashed changes
 	
 
 }

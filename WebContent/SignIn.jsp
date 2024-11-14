@@ -18,9 +18,10 @@
 	<header>
 	    <jsp:include page="componentes/navbar-home.jsp"></jsp:include>
 	</header>
-	<form method="POST" action="ServletSignIn">
+	<form action="ServletSignIn" method="post">
         <div id="datosPersonales" class="card p-5 mx-auto col-4" >
         <h3 class="card-title text-center mb-4">Datos personales</h3>
+        
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="nombre" class="form-label">Nombre</label>
@@ -48,7 +49,7 @@
                         <option selected disabled value="">Seleccione</option>
                         <option value="Masculino">Masculino</option>
                         <option value="Femenino">Femenino</option>
-                        <option value="Otro">Otro</option>
+                        <option value="Otro">No binario</option>
                     </select>
                 </div>
                 <div class="col-md-6">
@@ -115,6 +116,12 @@
 			            <input type="email" class="form-control" id="correo" name="correo" required>
 			        </div>
   			    </div>
+  			    <div class="row mb-3">
+		            <div class="col-md-6">
+		                <label for="fechaNacimiento" class="form-label">Fecha de Nacimiento</label>
+		                <input type="date" class="form-control" id="fechaNacimiento" name="fechaNacimiento" required>
+		            </div>
+        		</div>
             </div>
             <h3>Dirección</h3>
 	        <div class="row mb-3">
@@ -171,7 +178,7 @@
 		        <label for="confirmarContrasena" class="form-label">Confirmar Contraseña</label>
 		        <input type="password" class="form-control" id="confirmarContrasena" name="confirmarContrasena" required>
 		    </div>
-		    <button type="submit" class="btn btn-primary w-100">Registrarse</button>
+		    <button type="submit" name="btnRegistrar" class="btn btn-primary w-100">Registrarse</button>
 	</div>
 	</form>
 

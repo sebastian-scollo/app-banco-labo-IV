@@ -4,14 +4,17 @@ public class Direccion {
 	private int idDireccion;
 	private String nombrecalle;
 	private int numerCalle;
+	private int piso;
 	private String departamento;
 	private int nroLocalidad;
 	private int IdCliente;
-	public Direccion(int idDireccion, String nombrecalle, int numerCalle, String departamento, int nroLocalidad,
+	public Direccion() {};
+	public Direccion(int idDireccion, String nombrecalle, int numerCalle, int piso, String departamento, int nroLocalidad,
 			int idCliente) {
 		this.idDireccion = idDireccion;
 		this.nombrecalle = nombrecalle;
 		this.numerCalle = numerCalle;
+		this.piso = piso;
 		this.departamento = departamento;
 		this.nroLocalidad = nroLocalidad;
 		IdCliente = idCliente;
@@ -33,6 +36,12 @@ public class Direccion {
 	}
 	public void setNumerCalle(int numerCalle) {
 		this.numerCalle = numerCalle;
+	}
+	public int getPiso() {
+		return piso;
+	}
+	public void setPiso(int piso) {
+		this.piso = piso;
 	}
 	public String getDepartamento() {
 		return departamento;
