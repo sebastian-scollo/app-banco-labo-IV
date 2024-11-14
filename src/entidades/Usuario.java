@@ -2,11 +2,13 @@ package entidades;
 
 public class Usuario {
 	private int IDUsuario;
+	private String NombreUsuario;
 	private String password;
 	private int TipoUsuario; 
 	private Boolean estado;
 	
 	
+
 	public Usuario(int iDUsuario, String password, int tipoUsuario, Boolean estado) {
 		
 		IDUsuario = iDUsuario;
@@ -39,6 +41,13 @@ public class Usuario {
 	}
 	public void setEstado(Boolean estado) {
 		this.estado = estado;
+	}
+	
+	public String getNombreUsuario() {
+		return NombreUsuario;
+	}
+	public void setNombreUsuario(String nombreUsuario) {
+		NombreUsuario = nombreUsuario;
 	}
 	
 

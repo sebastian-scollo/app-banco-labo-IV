@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html lang="es">
+<%@ page import="entidades.Usuario" %>
 <head>
     <meta charset="ISO-8859-1">
     <title>MenuAdmin</title>
@@ -72,7 +73,13 @@
     </style>
 </head>
 <body>
-
+<% 
+    Usuario usuario = (Usuario) session.getAttribute("usuarioLogueado");
+    if (usuario == null || usuario.getTipoUsuario() != 1) {
+        response.sendRedirect("Login.jsp");
+        return;
+    }
+%>
     <div class="header">
         <img src="SLOGAN.png" alt="Logo">
         <h1>  MENU ADMINISTRADOR</h1>

@@ -78,7 +78,8 @@
 <body>
     <div class="login-container">
         <form action="LoginServlet" method="post">
-            <h2>Bienvenido a Banca Online</h2>
+        	<h1>Banco Nejo</h1>
+            <h3>Iniciar Sesión</h3>
             <input name="usuario" type="text" placeholder="Usuario" required>
             <input name="password" type="password" placeholder="Contraseña" required>
             <button type="submit" class="btn-login">Ingresar</button>
