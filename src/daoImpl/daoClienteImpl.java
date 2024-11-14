@@ -171,28 +171,7 @@ public ArrayList<Cliente> ListarNombre(String paramNombre) {
 	    }
 	    return listaClientes;
 }
-/*@Override
-    public boolean eliminarCliente(String dni) {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
 
-        String sql = "UPDATE clientes SET Baja_CL = 1 WHERE Admin_CL = 0 AND DNI_CL = ? ";
-        try {
-            conexion cn = new conexion();
-            Connection cnn = cn.obtenerConexion();
-            PreparedStatement ps = cnn.prepareStatement(sql);
-            ps.setString(1, dni);
-            int resultado = ps.executeUpdate();
-            return resultado > 0;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return false;
-    }*/
 @Override
 public boolean eliminarCliente(int paraIdcliente) {
 	  try {
