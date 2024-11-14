@@ -1,8 +1,11 @@
+DROP DATABASE IF EXISTS BancoGestionLab4;
 
+-- Crear la base de datos
+CREATE DATABASE BancoGestionLab4;
 use BancoGestionLab4;
 
 create table Usuarios(
-	IDUsuario  INT not null,
+	IDUsuario  INT auto_increment,
     NombreUsuario varchar (20) not null,
     Contrasenia varchar (100) not null,
     TipoUsuario tinyint not null,
@@ -118,10 +121,10 @@ constraint PK_CUOTA primary key(IDCuota),
     
 INSERT INTO Usuarios (IDUsuario, NombreUsuario, Contrasenia, TipoUsuario, Estado) VALUES
 (1, 'homero', 'donuts123', 1, 1),
-(2, 'marge', 'maggie123', 2, 1),
-(3, 'bart', 'skateboard', 2, 1),
-(4, 'lisa', 'jazz123', 2, 1),
-(5, 'maggie', 'pacifier123', 2, 1);
+(2, 'marge', 'maggie123', 2, 2),
+(3, 'bart', 'skateboard', 2, 2),
+(4, 'lisa', 'jazz123', 2, 2),
+(5, 'maggie', 'pacifier123', 2, 2);
 
 INSERT INTO Provincias (IDProvincia, Nombre) VALUES
 (1, 'Buenos Aires'),
@@ -130,15 +133,15 @@ INSERT INTO Provincias (IDProvincia, Nombre) VALUES
 (4, 'Chubut'),
 (5, 'CABA'),
 (6, 'Corrientes'),
-(7, 'Entre Ríos'),
+(7, 'Entre Rios'),
 (8, 'Formosa'),
 (9, 'Jujuy'),
 (10, 'La Pampa'),
 (11, 'La Rioja'),
 (12, 'Mendoza'),
 (13, 'Misiones'),
-(14, 'Neuquén'),
-(15, 'Río Negro'),
+(14, 'Neuquen'),
+(15, 'Rio Negro'),
 (16, 'Salta'),
 (17, 'San Juan'),
 (18, 'San Luis'),
@@ -146,7 +149,7 @@ INSERT INTO Provincias (IDProvincia, Nombre) VALUES
 (20, 'Santa Fe'),
 (21, 'Santiago del Estero'),
 (22, 'Tierra del Fuego'),
-(23, 'Tucumán');
+(23, 'Tucuman');
 
 	
 -- Localidades para Buenos Aires
@@ -214,9 +217,9 @@ INSERT INTO TipoMovimientos (Descripcion) VALUES
 
 INSERT INTO Movimientos (Detalle, Importe, IDCuentaEmisor, IDCuentaReceptor, TipoMovimientoID) VALUES
 ('Transferencia a cuenta de Marge', 500.00, 1, 2, 1),  
-('Depósito de salario', 2000.00, 2, 2, 2),           
+('Deposito de salario', 2000.00, 2, 2, 2),           
 ('Retiro en cajero', 1000.00, 3, NULL, 3),            
-('Pago de préstamo de Lisa', 1500.00, 4, NULL, 4);     
+('Pago de prestamo de Lisa', 1500.00, 4, NULL, 4);     
 
 INSERT INTO Prestamos (MontoSolitado, ImporteAPagar, Plazo, Estado, FechaSolicitado, ClienteID) VALUES
 (10000.00, 12000.00, 12, 'En tramite', '2024-10-01', 1),

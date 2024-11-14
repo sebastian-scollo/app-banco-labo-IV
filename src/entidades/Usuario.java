@@ -2,16 +2,25 @@ package entidades;
 
 public class Usuario {
 	private int IDUsuario;
+<<<<<<< HEAD
 	private String NombreUsuario;
+=======
+	private String nombreUsuario;
+>>>>>>> 6ee51c63d636acecd76034c40579d86d02e722c1
 	private String password;
 	private int TipoUsuario; 
 	private Boolean estado;
 	
 	
+<<<<<<< HEAD
 
 	public Usuario(int iDUsuario, String password, int tipoUsuario, Boolean estado) {
+=======
+	public Usuario(int iDUsuario,String nombreUsuario, String password, int tipoUsuario, Boolean estado) {
+>>>>>>> 6ee51c63d636acecd76034c40579d86d02e722c1
 		
 		IDUsuario = iDUsuario;
+		this.nombreUsuario = nombreUsuario;
 		this.password = password;
 		TipoUsuario = tipoUsuario;
 		this.estado = estado;
@@ -23,6 +32,12 @@ public class Usuario {
 	}
 	public void setIDUsuario(int iDUsuario) {
 		IDUsuario = iDUsuario;
+	}
+	public String getNombreUsuario() {
+		return nombreUsuario;
+	}
+	public void setNombreUsuario(String nombreUsuario) {
+		this.nombreUsuario = nombreUsuario;
 	}
 	public String getPassword() {
 		return password;
