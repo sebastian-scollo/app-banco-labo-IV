@@ -171,7 +171,7 @@ public ArrayList<Cliente> ListarNombre(String paramNombre) {
 	    }
 	    return listaClientes;
 }
-<<<<<<< Updated upstream
+
 /*@Override
     public boolean eliminarCliente(String dni) {
         try {
@@ -217,7 +217,7 @@ public boolean eliminarCliente(int paraIdcliente) {
 	  }
 	  return false;
 }
-=======
+
 
 @Override
 public boolean RegistrarCliente(Cliente cliente) {
@@ -374,7 +374,7 @@ public boolean verificarCUIL(String CUIL) {
 }
 
 
->>>>>>> Stashed changes
+
 	
 
 }

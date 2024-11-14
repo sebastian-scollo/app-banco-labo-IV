@@ -32,7 +32,6 @@ public class negocioClienteImpl implements negocioCliente {
 	
 		return dao.ListarNombre(paramNombre);
 	}
-<<<<<<< Updated upstream
 
 	@Override
 	public boolean eliminarCliente(int paraIdcliente) {
@@ -40,12 +39,12 @@ public class negocioClienteImpl implements negocioCliente {
 		return dao.eliminarCliente(paraIdcliente);
 	}
 
-=======
+
 	@Override
 	public boolean RegistrarCliente(Cliente cliente) {
 		return dao.RegistrarCliente(cliente);
 	}
->>>>>>> Stashed changes
+
 	
 	
 }
