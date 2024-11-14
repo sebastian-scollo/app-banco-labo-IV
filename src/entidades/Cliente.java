@@ -13,6 +13,7 @@ public class Cliente extends Usuario {
 	private Date fechaNacimiento;
 	private String telefono;
 	private String correo;
+	private Direccion direccion;
 	private int idUsuario;
 	private boolean activo;
 	private Provincia provincia;
@@ -24,7 +25,7 @@ public class Cliente extends Usuario {
 
 	 public void setProvincia(Provincia provincia) {
 	        this.provincia = provincia;
-	    }
+	    } 
 	public Date getFechaNacimiento() {
 		return fechaNacimiento;
 	}
@@ -66,6 +67,7 @@ public class Cliente extends Usuario {
 		this.correo = correo;
 		this.telefono= _telefono;
 		this.idUsuario = idUsurio;
+		setTipoUsuario(2);
 	}
 	public Cliente() {
 		super();
@@ -124,7 +126,14 @@ public class Cliente extends Usuario {
 	public void setTelefono(String telefono) {
 		this.telefono = telefono;
 	}
-	
+	public Direccion getDireccion()
+	{
+		return direccion;
+	}
+	public void setDireccion(Direccion direccion)
+	{
+		this.direccion = direccion;
+	}
 	
  /*IDCliente int auto_increment,
     DNI varchar(8) unique not null,
