@@ -8,9 +8,10 @@ public interface daoCliente {
 	public ArrayList<Cliente>ListarDni(String paramDni);
 	public ArrayList<Cliente>ListarNombre(String paramNombre);
 	public boolean eliminarCliente(int paraIdcliente);
+	public boolean EditarCliente(Cliente cliente);
 
 	public boolean verificarDNI(String DNI);
 	public boolean verificarCUIL(String CUIL);
 	public boolean RegistrarCliente(Cliente cliente);
-
+    
 }

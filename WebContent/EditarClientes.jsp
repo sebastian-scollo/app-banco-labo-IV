@@ -1,22 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ page import="entidades.Cliente" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar</title>
+    <title>Editar Cliente</title>
     <style>
        
-          /* Agregar margen superior al cuerpo para espacio entre menú y formulario */
         body {
-            margin-top: 120px; /* Ajusta según la altura de BarraMenuAdmin.jsp */
+            margin-top: 120px; 
         }
 
 
-    
-        /* Estilos para el formulario */
         .form-container {
             max-width: 700px;
             margin:  auto;
@@ -66,11 +64,6 @@
             outline: none;
             box-sizing: border-box;
             color: #666;
-           
-          
-      
-           
-           
         }
 
         .submit-btn {
@@ -89,8 +82,6 @@
             background-color: #246da8;
            
         }
-
-        /* Estilo para la flecha del select */
         .form-group select {
             appearance: none;
             -webkit-appearance: none;
@@ -100,8 +91,8 @@
             
         }
         .form-group {
-            flex: 1; /* Las columnas ocupan el mismo espacio */
-            margin-right: 10px; /* Espacio entre columnas */
+            flex: 1;
+            margin-right: 10px;
         }
         .form-group-pair {
             display: flex; /* Usar flexbox para dos columnas */
@@ -137,45 +128,55 @@
 
     </style>
 </head>
+<script>
+    function confirmarEliminacion() {
+        return confirm("¿Seguro de querer aplicar los nuevos cambios?");
+    }
+</script>
 <body>
+
     <%@ include file="BarraMenuAdmin.jsp" %>
     
 
-        <!-- Campos en dos columnas -->
-        <form action="submitForm" method="post">
-        <div class="form-group-pair">
-            <div class="form-group">
-                <input type="text" id="nombres" placeholder="Nombre" required pattern="[A-Za-z\s]+" title="Solo se permiten letras y espacios" class="form-input"  >
-            </div>
-            <div class="form-group">
-                <input type="text" id="apellidos" placeholder="Apellido" class="form-input"  required >
-            </div>
+       <%
+    Cliente cliente = (Cliente) request.getAttribute("cliente");
+    if (cliente == null) {
+        cliente = new Cliente(); 
+    }
+%>
+
+<form action="servletEditarCliente" method="post" onsubmit="return confirmarEliminacion();" >
+    <div class="form-group-pair">
+        <div class="form-group">
+            <input type="text" name="nombre" id="nombres" placeholder="Nombre" required
+                   value="<%= cliente.getNombre() %>" class="form-input">
         </div>
-
-       
-
-        <div class="form-group-pair">
-            <div class="form-group">
-                <label for="fecha-nacimiento" class="form-label">Fecha de nacimiento</label>
-                <input type="date" id="fecha-nacimiento" class="form-input" required>
-            </div>
-           <div class="form-group">
-                <label for="sexo-dni" class="form-label">Sexo segun tu DNI</label>
-                <select id="sexo-dni" class="form-input">
-                    <option value="femenino">Femenino</option>
-                    <option value="masculino">Masculino</option>
-                </select>
-            </div>
+        <div class="form-group">
+            <input type="text" name="apellido" id="apellidos" placeholder="Apellido" required
+                   value="<%= cliente.getApellido() %>" class="form-input">
         </div>
-
-        <!-- Campo de correo electrónico en una columna completa -->
-        <div class="form-group email-group">
-            <input type="email" id="email" placeholder="Email" class="form-input" required pattern="^[\w.-]+@[\w.]+.\w{2,4}$" title="Por favor, ingresa un correo electrónico válido, como usuario@ejemplo.com"  >
-        </div>
-
-        <!-- Boton de envio -->
-        <input type="submit" class="submit-btn" value="Aceptar"> </input>
-       </form> 
     </div>
+
+    <div class="form-group-pair">
+        <div class="form-group">
+            <input type="text" name="telefono" placeholder="Teléfono" required
+                   value="<%= cliente.getTelefono() %>" class="form-input">
+        </div>
+        <div class="form-group">
+            <select name="sexo" id="sexo-dni" class="form-input">
+                <option value="femenino" <%= "femenino".equals(cliente.getSexo()) ? "selected" : "" %>>Femenino</option>
+                <option value="masculino" <%= "masculino".equals(cliente.getSexo()) ? "selected" : "" %>>Masculino</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="form-group email-group">
+        <input type="email" name="email" placeholder="Email" required
+               value="<%= cliente.getCorreo() %>" class="form-input">
+    </div>
+
+    <input type="hidden" name="dni" value="<%= cliente.getDni() %>">
+    <input type="submit" class="submit-btn" name="btnAceptar" value="Aceptar">
+</form>
 </body>
 </html>

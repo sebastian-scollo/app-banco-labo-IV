@@ -45,6 +45,11 @@ public class negocioClienteImpl implements negocioCliente {
 		return dao.RegistrarCliente(cliente);
 	}
 
+	@Override
+	public boolean EditarClieente(Cliente cliente) {	
+		return dao.EditarCliente(cliente);
+	}
+
 	
 	
 }

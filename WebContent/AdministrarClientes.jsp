@@ -15,11 +15,6 @@
             background-color: #f4f4f4;
             display: flex;
         }
-        
-        
-        .user-info {
-            font-size: 16px;
-        }
         .table-container {
             margin-top: 70px;
             padding: 20px;
@@ -69,12 +64,10 @@
     <div class="table-container">
         <%@ include file="BarraMenuAdmin.jsp" %>
 
-        <!-- Boton "Mostrar todo" -->
         <form action="ServletListarCliente" method="post">
             <input type="submit" value="Mostrar todo" name="btnMostrarTodos" class="search-button">
         </form>
 
-        <!-- Campos para ingresar y buscar por DNI Nro Document0.-->
         <form action="ServletListarCliente" method="post">
             <div class="search-container">
                 <input type="text" class="form-input" name="txtDni" placeholder="Buscar por DNI">
@@ -84,16 +77,15 @@
             </div>
         </form>
 
-        <!--Campo para ingresar y buscar por NAME/NOMBRE. -->
         <form action="ServletListarCliente" method="post">
-        <div class="search-container">
-            <input type="text" class="form-input" name="txtNombre" placeholder="Buscar por Nombre">
-            <button type="submit" name="btnBuscarNombre" class="search-button">
-                <i class="bi bi-search"></i> Buscar Nombre
-            </button>
-        </div>
-          </form>
-          <!-- Importante recordar de que siempre va ver un form para poder vincular a nuestros SV/servlet requeridos. -->
+            <div class="search-container">
+                <input type="text" class="form-input" name="txtNombre" placeholder="Buscar por Nombre">
+                <button type="submit" name="btnBuscarNombre" class="search-button">
+                    <i class="bi bi-search"></i> Buscar Nombre
+                </button>
+            </div>
+        </form>
+
         <table id="miTabla">
             <thead>
                 <tr>
@@ -126,7 +118,7 @@
                         <td><%= cliente.getNacionalidad() %></td>
                         <td><%= cliente.getCorreo() %></td>
                         <td>
-                            <button onclick="window.location.href='EditarClientes.jsp'">
+                            <button onclick="window.location.href='servletEditarCliente?dni=<%= cliente.getDni() %>'">
                                 <i class="bi bi-pencil"></i> Editar
                             </button>
                             <button onclick="window.location.href='EliminarCliente.jsp'">
@@ -142,9 +134,41 @@
         </table>
 
         <div id="pagination">
-            <button onclick="previousPage()">Anterior</button>
-            <button onclick="nextPage()">Siguiente</button>
+            <button onclick="changePage(-1)">Anterior</button>
+            <span id="pageInfo"></span>
+            <button onclick="changePage(1)">Siguiente</button>
         </div>
     </div>
+
+    <script>
+        const rowsPerPage = 3; 
+        let currentPage = 1;
+
+        function showPage(page) {
+            const table = document.getElementById('miTabla');
+            const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+            const totalPages = Math.ceil(rows.length / rowsPerPage);
+
+            if (page < 1) page = 1;
+            if (page > totalPages) page = totalPages;
+
+            for (let i = 0; i < rows.length; i++) {
+                rows[i].style.display = 'none';
+            }
+
+            for (let i = (page - 1) * rowsPerPage; i < (page * rowsPerPage) && i < rows.length; i++) {
+                rows[i].style.display = '';
+            }
+
+            document.getElementById('pageInfo').innerText = `Página ${page} de ${totalPages}`;
+            currentPage = page;
+        }
+
+        function changePage(direction) {
+            showPage(currentPage + direction);
+        }
+
+        showPage(currentPage);
+    </script>
 </body>
 </html>

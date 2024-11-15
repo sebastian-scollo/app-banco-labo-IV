@@ -58,7 +58,6 @@
 </style>
 <script>
     function confirmarEliminacion() {
-        // Mostrar cuadro de confirmación
         return confirm("¿Está seguro de que desea eliminar esta cuenta?");
     }
 </script>

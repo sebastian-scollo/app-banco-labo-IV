@@ -172,28 +172,7 @@ public ArrayList<Cliente> ListarNombre(String paramNombre) {
 	    return listaClientes;
 }
 
-/*@Override
-    public boolean eliminarCliente(String dni) {
-        try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        }
 
-        String sql = "UPDATE clientes SET Baja_CL = 1 WHERE Admin_CL = 0 AND DNI_CL = ? ";
-        try {
-            conexion cn = new conexion();
-            Connection cnn = cn.obtenerConexion();
-            PreparedStatement ps = cnn.prepareStatement(sql);
-            ps.setString(1, dni);
-            int resultado = ps.executeUpdate();
-            return resultado > 0;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return false;
-    }*/
 @Override
 public boolean eliminarCliente(int paraIdcliente) {
 	  try {
@@ -237,25 +216,25 @@ public boolean RegistrarCliente(Cliente cliente) {
             return false;
         }
 
-        connection.setAutoCommit(false); // Inicia la transacción
+        connection.setAutoCommit(false); 
 
-        // Insertar en la tabla Usuarios
+       
         String insertUsuario = "INSERT INTO Usuarios (NombreUsuario, Contrasenia, TipoUsuario, Estado) VALUES (?, ?, ?, ?)";
         pstUsuario = connection.prepareStatement(insertUsuario, Statement.RETURN_GENERATED_KEYS); // Asegúrate de usar RETURN_GENERATED_KEYS
         pstUsuario.setString(1, cliente.getNombreUsuario());
         pstUsuario.setString(2, cliente.getPassword());
-        pstUsuario.setInt(3, 2); // Tipo de usuario
-        pstUsuario.setBoolean(4, true);  // Estado activo
+        pstUsuario.setInt(3, 2);
+        pstUsuario.setBoolean(4, true);  
         pstUsuario.executeUpdate();
         
-        // Obtener el ID generado para el usuario
+      
         rs = pstUsuario.getGeneratedKeys();
         if (rs.next()) {
-            usuarioID = rs.getInt(1); // Obtiene el ID generado
+            usuarioID = rs.getInt(1); 
         }
         rs.close();
 
-        // Insertar en la tabla Clientes
+     
         String insertCliente = "INSERT INTO Clientes (DNI, CUIL, Nombre, Apellido, Sexo, Nacionalidad, FechaNacimiento, Telefono, CorreoElectronico, UsuarioID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         pstCliente = connection.prepareStatement(insertCliente, Statement.RETURN_GENERATED_KEYS); // Agregar RETURN_GENERATED_KEYS aquí
         pstCliente.setString(1, cliente.getDni());
@@ -267,17 +246,17 @@ public boolean RegistrarCliente(Cliente cliente) {
         pstCliente.setDate(7, new java.sql.Date(cliente.getFechaNacimiento().getTime()));
         pstCliente.setString(8, cliente.getTelefono());
         pstCliente.setString(9, cliente.getCorreo());
-        pstCliente.setInt(10, usuarioID); // Usar el ID generado para el usuario
+        pstCliente.setInt(10, usuarioID); 
         pstCliente.executeUpdate();
         
-        // Obtener el ID generado para el cliente
+        
         rs = pstCliente.getGeneratedKeys();
         if (rs.next()) {
-            clienteID = rs.getInt(1); // Obtiene el ID generado
+            clienteID = rs.getInt(1);
         }
         rs.close();
 
-        // Insertar en la tabla Direcciones
+    
         String sqlDireccion = "INSERT INTO Direcciones (Calle, Numero, Piso, Departamento, LocalidadID, ClienteID) VALUES (?, ?, ?, ?, ?, ?)";
         pstDireccion = connection.prepareStatement(sqlDireccion);
         pstDireccion.setString(1, cliente.getDireccion().getNombrecalle());
@@ -293,10 +272,10 @@ public boolean RegistrarCliente(Cliente cliente) {
             pstDireccion.setNull(4, java.sql.Types.VARCHAR);
         }
         pstDireccion.setInt(5, cliente.getDireccion().getNroLocalidad());
-        pstDireccion.setInt(6, clienteID); // Usar el ID generado para el cliente
+        pstDireccion.setInt(6, clienteID); 
         pstDireccion.executeUpdate();
 
-        connection.commit(); // Confirma la transacción si todo ha ido bien
+        connection.commit();
         return true;
 
     } catch (SQLException e) {
@@ -373,8 +352,37 @@ public boolean verificarCUIL(String CUIL) {
 	return existe;
 }
 
-
-
+@Override
+public boolean EditarCliente(Cliente cliente) {
+	  try {
+	        Class.forName("com.mysql.jdbc.Driver"); 
+	        System.out.println("Driver MySQL cargado correctamente.");
+	    } catch(ClassNotFoundException e) {
+	        System.out.println("Error al cargar el driver MySQL.");
+	        e.printStackTrace();
+	     
+	    }
 	
-
+	  String consulta = "update Clientes Set Nombre = ?, Apellido=?,Sexo=?,Telefono=?,CorreoElectronico=? WHERE DNI=?";
+	  conexion cn = new conexion();
+	    Connection connection = cn.obtenerConexion();
+	    if (connection == null) {
+	        return false;
+	    }
+	    try {
+	    	PreparedStatement statement = connection.prepareStatement(consulta);
+	    	
+	    	statement.setString(1,cliente.getNombre());
+	    	statement.setString(2,cliente.getApellido());
+	    	statement.setString(3,cliente.getSexo());
+	    	statement.setString(4,cliente.getTelefono());
+	    	statement.setString(5,cliente.getCorreo());
+	    	statement.setString(6,cliente.getDni());
+            int actualizado = statement.executeUpdate();
+            return actualizado >0;
+	    }catch(Exception ex) {
+	    	ex.printStackTrace();
+	    	return false;
+	    }
+  }
 }

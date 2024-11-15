@@ -150,10 +150,47 @@
 </table>
         
         <div id="pagination">
-            <button onclick="previousPage()">Anterior</button>
-            <button onclick="nextPage()">Siguiente</button>
-        </div>
+    <button onclick="changePage(-1)">Anterior</button>
+    <span id="pageInfo"></span>
+    <button onclick="changePage(1)">Siguiente</button>
+</div>
     </div>
 </body>
+<script>
+   
+    const rowsPerPage = 3; 
+    let currentPage = 1;
+
+    function showPage(page) {
+        const table = document.getElementById('miTabla');
+        const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+        const totalPages = Math.ceil(rows.length / rowsPerPage);
+
+       
+        if (page < 1) page = 1;
+        if (page > totalPages) page = totalPages;
+
+     
+        for (let i = 0; i < rows.length; i++) {
+            rows[i].style.display = 'none';
+        }
+
+       
+        for (let i = (page - 1) * rowsPerPage; i < (page * rowsPerPage) && i < rows.length; i++) {
+            rows[i].style.display = '';
+        }
+
+       
+        document.getElementById('pageInfo').innerText = `Página ${page} de ${totalPages}`;
+        currentPage = page;
+    }
+
+    function changePage(direction) {
+        showPage(currentPage + direction);
+    }
+
+    
+    showPage(currentPage);
+</script>
 
 </html>
