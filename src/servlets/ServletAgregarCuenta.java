@@ -2,6 +2,10 @@ package servlets;
 import entidades.Cuenta;
 import negocio.negocioCuenta;
 import negocioImpl.negocioCuentaImpl;
+import entidades.TipoCuenta;
+import negocio.negocioTipoCuenta;
+import negocioImpl.negocioTipoCuentaImpl;
+import java.util.ArrayList;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,8 +33,23 @@ public class ServletAgregarCuenta extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+
+		        negocioTipoCuenta dao = new negocioTipoCuentaImpl();
+		 
+		        try {
+		 
+		            ArrayList<TipoCuenta> listTipo = dao.obtenerTiposCuentas();
+		            request.setAttribute("listTipo", listTipo);
+		 
+		            RequestDispatcher dispatcher = request.getRequestDispatcher("AgregarCuenta.jsp");
+		            dispatcher.forward(request, response);
+		 
+		        } catch (Exception e) {
+		            e.printStackTrace();
+		            throw new ServletException(e);
+		        }
+		    }
+		
 	}
 
 	/**
@@ -38,10 +57,15 @@ public class ServletAgregarCuenta extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+	 		
 		if( request.getParameter("btnAceptar") != null ) {
             Cuenta c = new Cuenta();
 
-        	c.setTipoCuentaId( Integer.parseInt( request.getParameter("CodigoTipoCuenta") ) );
+            int idTipo = Integer.parseInt(request.getParameter("TipoCuenta"));
+   		 
+    	    request.setAttribute("tipoSeleccionado", idTipo);
+            
+        	c.setTipoCuentaId( idTipo );
            	c.setClienteId( Integer.parseInt( request.getParameter("IdCliente") ) );
             c.setCBU( request.getParameter("CBU") );
             c.setNroCuenta( request.getParameter("NumCuenta") );

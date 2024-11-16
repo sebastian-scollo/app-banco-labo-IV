@@ -36,17 +36,20 @@ public class ServletModificarCuenta extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 negocioTipoCuenta negTipoCuenta = new negocioTipoCuentaImpl();
-		    ArrayList<TipoCuenta> listaTiposCuenta = negTipoCuenta.obtenerTiposCuentas();
-
-		    if (listaTiposCuenta != null && !listaTiposCuenta.isEmpty()) {
-		        request.setAttribute("listaTiposCuenta", listaTiposCuenta);
-		    } else {
-		        request.setAttribute("mensaje", "No hay tipos de cuenta disponibles.");
-		    }
-		    
-		    RequestDispatcher rd = request.getRequestDispatcher("EdicionCuenta.jsp");
-		    rd.forward(request, response);
+		 negocioTipoCuenta dao = new negocioTipoCuentaImpl();
+		 
+	        try {
+	 
+	            ArrayList<TipoCuenta> listTipo = dao.obtenerTiposCuentas();
+	            request.setAttribute("listaTiposCuenta", listTipo);
+	 
+	            RequestDispatcher dispatcher = request.getRequestDispatcher("EditarCuenta.jsp");
+	            dispatcher.forward(request, response);
+	 
+	        } catch (Exception e) {
+	            e.printStackTrace();
+	            throw new ServletException(e);
+	        }
 	}
 
 	/**
@@ -66,7 +69,7 @@ public class ServletModificarCuenta extends HttpServlet {
 
 	        
 	        boolean exito = negCuenta.ModificarCuenta(cuenta);
-	        String mensaje = exito ? "Cuenta modificada con éxito" : "Error al modificar la cuenta";
+	        String mensaje = exito ? "Cuenta modificada con ï¿½xito" : "Error al modificar la cuenta";
 
 	      
 	        negocioTipoCuenta negTipoCuenta = new negocioTipoCuentaImpl();
@@ -74,7 +77,7 @@ public class ServletModificarCuenta extends HttpServlet {
 
 	        request.setAttribute("mensaje", mensaje);
 	        request.setAttribute("listaTiposCuenta", listaTiposCuenta);
-	        RequestDispatcher rd = request.getRequestDispatcher("EdicionCuenta.jsp");
+	        RequestDispatcher rd = request.getRequestDispatcher("EditarCuenta.jsp");
 	        rd.forward(request, response);
 	}
 

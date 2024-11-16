@@ -3,6 +3,8 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="entidades.Cuenta" %>
 <%@ page import="entidades.TipoCuenta" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -135,16 +137,13 @@
             <div class="form-group">
                 <label for="selectTipoCuenta" class="form-label">Tipo de Cuenta:</label>
                 <select id="selectTipoCuenta" name="selectTipoCuenta" class="form-input" required>
-                    <option value="" disabled selected>Seleccione un tipo de cuenta</option>
-                    <% 
-                        if (listaTiposCuenta != null) {
-                            for (TipoCuenta tipoCuenta : listaTiposCuenta) {
-                    %>
-                        <option value="<%= tipoCuenta.getIdTipoCuenta() %>"><%= tipoCuenta.getDescripcion() %></option>
-                    <% 
-                            }
-                        }
-                    %>
+                    <c:foreach items="${listaTipoCuenta}" var="tipo">
+			                <option value="${tipo.getIdTipoCuenta()}"
+			                    <c:if test="${tipo.getIdTipoCuenta() eq tipoSeleccionado}">selected="selected"</c:if>
+			                    >
+			                    ${tipo.getDescripcion()}
+			                </option>
+			        </c:foreach>
                 </select>
             </div>
 

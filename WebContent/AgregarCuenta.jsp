@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@ page import="entidades.Cuenta, negocio.negocioCuenta, negocioImpl.negocioCuentaImpl, java.util.Date" %>
+<%@ page import="entidades.TipoCuenta" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -133,11 +135,15 @@
         <form action="ServletAgregarCuenta" method="post">
             <div class="form-group-pair">
                 <div class="form-group">
-                    <input type="text" id="CodigoTipoCuenta" name="CodigoTipoCuenta" 
-                           placeholder="Codigo Tipo Cuenta" class="form-input" 
-                           pattern="^[A-Za-z0-9]{1,10}$" 
-                           title="El código debe contener entre 1 y 10 caracteres alfanuméricos." 
-                           required>
+                    <select name="TipoCuenta">
+			            <c:foreach items="${listTipo}" var="tipo">
+			                <option value="${tipo.getIdTipoCuenta()}"
+			                    <c:if test="${tipo.getIdTipoCuenta() eq tipoSeleccionado}">selected="selected"</c:if>
+			                    >
+			                    ${tipo.getDescripcion()}
+			                </option>
+			            </c:foreach>
+			        </select>
                 </div>
                 <div class="form-group">
                     <input type="text" id="IdCliente" name="IdCliente" 
