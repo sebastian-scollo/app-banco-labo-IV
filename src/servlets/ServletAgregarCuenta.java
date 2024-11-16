@@ -58,27 +58,32 @@ public class ServletAgregarCuenta extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 	 		
-		if( request.getParameter("btnAceptar") != null ) {
-            Cuenta c = new Cuenta();
+		  if (request.getParameter("btnAceptar") != null) {
+		        Cuenta c = new Cuenta();
 
-            int idTipo = Integer.parseInt(request.getParameter("TipoCuenta"));
-   		 
-    	    request.setAttribute("tipoSeleccionado", idTipo);
-            
-        	c.setTipoCuentaId( idTipo );
-           	c.setClienteId( Integer.parseInt( request.getParameter("IdCliente") ) );
-            c.setCBU( request.getParameter("CBU") );
-            c.setNroCuenta( request.getParameter("NumCuenta") );
-            
-            c.setSaldo(0);
-            
-            negocioCuenta nc = new negocioCuentaImpl();
-          	nc.AgregarCuenta(c);
-    	}
-		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("AgregarCuenta.jsp");  //s
-        dispatcher.forward(request, response);
-        
+		       
+		        int idTipo = Integer.parseInt(request.getParameter("TipoCuenta"));
+		        request.setAttribute("tipoSeleccionado", idTipo);
+		        
+		    
+		        c.setTipoCuentaId(idTipo);
+		        c.setClienteId(Integer.parseInt(request.getParameter("IdCliente")));
+		        c.setCBU(request.getParameter("CBU"));
+		        c.setNroCuenta(request.getParameter("NumCuenta"));
+		        
+		       
+		        c.setSaldo(Double.parseDouble(request.getParameter("Saldo")));
+
+		        
+		   
+		        negocioCuenta nc = new negocioCuentaImpl();
+		        nc.AgregarCuenta(c); 
+		    }
+
+		  
+		    RequestDispatcher dispatcher = request.getRequestDispatcher("AgregarCuenta.jsp");
+		    dispatcher.forward(request, response);
 	}
+
 
 }

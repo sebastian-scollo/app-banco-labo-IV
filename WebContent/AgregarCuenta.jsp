@@ -112,7 +112,7 @@
         }
 
         .form-group::after {
-            content: '▾';
+            content: '+';
             position: absolute;
             right: 10px;
             top: 50%;
@@ -125,23 +125,27 @@
         }
     </style>
 </head>
-
+<script>
+    function confirmarEliminacion() {
+        return confirm("¿Estas seguro de que desea agregar esta nueva cuenta?");
+    }
+</script>
 <body>
     <%@ include file="BarraMenuAdmin.jsp" %>
-    <%                 String listaTiposCuenta = (String) request.getAttribute("listaTiposCuenta");
- %>
+    
     <div class="form-container">
         <h2>INGRESE DATOS DE CUENTA</h2>
 
-        <form action="ServletAgregarCuenta" method="post">
+        <form action="ServletAgregarCuenta" method="post" onsubmit="return confirmarEliminacion();" >
             <div class="form-group-pair">
                 <div class="form-group">
-                    <select name="TipoCuenta">
-			            
-                      	<c:out value="${listaTiposCuenta}"/>
-                      
-                       
-			        </select>
+                    <label for="TipoCuenta" class="form-label">Tipo de Cuenta:</label>
+                   
+                    <select name="TipoCuenta" class="form-input" required>
+                        <option value="1">Ahorro</option>
+                        <option value="2">Corriente</option>
+                        <option value="3">Plazo fijo</option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <input type="text" id="IdCliente" name="IdCliente" 
@@ -162,7 +166,7 @@
                 </div>
                 <div class="form-group">
                     <input type="text" id="NumCuenta" name="NumCuenta" 
-                           placeholder="Número de cuenta" class="form-input" 
+                           placeholder="Numero de cuenta" class="form-input" 
                            pattern="^\d{1,20}$" 
                            title="El número de cuenta debe contener entre 1 y 20 dígitos." 
                            required>
@@ -173,7 +177,7 @@
                 <input type="text" id="Saldo" name="Saldo" 
                        placeholder="Saldo" class="form-input" 
                        pattern="^\d+(\.\d{1,2})?$" 
-                       title="El saldo debe ser un número positivo con hasta dos decimales." 
+                       title="El saldo debe ser un numero positivo." 
                        required>
             </div>
 
@@ -182,4 +186,3 @@
     </div>
 </body>
 </html>
-

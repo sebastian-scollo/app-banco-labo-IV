@@ -36,7 +36,7 @@ public class ServletModificarCuenta extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 negocioTipoCuenta dao = new negocioTipoCuentaImpl();
+		/* negocioTipoCuenta dao = new negocioTipoCuentaImpl();
 		 
 	        try {
 	 
@@ -49,35 +49,31 @@ public class ServletModificarCuenta extends HttpServlet {
 	        } catch (Exception e) {
 	            e.printStackTrace();
 	            throw new ServletException(e);
-	        }
+	        }*/
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		negocioCuenta negCuenta = new negocioCuentaImpl();
-	        Cuenta cuenta = new Cuenta();
-	        cuenta.setSaldo(Double.parseDouble(request.getParameter("txtSaldo")));
-	        cuenta.setClienteId(Integer.parseInt(request.getParameter("txtClienteId")));
-	        cuenta.setClienteId(Integer.parseInt(request.getParameter("txtIdCuenta")));
-	        TipoCuenta tipoCuenta = new TipoCuenta();
-	        tipoCuenta.setIdTipoCuenta(Integer.parseInt(request.getParameter("selectTipoCuenta")));
-	        cuenta.setObjidTipoCuenta(tipoCuenta);
+		 negocioCuenta negCuenta = new negocioCuentaImpl();
+		    
+		    Cuenta cuenta = new Cuenta();
+		    cuenta.setSaldo(Double.parseDouble(request.getParameter("txtSaldo")));
+		    cuenta.setClienteId(Integer.parseInt(request.getParameter("txtClienteId")));
+		    cuenta.setTipoCuentaId(Integer.parseInt(request.getParameter("selectTipoCuenta"))); 
+		    cuenta.setIdCuenta(Integer.parseInt(request.getParameter("txtIdCuenta")));
 
-	        
-	        boolean exito = negCuenta.ModificarCuenta(cuenta);
-	        String mensaje = exito ? "Cuenta modificada con �xito" : "Error al modificar la cuenta";
-
-	      
-	        negocioTipoCuenta negTipoCuenta = new negocioTipoCuentaImpl();
-	        ArrayList<TipoCuenta> listaTiposCuenta = negTipoCuenta.obtenerTiposCuentas();
-
-	        request.setAttribute("mensaje", mensaje);
-	        request.setAttribute("listaTiposCuenta", listaTiposCuenta);
-	        RequestDispatcher rd = request.getRequestDispatcher("EditarCuenta.jsp");
-	        rd.forward(request, response);
+		    boolean exito = negCuenta.ModificarCuenta(cuenta);
+		    String mensaje = exito ? "Cuenta modificada con exito" : "Error al modificar la cuenta";
+		    
+		    negocioTipoCuenta negTipoCuenta = new negocioTipoCuentaImpl();
+		    ArrayList<TipoCuenta> listaTiposCuenta = negTipoCuenta.obtenerTiposCuentas();
+		    
+		    request.setAttribute("mensaje", mensaje);
+		    request.setAttribute("listaTiposCuenta", listaTiposCuenta);
+		    RequestDispatcher rd = request.getRequestDispatcher("EditarCuenta.jsp");
+		    rd.forward(request, response);
 	}
 
 }
