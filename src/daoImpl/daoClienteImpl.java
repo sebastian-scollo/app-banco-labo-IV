@@ -260,7 +260,7 @@ public boolean RegistrarCliente(Cliente cliente) {
         String sqlDireccion = "INSERT INTO Direcciones (Calle, Numero, Piso, Departamento, LocalidadID, ClienteID) VALUES (?, ?, ?, ?, ?, ?)";
         pstDireccion = connection.prepareStatement(sqlDireccion);
         pstDireccion.setString(1, cliente.getDireccion().getNombrecalle());
-        pstDireccion.setInt(2, cliente.getDireccion().getNroLocalidad());
+        pstDireccion.setInt(2, cliente.getDireccion().getNumerCalle());
         if (cliente.getDireccion().getPiso() >= 0) {
             pstDireccion.setInt(3, cliente.getDireccion().getPiso());
         } else {

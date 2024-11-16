@@ -4,7 +4,7 @@ public class Direccion {
 	private int idDireccion;
 	private String nombrecalle;
 	private int numerCalle;
-	private int piso;
+	private Integer piso;
 	private String departamento;
 	private int nroLocalidad;
 	private int IdCliente;

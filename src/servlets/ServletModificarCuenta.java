@@ -47,7 +47,7 @@ public class ServletModificarCuenta extends HttpServlet {
            	c.setClienteId( Integer.parseInt( request.getParameter("IdCliente") ) );
             c.setCBU( request.getParameter("CBU") );
             c.setNroCuenta( request.getParameter("NumCuenta") );
-            c.setSaldo( Double.parseDouble( request.getParameter( "Saldo" ) );
+            c.setSaldo( Double.parseDouble( request.getParameter( "Saldo" ) ));
             
             negocioCuenta nc = new negocioCuentaImpl();
           	nc.ModificarCuenta(c);
