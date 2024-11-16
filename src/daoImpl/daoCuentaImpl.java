@@ -184,7 +184,8 @@ public class daoCuentaImpl implements daoCuenta {
 					+ "VALUES (	"
 					+ cuenta.getNroCuenta() + ", "
 					+ cuenta.getCBU() + ", "
-					+ cuenta.getClienteId() + ", "
+					+ cuenta.getSaldo() + ", "
+ 					+ cuenta.getClienteId() + ", "
 					+ cuenta.getTipoCuentaId()
  					+ ");";
 			
