@@ -11,6 +11,14 @@ public class Cuenta {
 	private int tipoCuentaId;
 	private Date fechaCreacion;
 	private String CBU;
+	private TipoCuenta objidTipoCuenta;
+	
+	public TipoCuenta getObjidTipoCuenta() {
+		return objidTipoCuenta;
+	}
+	public void setObjidTipoCuenta(TipoCuenta objidTipoCuenta) {
+		this.objidTipoCuenta = objidTipoCuenta;
+	}
 	private boolean estado;
 	
 	public String getCBU() {

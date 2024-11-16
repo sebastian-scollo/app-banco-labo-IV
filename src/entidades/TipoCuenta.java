@@ -2,13 +2,13 @@ package entidades;
 
 public class TipoCuenta {
 
-	private int idTipoCuenta;
+	private Integer idTipoCuenta;
 	private String descripcion;
 	
 	public int getIdTipoCuenta() {
 		return idTipoCuenta;
 	}
-	public void setIdTipoCuenta(int idTipoCuenta) {
+	public void setIdTipoCuenta(Integer idTipoCuenta) {
 		this.idTipoCuenta = idTipoCuenta;
 	}
 	public String getDescripcion() {
@@ -22,6 +22,12 @@ public class TipoCuenta {
 		this.idTipoCuenta = idTipoCuenta;
 		this.descripcion = descripcion;
 	}
-	
+
+	public TipoCuenta(Integer idTipoCuenta, String descripcion) {
+		super();
+		this.idTipoCuenta = idTipoCuenta;
+		this.descripcion = descripcion;
+	}
+	public TipoCuenta() {}
 	
 }

@@ -129,7 +129,7 @@
 	<div class="form-container">
         <h2>INGRESE DATOS DE CUENTA</h2>
 
-        <form action="/ServletModificarCuenta" method="post">
+        <form action="ServletModificarCuenta" method="post">
             <div class="form-group-pair">
             	<div class="form-group">
                     <input type="text" id="NumCuenta" name="NumCuenta" placeholder="Número de cuenta" class="form-input" required>

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@ page import="entidades.Cuenta, negocio.negocioCuenta, negocioImpl.negocioCuentaImpl, java.util.Date" %>
+<%@ page import="entidades.TipoCuenta, java.util.ArrayList" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -126,27 +128,53 @@
 
 <body>
     <%@ include file="BarraMenuAdmin.jsp" %>
-    
+    <%                 String listaTiposCuenta = (String) request.getAttribute("listaTiposCuenta");
+ %>
     <div class="form-container">
         <h2>INGRESE DATOS DE CUENTA</h2>
 
         <form action="ServletAgregarCuenta" method="post">
             <div class="form-group-pair">
                 <div class="form-group">
-                    <input type="text" id="CodigoTipoCuenta" name="CodigoTipoCuenta" placeholder="Codigo Tipo Cuenta" class="form-input" required>
+                    <select name="TipoCuenta">
+			            
+                      	<c:out value="${listaTiposCuenta}"/>
+                      
+                       
+			        </select>
                 </div>
                 <div class="form-group">
-                    <input type="text" id="IdCliente" name="IdCliente" placeholder="ID Cliente" class="form-input" required>
+                    <input type="text" id="IdCliente" name="IdCliente" 
+                           placeholder="ID Cliente" class="form-input" 
+                           pattern="^[A-Za-z0-9]{1,10}$" 
+                           title="El ID del cliente debe contener entre 1 y 10 caracteres alfanuméricos." 
+                           required>
                 </div>
             </div>
             
             <div class="form-group-pair">
                 <div class="form-group">
-                    <input type="text" id="CBU" name="CBU" placeholder="CBU" class="form-input" required>
+                    <input type="text" id="CBU" name="CBU" 
+                           placeholder="CBU" class="form-input" 
+                           pattern="^\d{22}$" 
+                           title="El CBU debe contener exactamente 22 dígitos." 
+                           required>
                 </div>
                 <div class="form-group">
-                    <input type="text" id="NumCuenta" name="NumCuenta" placeholder="Número de cuenta" class="form-input" required>
+                    <input type="text" id="NumCuenta" name="NumCuenta" 
+                           placeholder="Número de cuenta" class="form-input" 
+                           pattern="^\d{1,20}$" 
+                           title="El número de cuenta debe contener entre 1 y 20 dígitos." 
+                           required>
                 </div>
+            </div>
+
+            <div class="form-group">
+                <input type="text" id="Saldo" name="Saldo" 
+                       placeholder="Saldo" class="form-input" 
+                       pattern="^\d+(\.\d{1,2})?$" 
+                       title="El saldo debe ser un número positivo con hasta dos decimales." 
+                       required>
             </div>
 
             <input type="submit" class="submit-btn" name="btnAceptar" value="Agregar Cuenta">
