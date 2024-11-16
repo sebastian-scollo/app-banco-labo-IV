@@ -184,7 +184,6 @@ public class daoCuentaImpl implements daoCuenta {
 					+ "VALUES (	"
 					+ cuenta.getNroCuenta() + ", "
 					+ cuenta.getCBU() + ", "
-					+ cuenta.getSaldo() + ", "
 					+ cuenta.getClienteId() + ", "
 					+ cuenta.getTipoCuentaId()
  					+ ");";
@@ -228,5 +227,43 @@ public class daoCuentaImpl implements daoCuenta {
 		}
 		return false;
 	}
+	
+	
+	public boolean ModificarCuenta(Cuenta cuenta) {
+		boolean exito = true;
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+		}
+		
+		catch (ClassNotFoundException e) {
+			exito = false;
+			e.printStackTrace();
+		}
+		
+		try {
+			conexion bd = new conexion();
+			Connection connection = bd.obtenerConexion();
+			
+			String query = "UPDATE Cuentas SET " +
+					"CBU = " + cuenta.getCBU() + ", " +
+					"Saldo = "+ cuenta.getSaldo() + ", " +
+					"ClienteId = "+ cuenta.getClienteId() + ", " +
+					"TipoCuewntaId = " + cuenta.getTipoCuentaId()
+ 					+ " WHERE NumeroCuenta = " + cuenta.getNroCuenta() + ";";
+			
+			PreparedStatement mtt = connection.prepareStatement(query);
+			
+			mtt.execute();
+		}
+		
+		catch (Exception e) {
+			exito = false;
+			e.printStackTrace();
+		}
+		
+		return exito;
+	}
+	
 
 }

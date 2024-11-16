@@ -42,4 +42,8 @@ public class negocioCuentaImpl implements negocioCuenta {
 	public boolean eliminarCuenta(int iDcuenta) {
 		return dao.eliminarCuenta(iDcuenta);
 	}
+	
+	public boolean ModificarCuenta(Cuenta cuenta) {
+		return dao.ModificarCuenta(cuenta);
+	}
 }

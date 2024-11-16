@@ -11,5 +11,7 @@ public interface daoCuenta {
   public int NuevaId();
   public boolean AgregarCuenta(Cuenta cuenta);
   public boolean eliminarCuenta(int idCuenta);
+  public boolean ModificarCuenta(Cuenta cuenta);
+
   
 }
