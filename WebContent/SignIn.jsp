@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE>
 <html>
 <head>
@@ -8,7 +8,6 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
 	<link rel="stylesheet" type="text/css" href="css/custom.css">
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
-	
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
 	<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
 
@@ -25,21 +24,21 @@
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="nombre" class="form-label">Nombre</label>
-                    <input type="text" class="form-control" id="nombre" name="nombre" required>
+                    <input type="text" class="form-control" id="nombre" name="nombre" pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$" title="El nombre solo puede contener letras y espacios."  required>
                 </div>
                 <div class="col-md-6">
                     <label for="apellido" class="form-label">Apellido</label>
-                    <input type="text" class="form-control" id="apellido" name="apellido" required>
+                    <input type="text" class="form-control" id="apellido" name="apellido" pattern="^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$" title="El apellido solo puede contener letras y espacios." required>
                 </div>
             </div>
             <div class="row mb-3">
                 <div class="col-md-6">
                     <label for="dni" class="form-label">DNI</label>
-                    <input type="text" class="form-control" id="dni" name="dni" required>
+                    <input type="text" class="form-control" id="dni" name="dni" pattern="^\d{7,8}$" title="El DNI debe contener solo números y tener entre 7 y 8 dígitos." maxlength="8"  required>
                 </div>
                 <div class="col-md-6">
                     <label for="cuil" class="form-label">CUIL</label>
-                    <input type="text" class="form-control" id="cuil" name="cuil" required>
+                    <input type="text" class="form-control" id="cuil" name="cuil" placeholder="Ej: 20-12345678-9" pattern="\d{2}-\d{8}-\d" title="El CUIL debe tener el formato XX-XXXXXXXX-X, donde X son números." required>
                 </div>
             </div>
             <div class="row mb-3">
@@ -109,7 +108,7 @@
                 <div class="row mb-3">
 			        <div class="col-md-6">
 			            <label for="telefono" class="form-label">Teléfono</label>
-			            <input type="text" class="form-control" id="telefono" name="telefono" required>
+			            <input type="text" class="form-control" id="telefono" name="telefono" required pattern="\+?(\d{1,3})?[\s.-]?\(?\d{1,4}\)?[\s.-]?\d{1,4}[\s.-]?\d{1,4}" title="Ingrese un teléfono válido. Ejemplo: +54 11 1234 5678 o 1123456789">
 			        </div>
 			        <div class="col-md-6">
 			            <label for="correo" class="form-label">Correo Electrónico</label>
@@ -177,11 +176,14 @@
 		    <div class="mb-3">
 		        <label for="confirmarContrasena" class="form-label">Confirmar Contraseña</label>
 		        <input type="password" class="form-control" id="confirmarContrasena" name="confirmarContrasena" required>
+		        
 		    </div>
+		    <div id="errorContrasena" class="text-danger mb-3" style="display: none;">Las contraseñas no coinciden.</div>
 		    <button type="submit" name="btnRegistrar" class="btn btn-primary w-100">Registrarse</button>
-	</div>
+		</div>
 	</form>
-
+	
+	
 	<jsp:include page="componentes/footer.jsp" />
 
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>

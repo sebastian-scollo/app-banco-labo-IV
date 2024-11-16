@@ -18,7 +18,40 @@
             document.getElementById("registroForm").reportValidity();
         }
     }
-    
+    document.getElementById('dni').addEventListener('input', function(e) {
+        e.target.value = e.target.value.replace(/[^0-9]/g, ''); // Elimina cualquier carácter no numérico
+    });
+    document.getElementById('fechaNacimiento').addEventListener('change', function () {
+        const fechaInput = new Date(this.value);
+        if (!esMayorDeEdad(fechaInput)) {
+            alert('Debes tener al menos 18 años para registrarte.');
+            this.value = ''; // Limpia el campo si la fecha es inválida
+            this.focus();
+        }
+    });
+
+    function esMayorDeEdad(fechaNacimiento) {
+        const hoy = new Date();
+        const edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
+        const mes = hoy.getMonth() - fechaNacimiento.getMonth();
+        const dia = hoy.getDate() - fechaNacimiento.getDate();
+        
+        // Verifica si el mes o día actual está antes del cumpleaños
+        if (mes < 0 || (mes === 0 && dia < 0)) {
+            return edad - 1 >= 18;
+        }
+        return edad >= 18;
+    }
+    // Validación de coincidencia entre contraseñas
+    document.querySelector("form").addEventListener("submit", function (event) {
+        const contrasena = document.getElementById("contrasena").value;
+        const confirmarContrasena = document.getElementById("confirmarContrasena").value;
+
+        if (contrasena !== confirmarContrasena) {
+            event.preventDefault(); // Evita el envío del formulario
+            alert("Las contraseñas no coinciden.");
+        }
+    });
  //// Función para cargar las provincias
     function cargarProvincias() {
         fetch('/app-banco-labo-IV/ObtenerProvinciasServlet')  // Llamada al servlet de provincias
