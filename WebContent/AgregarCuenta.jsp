@@ -133,20 +133,44 @@
         <form action="ServletAgregarCuenta" method="post">
             <div class="form-group-pair">
                 <div class="form-group">
-                    <input type="text" id="CodigoTipoCuenta" name="CodigoTipoCuenta" placeholder="Codigo Tipo Cuenta" class="form-input" required>
+                    <input type="text" id="CodigoTipoCuenta" name="CodigoTipoCuenta" 
+                           placeholder="Codigo Tipo Cuenta" class="form-input" 
+                           pattern="^[A-Za-z0-9]{1,10}$" 
+                           title="El código debe contener entre 1 y 10 caracteres alfanuméricos." 
+                           required>
                 </div>
                 <div class="form-group">
-                    <input type="text" id="IdCliente" name="IdCliente" placeholder="ID Cliente" class="form-input" required>
+                    <input type="text" id="IdCliente" name="IdCliente" 
+                           placeholder="ID Cliente" class="form-input" 
+                           pattern="^[A-Za-z0-9]{1,10}$" 
+                           title="El ID del cliente debe contener entre 1 y 10 caracteres alfanuméricos." 
+                           required>
                 </div>
             </div>
             
             <div class="form-group-pair">
                 <div class="form-group">
-                    <input type="text" id="CBU" name="CBU" placeholder="CBU" class="form-input" required>
+                    <input type="text" id="CBU" name="CBU" 
+                           placeholder="CBU" class="form-input" 
+                           pattern="^\d{22}$" 
+                           title="El CBU debe contener exactamente 22 dígitos." 
+                           required>
                 </div>
                 <div class="form-group">
-                    <input type="text" id="NumCuenta" name="NumCuenta" placeholder="Número de cuenta" class="form-input" required>
+                    <input type="text" id="NumCuenta" name="NumCuenta" 
+                           placeholder="Número de cuenta" class="form-input" 
+                           pattern="^\d{1,20}$" 
+                           title="El número de cuenta debe contener entre 1 y 20 dígitos." 
+                           required>
                 </div>
+            </div>
+
+            <div class="form-group">
+                <input type="text" id="Saldo" name="Saldo" 
+                       placeholder="Saldo" class="form-input" 
+                       pattern="^\d+(\.\d{1,2})?$" 
+                       title="El saldo debe ser un número positivo con hasta dos decimales." 
+                       required>
             </div>
 
             <input type="submit" class="submit-btn" name="btnAceptar" value="Agregar Cuenta">

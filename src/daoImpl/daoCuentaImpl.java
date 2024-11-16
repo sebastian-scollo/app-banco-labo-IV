@@ -165,41 +165,40 @@ public class daoCuentaImpl implements daoCuenta {
 	}
 	
 	public boolean AgregarCuenta(Cuenta cuenta) {
-		boolean exito = true;
-		
-		try {
-			Class.forName("com.mysql.jdbc.Driver");
-		}
-		
-		catch (ClassNotFoundException e) {
-			exito = false;
-			e.printStackTrace();
-		}
-		
-		try {
-			conexion bd = new conexion();
-			Connection connection = bd.obtenerConexion();
-			
-			String query = "INSERT INTO Cuentas (NumeroCuenta, CBU, Saldo, ClienteID, TipoCuentaID)"
-					+ "VALUES (	"
-					+ cuenta.getNroCuenta() + ", "
-					+ cuenta.getCBU() + ", "
-					+ cuenta.getSaldo() + ", "
- 					+ cuenta.getClienteId() + ", "
-					+ cuenta.getTipoCuentaId()
- 					+ ");";
-			
-			PreparedStatement mtt = connection.prepareStatement(query);
-			
-			mtt.execute();
-		}
-		
-		catch (Exception e) {
-			exito = false;
-			e.printStackTrace();
-		}
-		
-		return exito;
+		 boolean exito = true;
+
+		    try {
+		       
+		        Class.forName("com.mysql.jdbc.Driver");
+		    } catch (ClassNotFoundException e) {
+		        exito = false;
+		        e.printStackTrace();
+		    }
+
+		    try {
+		      
+		        conexion bd = new conexion();
+		        Connection connection = bd.obtenerConexion();
+
+		      
+		        String query = "INSERT INTO Cuentas (NumeroCuenta, CBU, Saldo, ClienteID, TipoCuentaID) " +
+		                       "VALUES (?, ?, ?, ?, ?)";
+
+		       
+		        PreparedStatement mtt = connection.prepareStatement(query);
+		        mtt.setString(1, cuenta.getNroCuenta());    
+		        mtt.setString(2, cuenta.getCBU());     
+		        mtt.setDouble(3, cuenta.getSaldo());    
+		        mtt.setInt(4, cuenta.getClienteId());    
+		        mtt.setInt(5, cuenta.getTipoCuentaId());
+		        mtt.executeUpdate();
+
+		    } catch (Exception e) {
+		        exito = false;
+		        e.printStackTrace();
+		    }
+
+		    return exito;
 	}
 
 
@@ -229,42 +228,73 @@ public class daoCuentaImpl implements daoCuenta {
 		return false;
 	}
 	
+	/*public boolean EditarCliente(Cliente cliente) {
+	  try {
+	        Class.forName("com.mysql.jdbc.Driver"); 
+	        System.out.println("Driver MySQL cargado correctamente.");
+	    } catch(ClassNotFoundException e) {
+	        System.out.println("Error al cargar el driver MySQL.");
+	        e.printStackTrace();
+	     
+	    }
 	
+	  String consulta = "update Clientes Set Nombre = ?, Apellido=?,Sexo=?,Telefono=?,CorreoElectronico=? WHERE DNI=?";
+	  conexion cn = new conexion();
+	    Connection connection = cn.obtenerConexion();
+	    if (connection == null) {
+	        return false;
+	    }
+	    try {
+	    	PreparedStatement statement = connection.prepareStatement(consulta);
+	    	
+	    	statement.setString(1,cliente.getNombre());
+	    	statement.setString(2,cliente.getApellido());
+	    	statement.setString(3,cliente.getSexo());
+	    	statement.setString(4,cliente.getTelefono());
+	    	statement.setString(5,cliente.getCorreo());
+	    	statement.setString(6,cliente.getDni());
+            int actualizado = statement.executeUpdate();
+            return actualizado >0;
+	    }catch(Exception ex) {
+	    	ex.printStackTrace();
+	    	return false;
+	    }
+  }*/
 	public boolean ModificarCuenta(Cuenta cuenta) {
-		boolean exito = true;
+		
 		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 		}
 		
 		catch (ClassNotFoundException e) {
-			exito = false;
+			
 			e.printStackTrace();
 		}
 		
+		conexion bd = new conexion();
+		Connection connection = bd.obtenerConexion();
+		
+		String query = "update Cuentas SET Saldo=?,TipoCuentaID=?,ClienteID=? WHERE IDCuenta=?";
+		
 		try {
-			conexion bd = new conexion();
-			Connection connection = bd.obtenerConexion();
 			
-			String query = "UPDATE Cuentas SET " +
-					"CBU = " + cuenta.getCBU() + ", " +
-					"Saldo = "+ cuenta.getSaldo() + ", " +
-					"ClienteId = "+ cuenta.getClienteId() + ", " +
-					"TipoCuewntaId = " + cuenta.getTipoCuentaId()
- 					+ " WHERE NumeroCuenta = " + cuenta.getNroCuenta() + ";";
+			PreparedStatement statement = connection.prepareStatement(query);
 			
-			PreparedStatement mtt = connection.prepareStatement(query);
-			
-			mtt.execute();
+			statement.setDouble(1,cuenta.getSaldo());
+			statement.setInt(2, cuenta.getObjidTipoCuenta().getIdTipoCuenta());
+	    	statement.setInt(3,cuenta.getClienteId());
+	    	statement.setInt(4,cuenta.getIdCuenta());
+			int actualizado = statement.executeUpdate();
+			return actualizado >0;
 		}
 		
 		catch (Exception e) {
-			exito = false;
+			
 			e.printStackTrace();
+			return false;
 		}
 		
-		return exito;
+		
 	}
-	
-
 }

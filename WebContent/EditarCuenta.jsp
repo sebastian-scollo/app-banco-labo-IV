@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="entidades.Cuenta" %>
+<%@ page import="entidades.TipoCuenta" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -7,22 +10,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>EdicionCuenta</title>
     <style>
- /* Agregar margen superior al cuerpo para espacio entre menú y formulario */
+        /* Agregar margen superior al cuerpo para espacio entre menú y formulario */
         body {
             margin-top: 120px; /* Ajusta según la altura de BarraMenuAdmin.jsp */
         }
 
-.form-container {
-    max-width: 500px;
-    margin: 150px auto; /* Agregar espacio adicional en la parte superior */
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    font-family: Arial, Helvetica, sans-serif;
-}
-
-    
+        .form-container {
+            max-width: 500px;
+            margin: 150px auto; /* Agregar espacio adicional en la parte superior */
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            font-family: Arial, Helvetica, sans-serif;
+        }
 
         .form-group-pair {
             display: flex;
@@ -32,11 +33,11 @@
 
         .form-group {
             position: relative;
-    background-color: #f5f5f5;
-    border: 1px solid #ddd;
-    padding: 10px;
-    border-radius: 4px;
-    margin-bottom: 15px; /* Espaciado entre los campos */
+            background-color: #f5f5f5;
+            border: 1px solid #ddd;
+            padding: 10px;
+            border-radius: 4px;
+            margin-bottom: 15px; /* Espaciado entre los campos */
         }
 
         .form-label {
@@ -57,16 +58,9 @@
             outline: none;
             box-sizing: border-box;
             color: #666;
-           
-          
-      
-           
-           
         }
 
-   
         .submit-btn {
-            
             width: 50%;
             padding: 10px;
             background-color: #1464a5;
@@ -80,6 +74,7 @@
             margin-left: auto;
             margin-right: auto;
         }
+
         .submit-btn:hover {
             background-color: #246da8;
         }
@@ -90,8 +85,6 @@
             -webkit-appearance: none;
             -moz-appearance: none;
             padding-right: 20px;
-
-            
         }
 
         .form-group::after {
@@ -104,50 +97,59 @@
         }
 
         .form-group:not(:has(select))::after {
-            content: ''; /* Esto elimina el contenido, es decir, la flecha */
+            content: ''; 
         }
+
         .form-group.email-group {
-            margin-bottom: 20px; /* Ajusta este valor para más o menos espacio */
+            margin-bottom: 20px; 
         }
-        
-
- 
-
     </style>
 </head>
 <%@ include file="BarraMenuAdmin.jsp" %>
 <body>
-  
-
     <div class="form-container">
-        <form action="submitForm" method="post">
-      
-   
-            <div class="form-group">
-                <input type="text" id="CodigoTipoCuenta" placeholder="CodigoTipoCuenta" class="form-input" >
-            </div>
-            <div class="form-group">
-                <input type="text" id="IdCliente" placeholder="IdCliente" class="form-input" >
-            </div>
-       
+        <form action="ServletModificarCuenta" method="post">
+            <% 
+                ArrayList<TipoCuenta> listaTiposCuenta = (ArrayList<TipoCuenta>) request.getAttribute("listaTiposCuenta");
+                String mensaje = (String) request.getAttribute("mensaje");
+                if (mensaje != null) {
+            %>
+                <p><%= mensaje %></p>
+            <% } %>
 
             <div class="form-group">
-                <label for="fechaCreacion" class="form-label">Fecha de creacion</label>
-                <input type="date" id="fechaCreacion" class="form-input" required>
+                <label for="txtSaldo" class="form-label">Saldo:</label>
+                <input type="text" id="txtSaldo" name="txtSaldo" placeholder="Ingrese el saldo" class="form-input" required />
             </div>
 
             <div class="form-group">
-                <input type="text" id="saldo" placeholder="saldo" class="form-input" >
+                <label for="txtClienteId" class="form-label">ID Cliente:</label>
+                <input type="text" id="txtClienteId" name="txtClienteId" placeholder="Ingrese el ID del cliente" class="form-input" required />
             </div>
-           
-        
 
-             <input type="submit" class="submit-btn" value="Aceptar"> </input>
-        </form> 
+            <div class="form-group">
+                <label for="txtIDcuenta" class="form-label">ID Cuenta:</label>
+                <input type="text" id="txtIdcuenta" name="txtIdCuenta" placeholder="Ingrese el ID de la Cuenta" class="form-input" required />
+            </div>
+
+            <div class="form-group">
+                <label for="selectTipoCuenta" class="form-label">Tipo de Cuenta:</label>
+                <select id="selectTipoCuenta" name="selectTipoCuenta" class="form-input" required>
+                    <option value="" disabled selected>Seleccione un tipo de cuenta</option>
+                    <% 
+                        if (listaTiposCuenta != null) {
+                            for (TipoCuenta tipoCuenta : listaTiposCuenta) {
+                    %>
+                        <option value="<%= tipoCuenta.getIdTipoCuenta() %>"><%= tipoCuenta.getDescripcion() %></option>
+                    <% 
+                            }
+                        }
+                    %>
+                </select>
+            </div>
+
+            <input type="submit" class="submit-btn" value="Aceptar" />
+        </form>
     </div>
-
-
-
-
 </body>
 </html>
