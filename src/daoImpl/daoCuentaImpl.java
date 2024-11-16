@@ -228,38 +228,7 @@ public class daoCuentaImpl implements daoCuenta {
 		return false;
 	}
 	
-	/*public boolean EditarCliente(Cliente cliente) {
-	  try {
-	        Class.forName("com.mysql.jdbc.Driver"); 
-	        System.out.println("Driver MySQL cargado correctamente.");
-	    } catch(ClassNotFoundException e) {
-	        System.out.println("Error al cargar el driver MySQL.");
-	        e.printStackTrace();
-	     
-	    }
 	
-	  String consulta = "update Clientes Set Nombre = ?, Apellido=?,Sexo=?,Telefono=?,CorreoElectronico=? WHERE DNI=?";
-	  conexion cn = new conexion();
-	    Connection connection = cn.obtenerConexion();
-	    if (connection == null) {
-	        return false;
-	    }
-	    try {
-	    	PreparedStatement statement = connection.prepareStatement(consulta);
-	    	
-	    	statement.setString(1,cliente.getNombre());
-	    	statement.setString(2,cliente.getApellido());
-	    	statement.setString(3,cliente.getSexo());
-	    	statement.setString(4,cliente.getTelefono());
-	    	statement.setString(5,cliente.getCorreo());
-	    	statement.setString(6,cliente.getDni());
-            int actualizado = statement.executeUpdate();
-            return actualizado >0;
-	    }catch(Exception ex) {
-	    	ex.printStackTrace();
-	    	return false;
-	    }
-  }*/
 	public boolean ModificarCuenta(Cuenta cuenta) {
 		
 		
@@ -282,7 +251,7 @@ public class daoCuentaImpl implements daoCuenta {
 			PreparedStatement statement = connection.prepareStatement(query);
 			
 			statement.setDouble(1,cuenta.getSaldo());
-			statement.setInt(2, cuenta.getObjidTipoCuenta().getIdTipoCuenta());
+			statement.setInt(2, cuenta.getTipoCuentaId());
 	    	statement.setInt(3,cuenta.getClienteId());
 	    	statement.setInt(4,cuenta.getIdCuenta());
 			int actualizado = statement.executeUpdate();

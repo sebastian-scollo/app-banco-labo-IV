@@ -88,7 +88,7 @@
         }
 
         .form-group::after {
-            content: '▾';
+            content: '+';
             position: absolute;
             right: 10px;
             top: 50%;
@@ -103,20 +103,45 @@
         .form-group.email-group {
             margin-bottom: 20px; 
         }
+        .form-group select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    background-color: #f5f5f5;
+    border-radius: 4px;
+    outline: none;
+    box-sizing: border-box;
+    color: #666;
+}
+
+.form-group select:focus {
+    border-color: #007bff;
+}
+
+.form-group::after {
+    content: '+';
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+    pointer-events: none;
+}
+        
     </style>
 </head>
 <%@ include file="BarraMenuAdmin.jsp" %>
+<script>
+    function confirmarEliminacion() {
+        return confirm("¿Estas seguro de que desea editar esta cuenta?");
+    }
+</script>
 <body>
     <div class="form-container">
-        <form action="ServletModificarCuenta" method="post">
-            <% 
-                String opciones = (String) request.getAttribute("listaTiposCuenta");
-                String mensaje = (String) request.getAttribute("mensaje");
-                if (mensaje != null) {
-            %>
-                <p><%= mensaje %></p>
-            <% } %>
-
+        <form action="ServletModificarCuenta" method="post" onsubmit="return confirmarEliminacion();" >
+       
+       
             <div class="form-group">
                 <label for="txtSaldo" class="form-label">Saldo:</label>
                 <input type="text" id="txtSaldo" name="txtSaldo" placeholder="Ingrese el saldo" class="form-input" required />
@@ -126,20 +151,20 @@
                 <label for="txtClienteId" class="form-label">ID Cliente:</label>
                 <input type="text" id="txtClienteId" name="txtClienteId" placeholder="Ingrese el ID del cliente" class="form-input" required />
             </div>
+<div class="form-group">
+    <label for="txtIdCuenta" class="form-label">ID Cuenta:</label>
+    <input type="text" id="txtIdCuenta" name="txtIdCuenta" placeholder="Ingrese el ID de la cuenta a editar" class="form-input" required />
+</div>
 
-            <div class="form-group">
-                <label for="txtIDcuenta" class="form-label">ID Cuenta:</label>
-                <input type="text" id="txtIdcuenta" name="txtIdCuenta" placeholder="Ingrese el ID de la Cuenta" class="form-input" required />
-            </div>
 
-            <div class="form-group">
-                <label for="selectTipoCuenta" class="form-label">Tipo de Cuenta:</label>
-                <select id="selectTipoCuenta" name="selectTipoCuenta" class="form-input" required>
-                      <c:out value="${opciones}"></c:out>
-			        
-                </select>
-            </div>
-
+          <div class="form-group">
+    <label for="selectTipoCuenta" class="form-label">Tipo de Cuenta:</label>
+    <select id="selectTipoCuenta" name="selectTipoCuenta" class="form-input" required>
+        <option value="1">Ahorro</option>
+        <option value="2">Corriente</option>
+        <option value="3">Plazo fijo</option>
+    </select>
+</div>
             <input type="submit" class="submit-btn" value="Aceptar" />
         </form>
     </div>
