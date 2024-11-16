@@ -16,5 +16,9 @@ public class negocioTipoCuentaImpl implements negocioTipoCuenta {
 		return dao.obtenerTiposCuentas();
 	}
    
+	
+	public String obtenerOpcionesDDL() {
+		return dao.obtenerOpcionesDDL();
+	}
 
 }

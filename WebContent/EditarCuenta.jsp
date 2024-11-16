@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="entidades.Cuenta" %>
-<%@ page import="entidades.TipoCuenta" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -112,7 +110,7 @@
     <div class="form-container">
         <form action="ServletModificarCuenta" method="post">
             <% 
-                ArrayList<TipoCuenta> listaTiposCuenta = (ArrayList<TipoCuenta>) request.getAttribute("listaTiposCuenta");
+                String opciones = (String) request.getAttribute("listaTiposCuenta");
                 String mensaje = (String) request.getAttribute("mensaje");
                 if (mensaje != null) {
             %>
@@ -137,13 +135,8 @@
             <div class="form-group">
                 <label for="selectTipoCuenta" class="form-label">Tipo de Cuenta:</label>
                 <select id="selectTipoCuenta" name="selectTipoCuenta" class="form-input" required>
-                    <c:foreach items="${listaTipoCuenta}" var="tipo">
-			                <option value="${tipo.getIdTipoCuenta()}"
-			                    <c:if test="${tipo.getIdTipoCuenta() eq tipoSeleccionado}">selected="selected"</c:if>
-			                    >
-			                    ${tipo.getDescripcion()}
-			                </option>
-			        </c:foreach>
+                      <c:out value="${opciones}"></c:out>
+			        
                 </select>
             </div>
 

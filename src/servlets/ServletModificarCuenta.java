@@ -40,9 +40,9 @@ public class ServletModificarCuenta extends HttpServlet {
 		 
 	        try {
 	 
-	            ArrayList<TipoCuenta> listTipo = dao.obtenerTiposCuentas();
+	            String listTipo = dao.obtenerOpcionesDDL();
 	            request.setAttribute("listaTiposCuenta", listTipo);
-	 
+
 	            RequestDispatcher dispatcher = request.getRequestDispatcher("EditarCuenta.jsp");
 	            dispatcher.forward(request, response);
 	 

@@ -38,7 +38,7 @@ public class ServletAgregarCuenta extends HttpServlet {
 		 
 		        try {
 		 
-		            ArrayList<TipoCuenta> listTipo = dao.obtenerTiposCuentas();
+		            String listTipo = dao.obtenerOpcionesDDL();
 		            request.setAttribute("listTipo", listTipo);
 		 
 		            RequestDispatcher dispatcher = request.getRequestDispatcher("AgregarCuenta.jsp");

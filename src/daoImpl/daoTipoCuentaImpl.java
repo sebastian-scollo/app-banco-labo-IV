@@ -19,7 +19,7 @@ public class daoTipoCuentaImpl implements daoTipoCuenta{
 			e.printStackTrace();
 		}
 		ArrayList<TipoCuenta> listado = new ArrayList<TipoCuenta>();
-		String consulta = "SELECT IDTipoCuenta,Descripcion FROM TipoCuentas";
+		String consulta = "SELECT * FROM TipoCuentas";
 		try {
 			conexion cn= new conexion();
 			Connection cnn=cn.obtenerConexion();
@@ -40,4 +40,18 @@ public class daoTipoCuentaImpl implements daoTipoCuenta{
 		return listado;
 	}
 
+	
+	public String obtenerOpcionesDDL() {
+		
+		String options = "";
+				
+		ArrayList<TipoCuenta> l = obtenerTiposCuentas();
+		
+		for (TipoCuenta tp : l) {
+			options += "<option value='" + tp.getIdTipoCuenta() + "'> " + tp.getDescripcion() + "</option> "; 
+		}
+		
+		return options;
+		
+	}
 }

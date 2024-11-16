@@ -6,5 +6,5 @@ import entidades.TipoCuenta;
 
 public interface daoTipoCuenta {
 	public ArrayList<TipoCuenta> obtenerTiposCuentas();
-	
+	public String obtenerOpcionesDDL();
 }

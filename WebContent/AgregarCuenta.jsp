@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
-<%@ page import="entidades.TipoCuenta" %>
+<%@ page import="entidades.TipoCuenta, java.util.ArrayList" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <!DOCTYPE html>
@@ -128,7 +128,8 @@
 
 <body>
     <%@ include file="BarraMenuAdmin.jsp" %>
-    
+    <%                 String listaTiposCuenta = (String) request.getAttribute("listaTiposCuenta");
+ %>
     <div class="form-container">
         <h2>INGRESE DATOS DE CUENTA</h2>
 
@@ -136,13 +137,10 @@
             <div class="form-group-pair">
                 <div class="form-group">
                     <select name="TipoCuenta">
-			            <c:foreach items="${listTipo}" var="tipo">
-			                <option value="${tipo.getIdTipoCuenta()}"
-			                    <c:if test="${tipo.getIdTipoCuenta() eq tipoSeleccionado}">selected="selected"</c:if>
-			                    >
-			                    ${tipo.getDescripcion()}
-			                </option>
-			            </c:foreach>
+			            
+                      	<c:out value="${listaTiposCuenta}"/>
+                      
+                       
 			        </select>
                 </div>
                 <div class="form-group">
