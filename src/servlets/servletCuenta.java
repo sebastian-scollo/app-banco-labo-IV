@@ -33,7 +33,21 @@ public class servletCuenta extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		negocioCuenta negCuenta = new negocioCuentaImpl();
+		if(request.getParameter("Param")!=null) {
+			try {
+			ArrayList<Cuenta> listado =  negCuenta.ListarCuenta();
+			request.setAttribute("listadoCuenta",listado!=null? listado:new ArrayList<>());
+			RequestDispatcher rd = request.getRequestDispatcher("AdministrarCuenta.jsp");
+			rd.forward(request, response);
+			
+			
+			}catch(Exception ex) {
+				ex.printStackTrace();
+				System.out.println("Error F:"+ex.getMessage());
+			}
+		}
 	}
 
 	

@@ -266,4 +266,46 @@ public class daoCuentaImpl implements daoCuenta {
 		
 		
 	}
+
+
+
+
+	@Override
+	public boolean CantidadCuenta(int idCliente) {
+		 
+		    boolean limite = false;
+
+		    
+		    
+		    conexion bd = new conexion();
+			Connection connection = bd.obtenerConexion();
+		    try {
+		      
+
+		        String consultaCantidadCuentas = "SELECT COUNT(*) AS total FROM Cuentas c INNER JOIN Clientes cl ON c.ClienteID = cl.IDCliente WHERE cl.IDCliente =?"; 
+
+		        PreparedStatement statement = connection.prepareStatement(consultaCantidadCuentas);
+		        statement.setInt(1, idCliente);
+
+		        ResultSet resultSet = statement.executeQuery();
+		        if (resultSet.next()) {
+		            int cantidad = resultSet.getInt("total");
+		            System.out.println("cantidad de cuenta del cliente: " + cantidad);
+		            limite = cantidad >= 3; 
+		        }
+
+		        connection.commit();
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		        try {
+		            if (connection != null) {
+		            	connection.rollback(); 
+		            }
+		        } catch (SQLException ex) {
+		            ex.printStackTrace();
+		        }
+		    }
+
+		    return limite;
+	}
 }

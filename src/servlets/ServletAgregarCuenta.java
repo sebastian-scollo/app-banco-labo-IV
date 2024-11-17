@@ -57,8 +57,36 @@ public class ServletAgregarCuenta extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-	 		
-		  if (request.getParameter("btnAceptar") != null) {
+		 if (request.getParameter("btnAceptar") != null) {
+		        Cuenta c = new Cuenta();
+
+		        int idTipo = Integer.parseInt(request.getParameter("TipoCuenta"));
+		        int idCliente = Integer.parseInt(request.getParameter("IdCliente"));
+
+		        
+		        negocioCuenta nc = new negocioCuentaImpl();
+		        boolean cantidadCuentas = nc.CantidadCuenta(idCliente);
+		        
+
+		        if (cantidadCuentas==true) {
+		           
+		            request.setAttribute("mensajeError", "El cliente ya tiene el número máximo permitido de cuentas.");
+		        } else {
+		           
+		            c.setTipoCuentaId(idTipo);
+		            c.setClienteId(idCliente);
+		            c.setCBU(request.getParameter("CBU"));
+		            c.setNroCuenta(request.getParameter("NumCuenta"));
+		            c.setSaldo(Double.parseDouble(request.getParameter("Saldo")));
+
+		            nc.AgregarCuenta(c);
+		        }
+		    }
+
+		    RequestDispatcher dispatcher = request.getRequestDispatcher("AgregarCuenta.jsp");
+		    dispatcher.forward(request, response);	
+		
+		 /* if (request.getParameter("btnAceptar") != null) {
 		        Cuenta c = new Cuenta();
 
 		       
@@ -82,7 +110,7 @@ public class ServletAgregarCuenta extends HttpServlet {
 
 		  
 		    RequestDispatcher dispatcher = request.getRequestDispatcher("AgregarCuenta.jsp");
-		    dispatcher.forward(request, response);
+		    dispatcher.forward(request, response);*/
 	}
 
 

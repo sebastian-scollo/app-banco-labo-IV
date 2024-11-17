@@ -139,6 +139,15 @@
 </script>
 <body>
     <div class="form-container">
+       
+        <% 
+            String mensaje = (String) request.getAttribute("mensaje");
+            if (mensaje != null) { 
+        %>
+            <div style="color: red; text-align: center; margin-bottom: 15px;">
+                <%= mensaje %>
+            </div>
+        <% } %>
         <form action="ServletModificarCuenta" method="post" onsubmit="return confirmarEliminacion();" >
        
        

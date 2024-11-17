@@ -13,5 +13,5 @@ public interface negocioCuenta {
 	public boolean AgregarCuenta(Cuenta cuenta);
 	public boolean eliminarCuenta(int iDcuenta);
 	public boolean ModificarCuenta(Cuenta cuenta);
-	
+	public boolean CantidadCuenta(int idCleinte);
 }

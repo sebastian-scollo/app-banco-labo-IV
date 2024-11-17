@@ -56,7 +56,41 @@ public class ServletModificarCuenta extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		 negocioCuenta negCuenta = new negocioCuentaImpl();
+		negocioCuenta negCuenta = new negocioCuentaImpl();
+
+	    int clienteId = Integer.parseInt(request.getParameter("txtClienteId"));
+	    
+	  
+	    boolean tieneDemasiadasCuentas = negCuenta.CantidadCuenta(clienteId);
+	    if (tieneDemasiadasCuentas) {
+	      
+	        String mensaje = "El cliente ya alcanzó el límite de cuentas permitidas (3). No se puede modificar esta cuenta.";
+	        request.setAttribute("mensaje", mensaje);
+	        RequestDispatcher rd = request.getRequestDispatcher("EditarCuenta.jsp");
+	        rd.forward(request, response);
+	        return;
+	    }
+
+	   
+	    Cuenta cuenta = new Cuenta();
+	    cuenta.setSaldo(Double.parseDouble(request.getParameter("txtSaldo")));
+	    cuenta.setClienteId(clienteId);
+	    cuenta.setTipoCuentaId(Integer.parseInt(request.getParameter("selectTipoCuenta")));
+	    cuenta.setIdCuenta(Integer.parseInt(request.getParameter("txtIdCuenta")));
+
+	    boolean exito = negCuenta.ModificarCuenta(cuenta);
+	    String mensaje = exito ? "Cuenta modificada con éxito" : "Error al modificar la cuenta";
+
+	    negocioTipoCuenta negTipoCuenta = new negocioTipoCuentaImpl();
+	    ArrayList<TipoCuenta> listaTiposCuenta = negTipoCuenta.obtenerTiposCuentas();
+
+	    request.setAttribute("mensaje", mensaje);
+	    request.setAttribute("listaTiposCuenta", listaTiposCuenta);
+	    RequestDispatcher rd = request.getRequestDispatcher("EditarCuenta.jsp");
+	    rd.forward(request, response);
+		
+		
+		/* negocioCuenta negCuenta = new negocioCuentaImpl();
 		    
 		    Cuenta cuenta = new Cuenta();
 		    cuenta.setSaldo(Double.parseDouble(request.getParameter("txtSaldo")));
@@ -73,7 +107,7 @@ public class ServletModificarCuenta extends HttpServlet {
 		    request.setAttribute("mensaje", mensaje);
 		    request.setAttribute("listaTiposCuenta", listaTiposCuenta);
 		    RequestDispatcher rd = request.getRequestDispatcher("EditarCuenta.jsp");
-		    rd.forward(request, response);
+		    rd.forward(request, response);*/
 	}
 
 }

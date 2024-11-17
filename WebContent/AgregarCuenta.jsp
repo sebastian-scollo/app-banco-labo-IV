@@ -134,6 +134,14 @@
     <%@ include file="BarraMenuAdmin.jsp" %>
     
     <div class="form-container">
+     <% 
+            String mensajeError = (String) request.getAttribute("mensajeError");
+            if (mensajeError != null && !mensajeError.isEmpty()) {
+        %>
+            <div class="alert alert-danger">
+                <%= mensajeError %>
+            </div>
+        <% } %>
         <h2>INGRESE DATOS DE CUENTA</h2>
 
         <form action="ServletAgregarCuenta" method="post" onsubmit="return confirmarEliminacion();" >

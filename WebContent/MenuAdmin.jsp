@@ -87,12 +87,12 @@
     </div>
     
     <div class="menu-container">
-        <a href="AdministrarCuenta.jsp">Administrar Cuenta</a>
+        <a href="servletCuenta?Param=1">Administrar Cuenta</a>
         <a href="ServletListarCliente?Param=1">Administrar Clientes</a>
-        <a href="services.jsp">Reportes de Clientes</a>
+        <a href="Informes.jsp">Reportes de Clientes</a>
         <a href="contact.jsp">Ver Solicitudes de préstamos</a>
-        <a href="contact.jsp">Agregar Cliente</a>
-        <a href="contact.jsp">Agregar Cuenta</a>
+        <a href="ClienteAgregar.jsp">Agregar Cliente</a>
+        <a href="AgregarCuenta.jsp">Agregar Cuenta</a>
     </div>
     
     <div class="content">
