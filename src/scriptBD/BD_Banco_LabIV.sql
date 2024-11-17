@@ -1,3 +1,4 @@
+DROP DATABASE IF EXISTS BancoGestionLab4;
 create database BancoGestionLab4;
 
 
@@ -8,7 +9,7 @@ create table Usuarios(
     Contrasenia varchar (100) not null,
     TipoUsuario tinyint ,
     Estado bit not null default 1,
-   CONSTRAINT validarTipoUsuario CHECK (TipoUsuario=1 AND TipoUsuario=2), # recordar de que 1 es ADMIN y 2 es Cliente solo vamos usar 2 valores.
+   CONSTRAINT validarTipoUsuario CHECK (TipoUsuario=1 or TipoUsuario=2), # recordar de que 1 es ADMIN y 2 es Cliente solo vamos usar 2 valores.
     CONSTRAINT PK_usuarios PRIMARY KEY(IDUsuario)
 );
 
@@ -216,7 +217,7 @@ INSERT INTO Cuentas (IDCuenta, NumeroCuenta, CBU, ClienteID, TipoCuentaID, Fecha
 (1, '123456', '12345', 1, 1, '2023-01-01', 1),
 (2, '234567', '23456', 2, 2, '2023-02-01', 1),
 (3, '345678', '34567', 3, 1, '2023-03-01', 1),
-(4, '456789', '45678', 4, 3, '2023-04-01 ', 1),
+(4, '456789', '45678', 4, 3, '2023-04-01', 1),
 (5, '567890', '56789', 5, 1, '2023-05-01', 1),
 (6, '678901', '67890', 6, 2, '2023-06-01', 1),
 (7, '789012', '78901', 7, 3, '2023-07-01', 1),
@@ -315,9 +316,3 @@ INSERT INTO Cuotas (IDCuota, NumeroCuota, FechaAbonada, ImporteAbonado, Estado, 
 (41, 10, '2024-05-05', 4583.33, 1, 5),
 (42, 11, '2024-06-05', 4583.34, 1, 5),
 (43, 12, '2024-07-05', 4583.33, 1, 5);
-
-SELECT*FROM Usuarios
-
-
-
-
