@@ -14,6 +14,6 @@ public interface negocioCliente {
 	public boolean eliminarCliente(int paraIdcliente);
 
 	public boolean RegistrarCliente(Cliente cliente);
-	
-
+    public boolean ExisteIdCliente(int idCliente);
+  
 }

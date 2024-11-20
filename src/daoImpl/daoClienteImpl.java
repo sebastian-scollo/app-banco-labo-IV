@@ -220,7 +220,7 @@ public boolean RegistrarCliente(Cliente cliente) {
 
        
         String insertUsuario = "INSERT INTO Usuarios (NombreUsuario, Contrasenia, TipoUsuario, Estado) VALUES (?, ?, ?, ?)";
-        pstUsuario = connection.prepareStatement(insertUsuario, Statement.RETURN_GENERATED_KEYS); // Asegúrate de usar RETURN_GENERATED_KEYS
+        pstUsuario = connection.prepareStatement(insertUsuario, Statement.RETURN_GENERATED_KEYS); 
         pstUsuario.setString(1, cliente.getNombreUsuario());
         pstUsuario.setString(2, cliente.getPassword());
         pstUsuario.setInt(3, 2);
@@ -385,4 +385,39 @@ public boolean EditarCliente(Cliente cliente) {
 	    	return false;
 	    }
   }
+@Override
+public boolean ExisteIdCliente(int idCliente) {
+	boolean existencia = false;
+	try {
+	        Class.forName("com.mysql.jdbc.Driver"); 
+	        System.out.println("Driver MySQL cargado correctamente.");
+	    } catch(ClassNotFoundException e) {
+	        System.out.println("Error al cargar el driver MySQL F compa.");
+	        e.printStackTrace();
+	     
+	    }
+	  
+	  String consulta = "SELECT IDCliente FROM Clientes WHERE IDCliente=?";
+	  conexion cn = new conexion();
+	    Connection connection = cn.obtenerConexion();
+	 try {
+		 PreparedStatement pst = cn.getPreparedStatement(consulta);
+	        pst.setInt(1, idCliente);
+	        ResultSet rs = pst.executeQuery();
+	        if (rs.next()) {
+	        	existencia = true; 
+	        }
+	        rs.close();
+	        pst.close();
+	        connection.close();
+		 
+	 }catch(Exception ex) {
+		 ex.printStackTrace();
+	 }
+	return existencia;
+}
+
+
+
+
 }

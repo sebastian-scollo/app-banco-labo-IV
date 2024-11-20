@@ -51,4 +51,14 @@ public class negocioCuentaImpl implements negocioCuenta {
 	public boolean CantidadCuenta(int idCleinte) {
 	   return  dao.CantidadCuenta(idCleinte);
 	}
+
+	@Override
+	public boolean repiteNroCuenta(String nroCuenta) {
+		return dao.repiteNroCuenta(nroCuenta);
+	}
+
+	@Override
+	public boolean repiteCbu(String cbu) {
+		return dao.repiteCbu(cbu);
+	}
 }

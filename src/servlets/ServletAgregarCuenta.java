@@ -1,6 +1,8 @@
 package servlets;
 import entidades.Cuenta;
+import negocio.negocioCliente;
 import negocio.negocioCuenta;
+import negocioImpl.negocioClienteImpl;
 import negocioImpl.negocioCuentaImpl;
 import entidades.TipoCuenta;
 import negocio.negocioTipoCuenta;
@@ -58,60 +60,61 @@ public class ServletAgregarCuenta extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		 if (request.getParameter("btnAceptar") != null) {
-		        Cuenta c = new Cuenta();
+			   if (request.getParameter("btnAceptar") != null) {
+			        Cuenta c = new Cuenta();
 
-		        int idTipo = Integer.parseInt(request.getParameter("TipoCuenta"));
-		        int idCliente = Integer.parseInt(request.getParameter("IdCliente"));
+			        int idTipo = Integer.parseInt(request.getParameter("TipoCuenta"));
+			        int idCliente = Integer.parseInt(request.getParameter("IdCliente"));
+			        String numeroCuenta = request.getParameter("NumCuenta");
+			        String cbuCuenta = request.getParameter("CBU");
 
-		        
-		        negocioCuenta nc = new negocioCuentaImpl();
-		        boolean cantidadCuentas = nc.CantidadCuenta(idCliente);
-		        
+			        negocioCuenta nc = new negocioCuentaImpl();
+			        negocioCliente clienteNeg = new negocioClienteImpl();
 
-		        if (cantidadCuentas==true) {
-		           
-		            request.setAttribute("mensajeError", "El cliente ya tiene el número máximo permitido de cuentas.");
-		        } else {
-		           
-		            c.setTipoCuentaId(idTipo);
-		            c.setClienteId(idCliente);
-		            c.setCBU(request.getParameter("CBU"));
-		            c.setNroCuenta(request.getParameter("NumCuenta"));
-		            c.setSaldo(Double.parseDouble(request.getParameter("Saldo")));
+			        boolean cantidadCuentas = nc.CantidadCuenta(idCliente);
+			        boolean existeIdCliente = clienteNeg.ExisteIdCliente(idCliente);
+			        boolean repiteNroCuenta = nc.repiteNroCuenta(numeroCuenta);
+			        boolean repiteCbu = nc.repiteCbu(cbuCuenta);
 
-		            nc.AgregarCuenta(c);
-		        }
-		    }
+			        // Indicador de errores
+			        boolean hayError = false;
 
-		    RequestDispatcher dispatcher = request.getRequestDispatcher("AgregarCuenta.jsp");
-		    dispatcher.forward(request, response);	
+			        if (cantidadCuentas) {
+			            request.setAttribute("mensajeErrorCuentas", "El cliente ya tiene la cantidad máxima permitida de cuentas.");
+			            hayError = true;
+			        }
+
+			        if (!existeIdCliente) {
+			            request.setAttribute("mensajeErrorCliente", "El ID de cliente ingresado no existe.");
+			            hayError = true;
+			        }
+
+			        if (repiteNroCuenta) {
+			            request.setAttribute("mensajeErrorNroCuenta", "El número de cuenta ya existe. Ingrese otro.");
+			            hayError = true;
+			        }
+
+			        if (repiteCbu) {
+			            request.setAttribute("mensajeErrorCBU", "El CBU ingresado ya está en uso. Ingrese otro.");
+			            hayError = true;
+			        }
+
+			        // Si no hay errores, procede a agregar la cuenta
+			        if (!hayError) {
+			            c.setTipoCuentaId(idTipo);
+			            c.setClienteId(idCliente);
+			            c.setCBU(cbuCuenta);
+			            c.setNroCuenta(numeroCuenta);
+			            c.setSaldo(Double.parseDouble(request.getParameter("Saldo")));
+
+			            nc.AgregarCuenta(c);
+			            request.setAttribute("mensajeExito", "La cuenta se agregó exitosamente.");
+			        }
+			    }
+
+			    request.getRequestDispatcher("AgregarCuenta.jsp").forward(request, response);
 		
-		 /* if (request.getParameter("btnAceptar") != null) {
-		        Cuenta c = new Cuenta();
-
-		       
-		        int idTipo = Integer.parseInt(request.getParameter("TipoCuenta"));
-		        request.setAttribute("tipoSeleccionado", idTipo);
-		        
-		    
-		        c.setTipoCuentaId(idTipo);
-		        c.setClienteId(Integer.parseInt(request.getParameter("IdCliente")));
-		        c.setCBU(request.getParameter("CBU"));
-		        c.setNroCuenta(request.getParameter("NumCuenta"));
-		        
-		       
-		        c.setSaldo(Double.parseDouble(request.getParameter("Saldo")));
-
-		        
-		   
-		        negocioCuenta nc = new negocioCuentaImpl();
-		        nc.AgregarCuenta(c); 
-		    }
-
-		  
-		    RequestDispatcher dispatcher = request.getRequestDispatcher("AgregarCuenta.jsp");
-		    dispatcher.forward(request, response);*/
+	 }
 	}
-
 
 }

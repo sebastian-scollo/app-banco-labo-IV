@@ -13,5 +13,5 @@ public interface daoCliente {
 	public boolean verificarDNI(String DNI);
 	public boolean verificarCUIL(String CUIL);
 	public boolean RegistrarCliente(Cliente cliente);
-    
+    public boolean ExisteIdCliente(int idCliente);
 }

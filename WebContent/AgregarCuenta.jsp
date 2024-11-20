@@ -134,14 +134,44 @@
     <%@ include file="BarraMenuAdmin.jsp" %>
     
     <div class="form-container">
-     <% 
-            String mensajeError = (String) request.getAttribute("mensajeError");
-            if (mensajeError != null && !mensajeError.isEmpty()) {
-        %>
-            <div class="alert alert-danger">
-                <%= mensajeError %>
-            </div>
-        <% } %>
+      <% 
+        String mensajeErrorCuentas = (String) request.getAttribute("mensajeErrorCuentas");
+        String mensajeErrorCliente = (String) request.getAttribute("mensajeErrorCliente");
+        String mensajeErrorNroCuenta = (String) request.getAttribute("mensajeErrorNroCuenta");
+        String mensajeErrorCBU = (String) request.getAttribute("mensajeErrorCBU");
+        String mensajeExito = (String) request.getAttribute("mensajeExito");
+      %>
+    
+      <% if (mensajeErrorCuentas != null && !mensajeErrorCuentas.isEmpty()) { %>
+        <div class="alert alert-danger">
+            <%= mensajeErrorCuentas %>
+        </div>
+      <% } %>
+    
+      <% if (mensajeErrorCliente != null && !mensajeErrorCliente.isEmpty()) { %>
+        <div class="alert alert-danger">
+            <%= mensajeErrorCliente %>
+        </div>
+      <% } %>
+
+      <% if (mensajeErrorNroCuenta != null && !mensajeErrorNroCuenta.isEmpty()) { %>
+        <div class="alert alert-danger">
+            <%= mensajeErrorNroCuenta %>
+        </div>
+      <% } %>
+
+      <% if (mensajeErrorCBU != null && !mensajeErrorCBU.isEmpty()) { %>
+        <div class="alert alert-danger">
+            <%= mensajeErrorCBU %>
+        </div>
+      <% } %>
+    
+      <% if (mensajeExito != null && !mensajeExito.isEmpty()) { %>
+        <div class="alert alert-success">
+            <%= mensajeExito %>
+        </div>
+      <% } %>
+        
         <h2>INGRESE DATOS DE CUENTA</h2>
 
         <form action="ServletAgregarCuenta" method="post" onsubmit="return confirmarEliminacion();" >

@@ -308,4 +308,74 @@ public class daoCuentaImpl implements daoCuenta {
 
 		    return limite;
 	}
+
+
+
+
+	@Override
+	public boolean repiteNroCuenta(String nroCuenta) {
+		boolean existencia = false;
+		try {
+		        Class.forName("com.mysql.jdbc.Driver"); 
+		        System.out.println("Driver MySQL cargado correctamente.");
+		    } catch(ClassNotFoundException e) {
+		        System.out.println("Error al cargar el driver MySQL F compa.");
+		        e.printStackTrace();
+		     
+		    }
+		  
+		  String consulta = "SELECT NumeroCuenta FROM Cuentas WHERE NumeroCuenta=?";
+		  conexion cn = new conexion();
+		    Connection connection = cn.obtenerConexion();
+		 try {
+			 PreparedStatement pst = cn.getPreparedStatement(consulta);
+		        pst.setString(1, nroCuenta);
+		        ResultSet rs = pst.executeQuery();
+		        if (rs.next()) {
+		        	existencia = true; 
+		        }
+		        rs.close();
+		        pst.close();
+		        connection.close();
+			 
+		 }catch(Exception ex) {
+			 ex.printStackTrace();
+		 }
+		return existencia;
+	}
+
+
+
+
+	@Override
+	public boolean repiteCbu(String cbu) {
+		boolean existencia = false;
+		try {
+		        Class.forName("com.mysql.jdbc.Driver"); 
+		        System.out.println("Driver MySQL cargado correctamente.");
+		    } catch(ClassNotFoundException e) {
+		        System.out.println("Error al cargar el driver MySQL F compa.");
+		        e.printStackTrace();
+		     
+		    }
+		  
+		  String consulta = "SELECT CBU FROM Cuentas WHERE CBU=?";
+		  conexion cn = new conexion();
+		    Connection connection = cn.obtenerConexion();
+		 try {
+			 PreparedStatement pst = cn.getPreparedStatement(consulta);
+		        pst.setString(1, cbu);
+		        ResultSet rs = pst.executeQuery();
+		        if (rs.next()) {
+		        	existencia = true; 
+		        }
+		        rs.close();
+		        pst.close();
+		        connection.close();
+			 
+		 }catch(Exception ex) {
+			 ex.printStackTrace();
+		 }
+		return existencia;
+	}
 }

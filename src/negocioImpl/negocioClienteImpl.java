@@ -50,6 +50,15 @@ public class negocioClienteImpl implements negocioCliente {
 		return dao.EditarCliente(cliente);
 	}
 
+	@Override
+	public boolean ExisteIdCliente(int idCliente) {
+	return dao.ExisteIdCliente(idCliente);
+	}
+
+
+
+	
+
 	
 	
 }
