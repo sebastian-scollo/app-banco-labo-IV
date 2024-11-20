@@ -14,4 +14,6 @@ public interface negocioCuenta {
 	public boolean eliminarCuenta(int iDcuenta);
 	public boolean ModificarCuenta(Cuenta cuenta);
 	public boolean CantidadCuenta(int idCleinte);
+	  public boolean repiteNroCuenta(String nroCuenta);
+	  public boolean repiteCbu(String cbu);
 }
