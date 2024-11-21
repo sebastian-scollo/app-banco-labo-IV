@@ -146,6 +146,9 @@
             <div class="form-group">
                 <input type="password" id="contraseña" placeholder="Ingrese su contraseña" class="form-input"  >
             </div>
+             <div class="form-group">
+                <input type="password" id="nuevaContraseña" placeholder="Ingrese su nuevo contraseña" class="form-input"  >
+            </div>
             <div class="form-group">
                 <input type="password" id="repContraseña" placeholder="Repita su contraseña" class="form-input">
             </div>
