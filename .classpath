@@ -14,15 +14,11 @@
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/matias duran/Desktop/TPINT_GRUPO8_LAB4/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/app-banco-labo-IV/WEB-INF/lib/taglibs-standard-impl-1.2.5.jar">
-		<attributes>
-			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="lib" path="C:/Users/matias duran/Desktop/TPINT_GRUPO8_LAB4 - copia/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/app-banco-labo-IV/WEB-INF/lib/gson-2.11.0.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="D:/taglibs-standard-impl-1.2.5.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

@@ -1,8 +1,9 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.util.List;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import entidades.Cliente;
+import entidades.Cuenta;
 import negocio.negocioReporte;
 import negocioImpl.negocioReporteImpl;
 
@@ -53,6 +55,40 @@ public class servletReporte extends HttpServlet {
             dispatcher.forward(request, response);
         }
 		
-	}
+		
+		
+		    String fechaInicio = request.getParameter("txtFechaInicio");
 
+		    String fechaFinal = request.getParameter("txtFechaFinal");
+		    negocioReporte negReporte = new negocioReporteImpl();
+		    if (request.getParameter("btnBuscarIntervalo") != null) {
+		        try {
+		            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		          
+		            java.sql.Date inicioDate = new java.sql.Date(sdf.parse(fechaInicio).getTime());
+		            java.sql.Date finalDate = new java.sql.Date(sdf.parse(fechaFinal).getTime());
+
+		         
+		            if (finalDate.equals(inicioDate)) {
+		                request.setAttribute("error", "Fecha Final no puede ser igual a la Fecha de Inicio.");
+		            } else if (finalDate.before(inicioDate)) {
+		                request.setAttribute("error", "Fecha Final debe ser anterior a la Fecha de Inicio.");
+		            } else {
+		               
+		                List<Cuenta> listaCuentasXfecha = negReporte.BusquedaIntervaloFecha(inicioDate, finalDate);
+		                request.setAttribute("listaCuentas", listaCuentasXfecha);
+		            }
+
+		           
+		            RequestDispatcher dispatcher = request.getRequestDispatcher("InformeCuentaCreadas.jsp");
+		            dispatcher.forward(request, response);
+
+		        } catch (Exception ex) {
+		            ex.printStackTrace();
+		            request.setAttribute("error", "Ocurrió un error al procesar las fechas.");
+		            RequestDispatcher dispatcher = request.getRequestDispatcher("InformeCuentaCreadas.jsp");
+		            dispatcher.forward(request, response);
+	 	        }
+	 }
+	}
 }

@@ -4,11 +4,14 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import dao.daoReporte;
 import entidades.Cliente;
+import entidades.Cuenta;
 import entidades.Provincia;
 
 public class daoReporteImpl implements daoReporte {
@@ -87,6 +90,45 @@ public class daoReporteImpl implements daoReporte {
 	        }
 	        return provincia;
 	    }
+	  @Override
+		public ArrayList<Cuenta> BusquedaIntervaloFecha(Date fechaInicio, Date fechaFinal) {
+		    try {
+		        Class.forName("com.mysql.jdbc.Driver"); 
+		        System.out.println("Driver MySQL cargado correctamente.");
+		    } catch (ClassNotFoundException e) {
+		        System.out.println("Error al cargar el driver MySQL.");
+		        e.printStackTrace();
+		    }
+
+		    String consulta = "SELECT CBU, Saldo, ClienteID, FechaCreacion FROM Cuentas WHERE FechaCreacion >= ? AND FechaCreacion <= ?";
+		    conexion cn = new conexion();
+		    Connection connection = cn.obtenerConexion();
+		    ArrayList<Cuenta> lista = new ArrayList<>();
+
+		    try (PreparedStatement ps = connection.prepareStatement(consulta)) {
+		      
+		        ps.setDate(1, (java.sql.Date) fechaInicio);
+		        ps.setDate(2, (java.sql.Date) fechaFinal);
+
+		       
+		        ResultSet rs = ps.executeQuery();
+
+		        while (rs.next()) {
+		            Cuenta cuenta = new Cuenta();
+		            cuenta.setCBU(rs.getString("CBU"));
+		            cuenta.setClienteId(rs.getInt("ClienteID"));
+		            cuenta.setSaldo(rs.getDouble("Saldo"));
+		            cuenta.setFechaCreacion(rs.getDate("FechaCreacion"));
+		            lista.add(cuenta);
+		        }
+
+		    } catch (Exception ex) {
+		        ex.printStackTrace();
+		    }
+
+		    return lista;
+
+		}
 	
 	
 }

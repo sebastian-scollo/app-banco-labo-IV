@@ -1,7 +1,7 @@
 package dao;
 import entidades.Cuenta;
 import java.util.ArrayList;
-
+import java.util.Date;
 import entidades.Cuenta;
 
 public interface daoCuenta {
@@ -15,4 +15,6 @@ public interface daoCuenta {
   public boolean CantidadCuenta(int idCliente);
   public boolean repiteNroCuenta(String nroCuenta);
   public boolean repiteCbu(String cbu);
+ 
+
 }
