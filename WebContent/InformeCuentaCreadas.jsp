@@ -56,6 +56,7 @@
         </div>
     </div>
 </form>
+<!-- Para un mensajito de error -->
 <% 
   String error = (String) request.getAttribute("error");
   if (error != null) {
