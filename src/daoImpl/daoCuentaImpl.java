@@ -10,6 +10,7 @@ import java.util.Date;
 import dao.daoCuenta;
 import entidades.Cliente;
 import entidades.Cuenta;
+import entidades.TipoCuenta;
 public class daoCuentaImpl implements daoCuenta {
 
 	@Override
@@ -30,7 +31,7 @@ public class daoCuentaImpl implements daoCuenta {
 		        
 		}
 		
-        String consulta= "SELECT IDCuenta,NumeroCuenta,CBU,Saldo,ClienteID,TipoCuentaID,FechaCreacion FROM Cuentas WHERE Estado=1   ";
+        String consulta= "SELECT IDCuenta, NumeroCuenta, CBU, Saldo, ClienteID, TipoCuentaID, FechaCreacion FROM Cuentas INNER JOIN TipoCuentas ON Cuentas.TipoCuentaID = TipoCuentas.IDTipoCuenta WHERE Estado=1";
         ArrayList<Cuenta> lista = new ArrayList<Cuenta>();
 		try {
 			//esta parte la llamo SETTEO:
@@ -38,15 +39,21 @@ public class daoCuentaImpl implements daoCuenta {
 			Statement st=cnn.createStatement();
 			ResultSet rs = st.executeQuery(consulta);
 			while(rs.next()) {
-				Cuenta cuenta = new Cuenta();
-				cuenta.setIdCuenta(rs.getInt("IDCuenta"));
-				cuenta.setNroCuenta(rs.getString("NumeroCuenta"));
-				cuenta.setCBU(rs.getString("CBU"));
-				cuenta.setSaldo(rs.getDouble("Saldo"));
-				cuenta.setClienteId(rs.getInt("ClienteID"));
-				cuenta.setTipoCuentaId(rs.getInt("TipoCuentaID"));
-				cuenta.setFechaCreacion(rs.getDate("FechaCreacion"));
-			    lista.add(cuenta);
+			     Cuenta cuenta = new Cuenta();
+		            cuenta.setIdCuenta(rs.getInt("IDCuenta"));
+		            cuenta.setNroCuenta(rs.getString("NumeroCuenta"));
+		            cuenta.setCBU(rs.getString("CBU"));
+		            cuenta.setSaldo(rs.getDouble("Saldo"));
+		            cuenta.setClienteId(rs.getInt("ClienteID"));
+		            cuenta.setFechaCreacion(rs.getDate("FechaCreacion"));
+
+		           
+		            TipoCuenta tipoCuenta = new TipoCuenta();
+		            tipoCuenta.setIdTipoCuenta(rs.getInt("TipoCuentaID"));
+		      
+		            cuenta.setObjidTipoCuenta(tipoCuenta);
+
+		            lista.add(cuenta);
 			}
 			/*SELECT IDCuenta,NumeroCuenta,CBU,Saldo,ClienteID,TipoCuentaID,FechaCreacion*/
 		}catch(Exception ex){
@@ -61,41 +68,52 @@ public class daoCuentaImpl implements daoCuenta {
 
 	@Override
 	public ArrayList<Cuenta> ListarXidCl(int idCliente) {
-		try {
-	        Class.forName("com.mysql.jdbc.Driver"); 
-	        System.out.println("Driver MySQL cargado correctamente.");
-	    } catch(ClassNotFoundException e) {
-	        System.out.println("Error al cargar el driver MySQL.");
-	        e.printStackTrace();
-	     
-	    }
-		 ArrayList<Cuenta> lista = new ArrayList<Cuenta>();
-		 conexion bd = new conexion();
-		 Connection cnn = bd.obtenerConexion();
-		 if(cnn==null) {
-			  System.out.println("Conexionn fallida: la conexiï¿½n es null.");
-		        
-		}
-		 String consulta="SELECT IDCuenta,NumeroCuenta,CBU,Saldo,ClienteID,TipoCuentaID,FechaCreacion FROM Cuentas WHERE Estado=1 AND IDCuenta="+idCliente;
-		try {
-			Statement st=cnn.createStatement();
-			ResultSet rs = st.executeQuery(consulta);
-			while(rs.next()) {
-				Cuenta cuenta = new Cuenta();
-				cuenta.setIdCuenta(rs.getInt("IDCuenta"));
-				cuenta.setNroCuenta(rs.getString("NumeroCuenta"));
-				cuenta.setCBU(rs.getString("CBU"));
-				cuenta.setSaldo(rs.getDouble("Saldo"));
-				cuenta.setClienteId(rs.getInt("ClienteID"));
-				cuenta.setTipoCuentaId(rs.getInt("TipoCuentaID"));
-				cuenta.setFechaCreacion(rs.getDate("FechaCreacion"));
-			    lista.add(cuenta);
-			}
-		}catch(Exception ex) {
-			System.out.println("Error al cargar el driver MySQL.");
-	        ex.printStackTrace();
-		}
-		return lista;
+		 try {
+		        Class.forName("com.mysql.jdbc.Driver");
+		        System.out.println("Driver MySQL cargado correctamente.");
+		    } catch (ClassNotFoundException e) {
+		        System.out.println("Error al cargar el driver MySQL.");
+		        e.printStackTrace();
+		    }
+
+		    ArrayList<Cuenta> lista = new ArrayList<>();
+		    conexion bd = new conexion();
+		    Connection cnn = bd.obtenerConexion();
+		    if (cnn == null) {
+		        System.out.println("Conexión fallida: la conexión es null.");
+		        return lista; 
+		    }
+
+		    String consulta = "SELECT c.IDCuenta, c.NumeroCuenta, c.CBU, c.Saldo, c.ClienteID, c.TipoCuentaID, c.FechaCreacion, " +
+		                      "tc.Descripcion " +
+		                      "FROM Cuentas c " +
+		                      "INNER JOIN TipoCuentas tc ON c.TipoCuentaID = tc.IDTipoCuenta " +
+		                      "WHERE c.Estado = 1 AND c.ClienteID = ?";
+
+		    try {
+		        PreparedStatement ps = cnn.prepareStatement(consulta);
+		        ps.setInt(1, idCliente); 
+		        ResultSet rs = ps.executeQuery();
+		        while (rs.next()) {
+		            Cuenta cuenta = new Cuenta();
+		            cuenta.setIdCuenta(rs.getInt("IDCuenta"));
+		            cuenta.setNroCuenta(rs.getString("NumeroCuenta"));
+		            cuenta.setCBU(rs.getString("CBU"));
+		            cuenta.setSaldo(rs.getDouble("Saldo"));
+		            cuenta.setClienteId(rs.getInt("ClienteID"));
+		            cuenta.setFechaCreacion(rs.getDate("FechaCreacion"));
+
+		            TipoCuenta tipoCuenta = new TipoCuenta();
+		            tipoCuenta.setIdTipoCuenta(rs.getInt("TipoCuentaID"));
+		            cuenta.setObjidTipoCuenta(tipoCuenta);
+
+		            lista.add(cuenta);
+		        }
+		    } catch (Exception ex) {
+		        System.out.println("Error al obtener las cuentas por cliente: " + ex.getMessage());
+		        ex.printStackTrace();
+		    }
+		    return lista;
 	}
 	@Override
 	public ArrayList<Cuenta> ListarXtipoCuenta(int paramTipoCuenta) {
@@ -189,8 +207,11 @@ public class daoCuentaImpl implements daoCuenta {
 		        mtt.setString(1, cuenta.getNroCuenta());    
 		        mtt.setString(2, cuenta.getCBU());     
 		        mtt.setDouble(3, cuenta.getSaldo());    
-		        mtt.setInt(4, cuenta.getClienteId());    
-		        mtt.setInt(5, cuenta.getTipoCuentaId());
+		        mtt.setInt(4, cuenta.getObjCliente().getIdCliente());    
+		       // TipoCuenta tipoCuenta = new TipoCuenta();
+		        /*tipoCuenta.setIdTipoCuenta(5);
+		        cuenta.setObjidTipoCuenta(tipoCuenta);  */
+		        mtt.setInt(5, cuenta.getObjidTipoCuenta().getIdTipoCuenta());
 		        mtt.executeUpdate();
 
 		    } catch (Exception e) {

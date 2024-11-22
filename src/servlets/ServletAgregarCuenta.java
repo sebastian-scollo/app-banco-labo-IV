@@ -1,4 +1,5 @@
 package servlets;
+import entidades.Cliente;
 import entidades.Cuenta;
 import negocio.negocioCliente;
 import negocio.negocioCuenta;
@@ -62,7 +63,7 @@ public class ServletAgregarCuenta extends HttpServlet {
 		 if (request.getParameter("btnAceptar") != null) {
 			   if (request.getParameter("btnAceptar") != null) {
 			        Cuenta c = new Cuenta();
-
+                    
 			        int idTipo = Integer.parseInt(request.getParameter("TipoCuenta"));
 			        int idCliente = Integer.parseInt(request.getParameter("IdCliente"));
 			        String numeroCuenta = request.getParameter("NumCuenta");
@@ -70,13 +71,14 @@ public class ServletAgregarCuenta extends HttpServlet {
 
 			        negocioCuenta nc = new negocioCuentaImpl();
 			        negocioCliente clienteNeg = new negocioClienteImpl();
-
+                    negocioTipoCuenta negTipoCuenta = new negocioTipoCuentaImpl();
+			        negocioCliente negCliente = new negocioClienteImpl();
 			        boolean cantidadCuentas = nc.CantidadCuenta(idCliente);
 			        boolean existeIdCliente = clienteNeg.ExisteIdCliente(idCliente);
 			        boolean repiteNroCuenta = nc.repiteNroCuenta(numeroCuenta);
 			        boolean repiteCbu = nc.repiteCbu(cbuCuenta);
-
-			        // Indicador de errores
+                    ArrayList<TipoCuenta> listTipoCuenta = negTipoCuenta.obtenerTiposCuentas();       
+			        ArrayList<Cliente> listCliente = negCliente.ListarCliente();
 			        boolean hayError = false;
 
 			        if (cantidadCuentas) {
@@ -101,8 +103,8 @@ public class ServletAgregarCuenta extends HttpServlet {
 
 			        // Si no hay errores, procede a agregar la cuenta
 			        if (!hayError) {
-			            c.setTipoCuentaId(idTipo);
-			            c.setClienteId(idCliente);
+			            c.setObjidTipoCuenta(new TipoCuenta(idTipo));
+			            c.setObjCliente(new Cliente(idCliente));
 			            c.setCBU(cbuCuenta);
 			            c.setNroCuenta(numeroCuenta);
 			            c.setSaldo(Double.parseDouble(request.getParameter("Saldo")));

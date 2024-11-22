@@ -72,6 +72,10 @@ public class Cliente extends Usuario {
 	public Cliente() {
 		super();
 	}
+	public Cliente(int idCliente2) {
+		this.idCliente = idCliente2;
+	}
+
 	public String getDni() {
 		return dni;
 	}
