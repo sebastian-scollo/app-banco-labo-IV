@@ -1,8 +1,11 @@
 package daoImpl;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import entidades.Cliente;
 import entidades.Usuario;
 import dao.UsuarioDao;
 
@@ -44,5 +47,35 @@ public class UsuarioDaoImpl implements UsuarioDao {
             }
         }
         return usuario;
+    }
+    
+    public boolean EditarContraseñaUsuario(String usuario, String password, String newPassword) {
+  	  try {
+  	        Class.forName("com.mysql.jdbc.Driver"); 
+  	        System.out.println("Driver MySQL cargado correctamente.");
+  	    } catch(ClassNotFoundException e) {
+  	        System.out.println("Error al cargar el driver MySQL.");
+  	        e.printStackTrace();
+  	     
+  	    }
+  	
+  	  String consulta = "update usuario Set Contrasenia = ? WHERE NombreUsuario=? AND Contrasenia=?";
+  	  conexion cn = new conexion();
+  	    Connection connection = cn.obtenerConexion();
+  	    if (connection == null) {
+  	        return false;
+  	    }
+  	    try {
+  	    	PreparedStatement statement = connection.prepareStatement(consulta);
+  	    	
+  	    	statement.setString(1,newPassword);
+  	    	statement.setString(2,usuario);
+  	    	statement.setString(3,newPassword);
+              int actualizado = statement.executeUpdate();
+              return actualizado >0;
+  	    }catch(Exception ex) {
+  	    	ex.printStackTrace();
+  	    	return false;
+  	    }
     }
 }

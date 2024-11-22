@@ -37,6 +37,11 @@
     </style>
 </head>
 <body>
+		<%
+		    String usuarioLogueado = (String) session.getAttribute("usuarioLogueado");
+		    
+		%>
+
     <div class="header">
         <img src="SLOGAN.png" alt="Logo">
         <div class="menu">
@@ -45,11 +50,16 @@
             <a href="SolicitudPrestamo.jsp">Solicitud Prestamo</a>
             <a href="Transferencias.jsp">Transacciones</a>
             <a href="contact.jsp">Realizar pago de Cuotas</a>
-            <a href="EditarPassword.jsp">Cambiar Contrasenia</a> 
+            <a href="EditarPassword.jsp?nombreUsuario=<%= usuarioLogueado %>">Cambiar Contrasenia</a> 
             <a href="contact.jsp">Datos Personales</a> 
             <a href="contact.jsp">Historial de movimientos</a> 
         </div>
-        <div class="user-info">Usuario: <strong>acá va el usuario Cliente</strong></div>
+        
+        
+        
+        <div class="user-info">Usuario: <strong><%= usuarioLogueado %></strong></div>
     </div>
+    
+    
 </body>
 </html>

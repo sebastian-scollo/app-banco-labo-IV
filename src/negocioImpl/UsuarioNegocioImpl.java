@@ -16,4 +16,10 @@ public class UsuarioNegocioImpl implements UsuarioNegocio {
         }
         return null;
     }
+    
+    public boolean editarPassword(String usuario, String password, String newPassword) {
+    	boolean resultado = usuarioDao.EditarContraseñaUsuario(usuario, password, newPassword);
+    	
+    	return resultado;
+    }
 }

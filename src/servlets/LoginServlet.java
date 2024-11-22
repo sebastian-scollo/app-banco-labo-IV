@@ -25,8 +25,8 @@ public class LoginServlet extends HttpServlet {
         Usuario usuario = usuarioNegocio.autenticarUsuario(nombreUsuario, contrasenia);
 
         if (usuario != null) {
-          
-            request.getSession().setAttribute("usuarioLogueado", usuario);
+        	String nombreusuario = usuario.getNombreUsuario();
+            request.getSession().setAttribute("usuarioLogueado", nombreusuario);
 
            
             if (usuario.getTipoUsuario() == 1) {

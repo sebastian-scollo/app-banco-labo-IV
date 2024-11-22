@@ -138,10 +138,17 @@
     </style>
 </head>
 <body>
+
+<%
+    /*String nombreUsuario = request.getParameter("nombreUsuario");*/
+    
+    String nombreUsuario = "homero";
+%>
     <div class="form-container">
         
         <!-- Campos en dos columnas -->
-        <form action="submitForm" method="post">
+        <form action="ServletEditarPassword" method="post">
+        <input type="hidden" name="nombreUsuario" value="<%= nombreUsuario %>">
         <div class="form-group-pair">
             <div class="form-group">
                 <input type="password" id="contraseña" placeholder="Ingrese su contraseña" class="form-input"  >
