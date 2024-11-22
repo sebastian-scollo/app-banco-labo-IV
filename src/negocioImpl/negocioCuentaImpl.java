@@ -49,8 +49,8 @@ public class negocioCuentaImpl implements negocioCuenta {
 	}
 
 	@Override
-	public boolean CantidadCuenta(int idCleinte) {
-	   return  dao.CantidadCuenta(idCleinte);
+	public boolean CantidadCuenta(int idCleinte, int idCuenta) {
+	   return  dao.CantidadCuenta(idCleinte, idCuenta);
 	}
 
 	@Override

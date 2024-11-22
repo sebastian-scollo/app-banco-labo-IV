@@ -12,7 +12,7 @@ public interface daoCuenta {
   public boolean AgregarCuenta(Cuenta cuenta);
   public boolean eliminarCuenta(int idCuenta);
   public boolean ModificarCuenta(Cuenta cuenta);
-  public boolean CantidadCuenta(int idCliente);
+  public boolean CantidadCuenta(int idCliente, int idCuenta);
   public boolean repiteNroCuenta(String nroCuenta);
   public boolean repiteCbu(String cbu);
  

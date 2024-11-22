@@ -67,8 +67,6 @@ public class ServletModificarCuenta extends HttpServlet {
 	
 	    int idCuenta = Integer.parseInt(request.getParameter("txtIdCuenta"));
 	    int clienteId = Integer.parseInt(request.getParameter("txtClienteId"));
-	    String cbuCuenta = request.getParameter("txtCBU");
-	    String numeroCuenta = request.getParameter("txtNumCuenta");
 	    double saldo = Double.parseDouble(request.getParameter("txtSaldo"));
 	    int idTipo = Integer.parseInt(request.getParameter("selectTipoCuenta"));
 
@@ -77,20 +75,8 @@ public class ServletModificarCuenta extends HttpServlet {
 	    String mensajeError = "";
 
 	   
-	    if (negCuenta.CantidadCuenta(clienteId)) {
+	    if (negCuenta.CantidadCuenta(clienteId, idCuenta)) {
 	        mensajeError = "Este cliente tiene el limite de posesion de cuenta(3).No se le puede asignar mas.";
-	        hayError = true;
-	    }
-
-	    
-	    if (negCuenta.repiteCbu(cbuCuenta)) {
-	        mensajeError = "Este CBU ya esta en uso. Ingrese otro.";
-	        hayError = true;
-	    }
-
-	  
-	    if (negCuenta.repiteNroCuenta(numeroCuenta)) {
-	        mensajeError = "Numero Cuenta existente, Ingrese otro.";
 	        hayError = true;
 	    }
 
@@ -104,6 +90,7 @@ public class ServletModificarCuenta extends HttpServlet {
 	        request.setAttribute("listaClientes", listaClientes);
 	        RequestDispatcher rd = request.getRequestDispatcher("EditarCuenta.jsp");
 	        rd.forward(request, response);
+	        System.out.println("error");
 	        return;
 	    }
 
@@ -111,8 +98,6 @@ public class ServletModificarCuenta extends HttpServlet {
 	    cuenta.setIdCuenta(idCuenta);
 	    cuenta.setObjCliente(new Cliente(clienteId));
 	    cuenta.setObjidTipoCuenta(new TipoCuenta(idTipo));
-	    cuenta.setCBU(cbuCuenta);
-	    cuenta.setNroCuenta(numeroCuenta);
 	    cuenta.setSaldo(saldo);
 
 	    boolean exito = negCuenta.ModificarCuenta(cuenta);

@@ -21,7 +21,7 @@ import java.util.concurrent.Executor;
 public class conexion {
 	private String host="jdbc:mysql://localhost:3306/";
 	private String user="root";
-	private String pass="root";
+	private String pass="";
 	private String bdname="BancoGestionLab4";
 	
 	protected Connection cn;
@@ -43,9 +43,11 @@ public class conexion {
 	
 	public Connection obtenerConexion() {
         try {
-        	Class.forName("com.mysql.jdbc.Driver");
+        	Class.forName("com.mysql.cj.jdbc.Driver");
         	
             cn= DriverManager.getConnection(host + bdname, user, pass);
+            cn.setAutoCommit(false);
+
             return cn;
         } catch (Exception e) {
             e.printStackTrace();
