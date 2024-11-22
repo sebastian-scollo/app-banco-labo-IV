@@ -73,7 +73,7 @@ public class ServletAgregarCuenta extends HttpServlet {
 			        negocioCliente clienteNeg = new negocioClienteImpl();
                     negocioTipoCuenta negTipoCuenta = new negocioTipoCuentaImpl();
 			        negocioCliente negCliente = new negocioClienteImpl();
-			        boolean cantidadCuentas = nc.CantidadCuenta(idCliente);
+			        boolean cantidadCuentas = nc.CantidadCuenta(idCliente,nc.NuevaId());
 			        boolean existeIdCliente = clienteNeg.ExisteIdCliente(idCliente);
 			        boolean repiteNroCuenta = nc.repiteNroCuenta(numeroCuenta);
 			        boolean repiteCbu = nc.repiteCbu(cbuCuenta);

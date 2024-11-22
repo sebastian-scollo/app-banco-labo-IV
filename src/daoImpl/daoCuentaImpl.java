@@ -15,7 +15,16 @@ public class daoCuentaImpl implements daoCuenta {
 
 	@Override
 	public ArrayList<Cuenta> ListarCuenta() {
-       
+     
+	    try {
+	        Class.forName("com.mysql.jdbc.Driver"); 
+	        System.out.println("Driver MySQL cargado correctamente.");
+	    } catch (ClassNotFoundException e) {
+	        System.out.println("Error mi compa");
+	        e.printStackTrace();
+	    }
+
+		
 		conexion bd = new conexion();
 		Connection cnn = bd.obtenerConexion();
 		if(cnn==null) {
@@ -63,8 +72,17 @@ public class daoCuentaImpl implements daoCuenta {
 
 	@Override
 	public ArrayList<Cuenta> ListarXidCl(int idCliente) {
+	    try {
+	        Class.forName("com.mysql.jdbc.Driver"); 
+	        System.out.println("Driver MySQL cargado correctamente.");
+	    } catch (ClassNotFoundException e) {
+	        System.out.println("Error mi compa");
+	        e.printStackTrace();
+	    }
 
-		    ArrayList<Cuenta> lista = new ArrayList<>();
+		
+		
+		ArrayList<Cuenta> lista = new ArrayList<>();
 		    conexion bd = new conexion();
 		    Connection cnn = bd.obtenerConexion();
 		    if (cnn == null) {
@@ -108,6 +126,15 @@ public class daoCuentaImpl implements daoCuenta {
 	}
 	@Override
 	public ArrayList<Cuenta> ListarXtipoCuenta(int paramTipoCuenta) {
+	    try {
+	        Class.forName("com.mysql.jdbc.Driver"); 
+	        System.out.println("Driver MySQL cargado correctamente.");
+	    } catch (ClassNotFoundException e) {
+	        System.out.println("Error mi compa");
+	        e.printStackTrace();
+	    }
+
+		
 		ArrayList<Cuenta> listado = new ArrayList<Cuenta>();
 		
 		try {
@@ -166,7 +193,16 @@ public class daoCuentaImpl implements daoCuenta {
 	}
 	
 	public boolean AgregarCuenta(Cuenta cuenta) {
-		 boolean exito = true;
+	    try {
+	        Class.forName("com.mysql.jdbc.Driver"); 
+	        System.out.println("Driver MySQL cargado correctamente.");
+	    } catch (ClassNotFoundException e) {
+	        System.out.println("Error mi compa");
+	        e.printStackTrace();
+	    }
+
+		
+		boolean exito = true;
 
 		    try {
 		      
@@ -219,6 +255,16 @@ public class daoCuentaImpl implements daoCuenta {
 	
 	
 	public boolean ModificarCuenta(Cuenta cuenta) {
+	    try {
+	        Class.forName("com.mysql.jdbc.Driver"); 
+	        System.out.println("Driver MySQL cargado correctamente.");
+	    } catch (ClassNotFoundException e) {
+	        System.out.println("Error mi compa");
+	        e.printStackTrace();
+	    }
+
+		
+		
 		
 		conexion bd = new conexion();
 		Connection connection = bd.obtenerConexion();
@@ -238,6 +284,7 @@ public class daoCuentaImpl implements daoCuenta {
 			int actualizado = statement.executeUpdate();
 			System.out.println("asdaafklfdnlafdlnlfdlnkafdlnkfnlalnkfnlk");
 			return actualizado >0;
+			 
 		}
 		
 		catch (Exception e) {
@@ -256,7 +303,15 @@ public class daoCuentaImpl implements daoCuenta {
 	public boolean CantidadCuenta(int idCliente, int idCuenta) {
 		 
 		    boolean limite = false;
+		    try {
+		        Class.forName("com.mysql.jdbc.Driver"); 
+		        System.out.println("Driver MySQL cargado correctamente.");
+		    } catch (ClassNotFoundException e) {
+		        System.out.println("Error mi compa");
+		        e.printStackTrace();
+		    }
 
+		    
 		    conexion bd = new conexion();
 			Connection connection = bd.obtenerConexion();
 		    try {
@@ -306,6 +361,15 @@ public class daoCuentaImpl implements daoCuenta {
 
 	@Override
 	public boolean repiteNroCuenta(String nroCuenta) {
+		
+	    try {
+	        Class.forName("com.mysql.jdbc.Driver"); 
+	        System.out.println("Driver MySQL cargado correctamente.");
+	    } catch (ClassNotFoundException e) {
+	        System.out.println("Error mi compa");
+	        e.printStackTrace();
+	    }
+
 		boolean existencia = false;
 
 		  String consulta = "SELECT NumeroCuenta FROM Cuentas WHERE NumeroCuenta=?";
@@ -333,6 +397,15 @@ public class daoCuentaImpl implements daoCuenta {
 
 	@Override
 	public boolean repiteCbu(String cbu) {
+	    try {
+	        Class.forName("com.mysql.jdbc.Driver"); 
+	        System.out.println("Driver MySQL cargado correctamente.");
+	    } catch (ClassNotFoundException e) {
+	        System.out.println("Error mi compa");
+	        e.printStackTrace();
+	    }
+
+		
 		boolean existencia = false;
 
 		  String consulta = "SELECT CBU FROM Cuentas WHERE CBU=?";
@@ -355,9 +428,5 @@ public class daoCuentaImpl implements daoCuenta {
 		return existencia;
 	}
 
-
-
-
-	
 
 }

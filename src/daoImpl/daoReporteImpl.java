@@ -96,7 +96,7 @@ public class daoReporteImpl implements daoReporte {
 		        Class.forName("com.mysql.jdbc.Driver"); 
 		        System.out.println("Driver MySQL cargado correctamente.");
 		    } catch (ClassNotFoundException e) {
-		        System.out.println("Error al cargar el driver MySQL.");
+		        System.out.println("Error mi compa");
 		        e.printStackTrace();
 		    }
 
