@@ -173,7 +173,7 @@
 
         <button type="submit" class="submit-btn">Registrar</button>
         <div class="footer">
-            <span>¿Ya estás registrado? <a href="Login.jsp">Inicia Sesión</a></span>
+           
         </div>
     </div>
 </body>

@@ -27,11 +27,11 @@ public class daoCuentaImpl implements daoCuenta {
 		conexion bd = new conexion();
 		Connection cnn = bd.obtenerConexion();
 		if(cnn==null) {
-			  System.out.println("Conexion fallida: la conexi�n es null.");
+			  System.out.println("Conexion fallida: la cone es null.");
 		        
 		}
 		
-        String consulta= "SELECT IDCuenta, NumeroCuenta, CBU, Saldo, ClienteID, TipoCuentaID, FechaCreacion FROM Cuentas INNER JOIN TipoCuentas ON Cuentas.TipoCuentaID = TipoCuentas.IDTipoCuenta WHERE Estado=1";
+        String consulta= "SELECT IDCuenta, NumeroCuenta, CBU, Saldo, ClienteID,TipoCuentaID, FechaCreacion FROM Cuentas INNER JOIN TipoCuentas ON Cuentas.TipoCuentaID = TipoCuentas.IDTipoCuenta WHERE Estado=1";
         ArrayList<Cuenta> lista = new ArrayList<Cuenta>();
 		try {
 			//esta parte la llamo SETTEO:
@@ -40,6 +40,9 @@ public class daoCuentaImpl implements daoCuenta {
 			ResultSet rs = st.executeQuery(consulta);
 			while(rs.next()) {
 			     Cuenta cuenta = new Cuenta();
+		            Cliente cliente = new Cliente();
+		         cliente.setIdCliente(rs.getInt("TipoCuentaID"));//OJO
+			     cuenta.setObjCliente(cliente);
 		            cuenta.setIdCuenta(rs.getInt("IDCuenta"));
 		            cuenta.setNroCuenta(rs.getString("NumeroCuenta"));
 		            cuenta.setCBU(rs.getString("CBU"));
@@ -47,7 +50,7 @@ public class daoCuentaImpl implements daoCuenta {
 		            cuenta.setClienteId(rs.getInt("ClienteID"));
 		            cuenta.setFechaCreacion(rs.getDate("FechaCreacion"));
 
-		           
+		            
 		            TipoCuenta tipoCuenta = new TipoCuenta();
 		            tipoCuenta.setIdTipoCuenta(rs.getInt("TipoCuentaID"));
 		      
@@ -96,17 +99,20 @@ public class daoCuentaImpl implements daoCuenta {
 		        ResultSet rs = ps.executeQuery();
 		        while (rs.next()) {
 		            Cuenta cuenta = new Cuenta();
-		            cuenta.setIdCuenta(rs.getInt("IDCuenta"));
+		            Cliente cliente = new Cliente();
+			         cliente.setIdCliente(rs.getInt("ClienteID"));//OJO
+				     cuenta.setObjCliente(cliente);//aca detalle composicion
+		            cuenta.setIdCuenta(rs.getInt("ClienteID"));
 		            cuenta.setNroCuenta(rs.getString("NumeroCuenta"));
 		            cuenta.setCBU(rs.getString("CBU"));
 		            cuenta.setSaldo(rs.getDouble("Saldo"));
-		            cuenta.setClienteId(rs.getInt("ClienteID"));
+		          //  cuenta.setClienteId(rs.getInt("ClienteID"));
 		            cuenta.setFechaCreacion(rs.getDate("FechaCreacion"));
 
 		            TipoCuenta tipoCuenta = new TipoCuenta();
-		            tipoCuenta.setIdTipoCuenta(rs.getInt("TipoCuentaID"));
+		           tipoCuenta.setIdTipoCuenta(rs.getInt("TipoCuentaID"));
 		            cuenta.setObjidTipoCuenta(tipoCuenta);
-
+                     
 		            lista.add(cuenta);
 		        }
 		    } catch (Exception ex) {
@@ -128,18 +134,23 @@ public class daoCuentaImpl implements daoCuenta {
 			
 			conexion bd = new conexion();
 			Connection connection =bd.obtenerConexion();
-			String consulta = "SELECT IDCuenta,NumeroCuenta,CBU,Saldo,ClienteID,TipoCuentaID,FechaCreacion FROM Cuentas WHERE Estado=1 AND TipoCuentaID="+paramTipoCuenta;
+			String consulta = "SELECT IDCuenta,NumeroCuenta,CBU,Saldo,ClienteID,TipoCuentaID,FechaCreacion FROM Cuentas INNER JOIN TipoCuentas  ON Cuentas.TipoCuentaID = TipoCuentas.IDTipoCuenta  WHERE Estado=1 AND TipoCuentaID="+paramTipoCuenta;
 			PreparedStatement mtt = connection.prepareStatement(consulta);
 			
 			ResultSet rs = mtt.executeQuery(consulta);
 			while (rs.next()) {
 				Cuenta cuenta = new Cuenta();
+				
 				cuenta.setIdCuenta(rs.getInt("IDCuenta"));
 				cuenta.setNroCuenta(rs.getString("NumeroCuenta"));
 				cuenta.setCBU(rs.getString("CBU"));
 				cuenta.setSaldo(rs.getDouble("Saldo"));
-				cuenta.setClienteId(rs.getInt("ClienteID"));
-				cuenta.setTipoCuentaId(rs.getInt("TipoCuentaID"));
+				 Cliente cliente = new Cliente();
+		         cliente.setIdCliente(rs.getInt("ClienteID"));//OJO
+		         cuenta.setObjCliente(cliente);//aca detalle composicion Adaptacion
+		         TipoCuenta tipoCuenta = new TipoCuenta();
+		           tipoCuenta.setIdTipoCuenta(rs.getInt("TipoCuentaID"));
+		           cuenta.setObjidTipoCuenta(tipoCuenta);  
 				cuenta.setFechaCreacion(rs.getDate("FechaCreacion"));
 			    listado.add(cuenta);
 				
@@ -265,16 +276,18 @@ public class daoCuentaImpl implements daoCuenta {
 		conexion bd = new conexion();
 		Connection connection = bd.obtenerConexion();
 		
-		String query = "update Cuentas SET Saldo=?,TipoCuentaID=?,ClienteID=? WHERE IDCuenta=?";
+		String query = "update Cuentas SET Saldo=?,TipoCuentaID=?,ClienteID=? WHERE IDCuenta=? AND Estado=1";
 		
 		try {
 			
 			PreparedStatement statement = connection.prepareStatement(query);
 			
-			statement.setDouble(1,cuenta.getSaldo());
-			statement.setInt(2, cuenta.getTipoCuentaId());
-	    	statement.setInt(3,cuenta.getClienteId());
-	    	statement.setInt(4,cuenta.getIdCuenta());
+
+	        statement.setDouble(1, cuenta.getSaldo());
+	        statement.setInt(2, cuenta.getObjidTipoCuenta().getIdTipoCuenta()); 
+	        statement.setInt(3, cuenta.getObjCliente().getIdCliente());        
+	        statement.setInt(4, cuenta.getIdCuenta());  
+		
 			int actualizado = statement.executeUpdate();
 			return actualizado >0;
 		}

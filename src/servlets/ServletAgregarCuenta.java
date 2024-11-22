@@ -101,7 +101,7 @@ public class ServletAgregarCuenta extends HttpServlet {
 			            hayError = true;
 			        }
 
-			        // Si no hay errores, procede a agregar la cuenta
+			       
 			        if (!hayError) {
 			            c.setObjidTipoCuenta(new TipoCuenta(idTipo));
 			            c.setObjCliente(new Cliente(idCliente));

@@ -10,10 +10,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import entidades.Cliente;
 import entidades.Cuenta;
 import entidades.TipoCuenta;
+import negocio.negocioCliente;
 import negocio.negocioCuenta;
 import negocio.negocioTipoCuenta;
+import negocioImpl.negocioClienteImpl;
 import negocioImpl.negocioCuentaImpl;
 import negocioImpl.negocioTipoCuentaImpl;
 
@@ -56,8 +59,80 @@ public class ServletModificarCuenta extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		negocioCuenta negCuenta = new negocioCuentaImpl();
+		
+	    negocioCuenta negCuenta = new negocioCuentaImpl();
+	    negocioTipoCuenta negTipoCuenta = new negocioTipoCuentaImpl();
+	    negocioCliente negCliente = new negocioClienteImpl();
 
+	
+	    int idCuenta = Integer.parseInt(request.getParameter("txtIdCuenta"));
+	    int clienteId = Integer.parseInt(request.getParameter("txtClienteId"));
+	    String cbuCuenta = request.getParameter("txtCBU");
+	    String numeroCuenta = request.getParameter("txtNumCuenta");
+	    double saldo = Double.parseDouble(request.getParameter("txtSaldo"));
+	    int idTipo = Integer.parseInt(request.getParameter("selectTipoCuenta"));
+
+	  
+	    boolean hayError = false;
+	    String mensajeError = "";
+
+	   
+	    if (negCuenta.CantidadCuenta(clienteId)) {
+	        mensajeError = "Este cliente tiene el limite de posesion de cuenta(3).No se le puede asignar mas.";
+	        hayError = true;
+	    }
+
+	    
+	    if (negCuenta.repiteCbu(cbuCuenta)) {
+	        mensajeError = "Este CBU ya esta en uso. Ingrese otro.";
+	        hayError = true;
+	    }
+
+	  
+	    if (negCuenta.repiteNroCuenta(numeroCuenta)) {
+	        mensajeError = "Numero Cuenta existente, Ingrese otro.";
+	        hayError = true;
+	    }
+
+	   
+	    if (hayError) {
+	        ArrayList<TipoCuenta> listaTiposCuenta = negTipoCuenta.obtenerTiposCuentas();
+	        ArrayList<Cliente> listaClientes = negCliente.ListarCliente();
+
+	        request.setAttribute("mensajeError", mensajeError);
+	        request.setAttribute("listaTiposCuenta", listaTiposCuenta);
+	        request.setAttribute("listaClientes", listaClientes);
+	        RequestDispatcher rd = request.getRequestDispatcher("EditarCuenta.jsp");
+	        rd.forward(request, response);
+	        return;
+	    }
+
+	    Cuenta cuenta = new Cuenta();
+	    cuenta.setIdCuenta(idCuenta);
+	    cuenta.setObjCliente(new Cliente(clienteId));
+	    cuenta.setObjidTipoCuenta(new TipoCuenta(idTipo));
+	    cuenta.setCBU(cbuCuenta);
+	    cuenta.setNroCuenta(numeroCuenta);
+	    cuenta.setSaldo(saldo);
+
+	    boolean exito = negCuenta.ModificarCuenta(cuenta);
+
+	  
+	    String mensaje = exito ? "Cuenta modificada con éxito" : "Error al modificar la cuenta";
+	    ArrayList<TipoCuenta> listaTiposCuenta = negTipoCuenta.obtenerTiposCuentas();
+	    ArrayList<Cliente> listaClientes = negCliente.ListarCliente();
+
+	  
+	    request.setAttribute("mensaje", mensaje);
+	    request.setAttribute("listaTiposCuenta", listaTiposCuenta);
+	    request.setAttribute("listaClientes", listaClientes);
+	    RequestDispatcher rd = request.getRequestDispatcher("EditarCuenta.jsp");
+	    rd.forward(request, response);
+		
+		
+	/*	
+		negocioCuenta negCuenta = new negocioCuentaImpl();
+        negocioTipoCuenta negTipoCuenta= new negocioTipoCuentaImpl();
 	    int clienteId = Integer.parseInt(request.getParameter("txtClienteId"));
 	    
 	  
@@ -81,7 +156,7 @@ public class ServletModificarCuenta extends HttpServlet {
 	    boolean exito = negCuenta.ModificarCuenta(cuenta);
 	    String mensaje = exito ? "Cuenta modificada con éxito" : "Error al modificar la cuenta";
 
-	    negocioTipoCuenta negTipoCuenta = new negocioTipoCuentaImpl();
+	   
 	    ArrayList<TipoCuenta> listaTiposCuenta = negTipoCuenta.obtenerTiposCuentas();
 
 	    request.setAttribute("mensaje", mensaje);
@@ -90,24 +165,7 @@ public class ServletModificarCuenta extends HttpServlet {
 	    rd.forward(request, response);
 		
 		
-		/* negocioCuenta negCuenta = new negocioCuentaImpl();
-		    
-		    Cuenta cuenta = new Cuenta();
-		    cuenta.setSaldo(Double.parseDouble(request.getParameter("txtSaldo")));
-		    cuenta.setClienteId(Integer.parseInt(request.getParameter("txtClienteId")));
-		    cuenta.setTipoCuentaId(Integer.parseInt(request.getParameter("selectTipoCuenta"))); 
-		    cuenta.setIdCuenta(Integer.parseInt(request.getParameter("txtIdCuenta")));
-
-		    boolean exito = negCuenta.ModificarCuenta(cuenta);
-		    String mensaje = exito ? "Cuenta modificada con exito" : "Error al modificar la cuenta";
-		    
-		    negocioTipoCuenta negTipoCuenta = new negocioTipoCuentaImpl();
-		    ArrayList<TipoCuenta> listaTiposCuenta = negTipoCuenta.obtenerTiposCuentas();
-		    
-		    request.setAttribute("mensaje", mensaje);
-		    request.setAttribute("listaTiposCuenta", listaTiposCuenta);
-		    RequestDispatcher rd = request.getRequestDispatcher("EditarCuenta.jsp");
-		    rd.forward(request, response);*/
+	 */
 	}
 
 }

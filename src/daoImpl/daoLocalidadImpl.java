@@ -24,9 +24,9 @@ public class daoLocalidadImpl implements daoLocalidad{
             pst.setInt(1, IDProvincia);
             ResultSet rs = pst.executeQuery();
             
-            // Recorre el resultado y crea un objeto Localidad por cada registro
+          
             while (rs.next()) {
-                int id = rs.getInt("IDLocalidad"); // Usa el nombre correcto de la columna para ID de Localidad
+                int id = rs.getInt("IDLocalidad"); 
                 String nombre = rs.getString("Nombre");
                 Localidad localidad = new Localidad(id, nombre, IDProvincia);
                 localidades.add(localidad);

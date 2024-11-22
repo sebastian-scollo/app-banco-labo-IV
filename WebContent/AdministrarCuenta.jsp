@@ -126,8 +126,8 @@
             <td><%= cuenta.getNroCuenta() %></td>
             <td><%= cuenta.getCBU() %></td>
             <td><%= cuenta.getSaldo() %></td>
-            <td><%= cuenta.getClienteId() %></td>
-            <td><%= cuenta.getTipoCuentaId() %></td>
+            <td><%= cuenta.getObjCliente().getIdCliente() %></td>
+            <td><%= cuenta.getObjidTipoCuenta().getIdTipoCuenta() %></td>
             <td><%= cuenta.getFechaCreacion() %></td>
             <td>
                 <button onclick="window.location.href='EditarCuenta.jsp?id=<%= cuenta.getIdCuenta()%>'">
