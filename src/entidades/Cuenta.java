@@ -12,7 +12,14 @@ public class Cuenta {
 	private Date fechaCreacion;
 	private String CBU;
 	private TipoCuenta objidTipoCuenta;
+	private Cliente objCliente;
 	
+	public Cliente getObjCliente() {
+		return objCliente;
+	}
+	public void setObjCliente(Cliente objCliente) {
+		this.objCliente = objCliente;
+	}
 	public TipoCuenta getObjidTipoCuenta() {
 		return objidTipoCuenta;
 	}
