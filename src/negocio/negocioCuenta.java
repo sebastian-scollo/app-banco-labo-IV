@@ -1,6 +1,7 @@
 package negocio;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import entidades.Cuenta;
 
@@ -16,4 +17,5 @@ public interface negocioCuenta {
 	public boolean CantidadCuenta(int idCleinte);
 	  public boolean repiteNroCuenta(String nroCuenta);
 	  public boolean repiteCbu(String cbu);
+
 }

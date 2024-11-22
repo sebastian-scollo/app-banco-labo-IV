@@ -26,7 +26,7 @@ public class daoCuentaImpl implements daoCuenta {
 		conexion bd = new conexion();
 		Connection cnn = bd.obtenerConexion();
 		if(cnn==null) {
-			  System.out.println("Conexi�n fallida: la conexi�n es null.");
+			  System.out.println("Conexion fallida: la conexi�n es null.");
 		        
 		}
 		
@@ -73,7 +73,7 @@ public class daoCuentaImpl implements daoCuenta {
 		 conexion bd = new conexion();
 		 Connection cnn = bd.obtenerConexion();
 		 if(cnn==null) {
-			  System.out.println("Conexi�n fallida: la conexi�n es null.");
+			  System.out.println("Conexionn fallida: la conexi�n es null.");
 		        
 		}
 		 String consulta="SELECT IDCuenta,NumeroCuenta,CBU,Saldo,ClienteID,TipoCuentaID,FechaCreacion FROM Cuentas WHERE Estado=1 AND IDCuenta="+idCliente;
@@ -166,7 +166,7 @@ public class daoCuentaImpl implements daoCuenta {
 	
 	public boolean AgregarCuenta(Cuenta cuenta) {
 		 boolean exito = true;
-
+      
 		    try {
 		       
 		        Class.forName("com.mysql.jdbc.Driver");
@@ -275,8 +275,6 @@ public class daoCuentaImpl implements daoCuenta {
 		 
 		    boolean limite = false;
 
-		    
-		    
 		    conexion bd = new conexion();
 			Connection connection = bd.obtenerConexion();
 		    try {
@@ -378,4 +376,10 @@ public class daoCuentaImpl implements daoCuenta {
 		 }
 		return existencia;
 	}
+
+
+
+
+	
+
 }
