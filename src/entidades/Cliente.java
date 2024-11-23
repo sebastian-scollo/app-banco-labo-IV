@@ -17,9 +17,17 @@ public class Cliente extends Usuario {
 	private int idUsuario;
 	private boolean activo;
 	private Provincia provincia;
+	private Usuario usuario;
 	
-	
-	 public Provincia getProvincia() {
+	 public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public Provincia getProvincia() {
 	        return provincia;
 	    }
 

@@ -2,6 +2,7 @@ package negocioImpl;
 
 import dao.UsuarioDao;
 import daoImpl.UsuarioDaoImpl;
+import entidades.Cliente;
 import entidades.Usuario;
 import negocio.UsuarioNegocio;
 
@@ -22,4 +23,9 @@ public class UsuarioNegocioImpl implements UsuarioNegocio {
     	
     	return resultado;
     }
+
+	@Override
+	public Cliente DatosPersonal(int idUsuario) {
+		return usuarioDao.DatosPersonal(idUsuario);
+	}
 }

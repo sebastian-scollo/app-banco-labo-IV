@@ -78,4 +78,50 @@ public class UsuarioDaoImpl implements UsuarioDao {
   	    	return false;
   	    }
     }
+
+	@Override
+	public Cliente DatosPersonal(int idUsuario) {
+	    conexion bd = new conexion();
+	    Cliente cliente = null; // Inicializar como null, no crear un objeto vacío
+	    Connection conn = null;
+	    PreparedStatement ps = null;
+	    ResultSet rs = null;
+	    
+	    try {
+	        conn = bd.obtenerConexion();
+	        String query = "SELECT * FROM Clientes WHERE UsuarioID=?";
+	        ps = conn.prepareStatement(query);
+	        ps.setInt(1, idUsuario);
+	        rs = ps.executeQuery();
+	        
+	        if(rs.next()) {
+	            cliente = new Cliente(); 
+	            cliente.setDni(rs.getString("DNI"));
+	            cliente.setCuil(rs.getString("CUIL"));
+	            cliente.setNombre(rs.getString("Nombre"));
+	            cliente.setApellido(rs.getString("Apellido"));
+	            cliente.setSexo(rs.getString("Sexo"));
+	            cliente.setNacionalidad(rs.getString("Nacionalidad"));
+	            cliente.setFechaNacimiento(rs.getDate("FechaNacimiento"));
+	            cliente.setTelefono(rs.getString("Telefono"));
+	            cliente.setCorreo(rs.getString("CorreoElectronico"));
+	        }
+	        
+	       
+	        System.out.println("Buscando usuario con ID: " + idUsuario);
+	        
+	    } catch(Exception ex) {
+	        ex.printStackTrace();
+	    } finally {
+	        try {
+	            if(rs != null) rs.close();
+	            if(ps != null) ps.close();
+	            if(conn != null) conn.close();
+	        } catch(Exception e) {
+	            e.printStackTrace();
+	        }
+	    }
+	    
+	    return cliente;
+	}
 }

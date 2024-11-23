@@ -51,7 +51,7 @@
             <a href="Transferencias.jsp">Transacciones</a>
             <a href="contact.jsp">Realizar pago de Cuotas</a>
             <a href="EditarPassword.jsp?nombreUsuario=<%= usuarioLogueado %>">Cambiar Contrasenia</a> 
-            <a href="contact.jsp">Datos Personales</a> 
+            <a href="servletDatosPersonales">Datos Personales</a> 
             <a href="contact.jsp">Historial de movimientos</a> 
         </div>
         

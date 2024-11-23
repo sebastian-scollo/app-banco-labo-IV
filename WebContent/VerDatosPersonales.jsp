@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="entidades.Cliente" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -10,46 +11,53 @@
 
 </head>
 <body>
-    <%@ include file="MenuCliente.jsp" %>
-    
+    <%@ include file="MenuCliente.jsp" %> <!-- Incluir el menú -->
+
     <div class="table-container">
-        <table id ="miTabla">
+        <h2>Datos Personales del Cliente</h2>
+        <table id="miTabla" border="1">
             <thead>
                 <tr>
-                    <th>Dni cliente</th>
-                    <th>telefono</th>
-                    <th>apellido</th>
-                    <th>sexo</th>
-                    <th>fecha nacimiento</th>
-                    <th>nacionalidad</th>
-                    <th>correo</th>
+                    <th>DNI Cliente</th>
+                    <th>Teléfono</th>
+                    <th>Apellido</th>
+                    <th>Sexo</th>
+                    <th>Fecha de Nacimiento</th>
                     <th>Nacionalidad</th>
-                    <th>nombre</th>
-                    <th>cuil</th>
+                    <th>Correo</th>
+                    <th>Nombre</th>
+                    <th>CUIL</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>Dato 1</td>
-                    <td>Dato 2</td>
-                    <td>Dato 3</td>
-                    <td>Dato 4</td>
-                    <td>Dato 5</td>
-                    <td>Dato 6</td>
-                    <td>Dato 7</td>
-                    <td>Dato 8</td>
-                    <td>Dato 9</td>
-                    <td>Dato 9</td>
-                       <!-- <button onclick="editarFila(this)">Editar</button>-->
-                       
-                       
-                    </td>
+                    <% 
+                        // Obtener el objeto 'cliente' desde el request
+                        Cliente cliente = (Cliente) request.getAttribute("cliente");
+
+                        if (cliente != null) {
+                    %>
+                    <td><%= cliente.getDni() %></td>
+                    <td><%= cliente.getTelefono() %></td>
+                    <td><%= cliente.getApellido() %></td>
+                    <td><%= cliente.getSexo() %></td>
+                    <td><%= cliente.getFechaNacimiento() %></td>
+                    <td><%= cliente.getNacionalidad() %></td>
+                    <td><%= cliente.getCorreo() %></td>
+                    <td><%= cliente.getNombre() %></td>
+                    <td><%= cliente.getCuil() %></td>
+                    <% 
+                        } else {
+                    %>
+                    <td colspan="9">No se encontraron datos personales para este cliente.</td>
+                    <% 
+                        }
+                    %>
                 </tr>
-               
             </tbody>
         </table>
-        
     </div>
-    <script src="eventos.js"></script>
+
+    <script src="eventos.js"></script> <!-- Si tienes un archivo de JavaScript -->
 </body>
 </html>
