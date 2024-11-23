@@ -37,18 +37,18 @@ public class ServletEditarPassword extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// Recuperar parámetros del formulario
+		// Recuperar parï¿½metros del formulario
 	    String nombreUsuario = request.getParameter("nombreUsuario");
-	    String contraseña = request.getParameter("contraseña");
-	    String nuevaContraseña = request.getParameter("nuevaContraseña");
-	    String repContraseña = request.getParameter("repContraseña");
+	    String contrasena = request.getParameter("contrasena");
+	    String nuevaContrasena = request.getParameter("nuevaContrasena");
+	    String repContrasena = request.getParameter("repContrasena");
 
-	    // Lógica para procesar la actualización de contraseña
-	    if (nuevaContraseña.equals(repContraseña)) {
-	        boolean resultado = usuarioNegocio.editarPassword(nombreUsuario, contraseña, nuevaContraseña);
+	    // Lï¿½gica para procesar la actualizaciï¿½n de contraseï¿½a
+	    if (nuevaContrasena.equals(repContrasena)) {
+	        boolean resultado = usuarioNegocio.editarPassword(nombreUsuario, contrasena, nuevaContrasena);
 	    } else {
-	        // Manejar el error si las contraseñas no coinciden
-	        response.getWriter().println("Las contraseñas no coinciden.");
+	        // Manejar el error si las contraseï¿½as no coinciden
+	        response.getWriter().println("Las contraseï¿½as no coinciden.");
 	    }
 	}
 

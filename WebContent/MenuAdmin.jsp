@@ -2,6 +2,8 @@
 <!DOCTYPE html>
 <html lang="es">
 <%@ page import="entidades.Usuario" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <head>
     <meta charset="ISO-8859-1">
     <title>MenuAdmin</title>
@@ -74,8 +76,9 @@
 </head>
 <body>
 <% 
-    Usuario usuario = (Usuario) session.getAttribute("usuarioLogueado");
-    if (usuario == null || usuario.getTipoUsuario() != 1) {
+    String usuario = (String) session.getAttribute("usuarioLogueado");
+	int tipo = (int) session.getAttribute("tipoUsuario");
+    if (usuario == null || tipo != 1) {
         response.sendRedirect("Login.jsp");
         return;
     }
@@ -83,7 +86,7 @@
     <div class="header">
         <img src="SLOGAN.png" alt="Logo">
         <h1>  MENU ADMINISTRADOR</h1>
-        <div class="user-info">Usuario: <strong>acá va el usuario logueado</strong></div>
+        <div class="user-info">Usuario: <strong><c:out value="${usuario}"></c:out></strong></div>
     </div>
     
     <div class="menu-container">

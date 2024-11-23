@@ -49,7 +49,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
         return usuario;
     }
     
-    public boolean EditarContraseñaUsuario(String usuario, String password, String newPassword) {
+    public boolean EditarContrasenaUsuario(String usuario, String password, String newPassword) {
   	  try {
   	        Class.forName("com.mysql.jdbc.Driver"); 
   	        System.out.println("Driver MySQL cargado correctamente.");

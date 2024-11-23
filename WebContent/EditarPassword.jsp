@@ -140,9 +140,8 @@
 <body>
 
 <%
-    /*String nombreUsuario = request.getParameter("nombreUsuario");*/
+    String nombreUsuario = (String) session.getAttribute("nombreUsuario");
     
-    String nombreUsuario = "homero";
 %>
     <div class="form-container">
         
@@ -151,13 +150,13 @@
         <input type="hidden" name="nombreUsuario" value="<%= nombreUsuario %>">
         <div class="form-group-pair">
             <div class="form-group">
-                <input type="password" id="contraseña" placeholder="Ingrese su contraseña" class="form-input"  >
+                <input type="password" id="contrasena" placeholder="Ingrese su contraseña" class="form-input"  >
             </div>
              <div class="form-group">
-                <input type="password" id="nuevaContraseña" placeholder="Ingrese su nuevo contraseña" class="form-input"  >
+                <input type="password" id="nuevaContrasena" placeholder="Ingrese su nuevo contraseña" class="form-input"  >
             </div>
             <div class="form-group">
-                <input type="password" id="repContraseña" placeholder="Repita su contraseña" class="form-input">
+                <input type="password" id="repContrasena" placeholder="Repita su contraseña" class="form-input">
             </div>
         </div>
 

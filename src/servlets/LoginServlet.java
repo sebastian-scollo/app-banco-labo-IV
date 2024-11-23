@@ -1,32 +1,33 @@
 package servlets;
 
 import java.io.IOException;
+import javax.servlet.http.HttpSession;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import negocioImpl.UsuarioNegocioImpl;
+import negocio.UsuarioNegocio;
 import entidades.Usuario;
 
 @WebServlet("/LoginServlet")
 public class LoginServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
-    private UsuarioNegocioImpl usuarioNegocio = new UsuarioNegocioImpl();
+    private UsuarioNegocio usuarioNegocio = new UsuarioNegocioImpl();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-      
+    	    	
         String nombreUsuario = request.getParameter("usuario");
         String contrasenia = request.getParameter("password");
-
       
         Usuario usuario = usuarioNegocio.autenticarUsuario(nombreUsuario, contrasenia);
 
         if (usuario != null) {
-        	String nombreusuario = usuario.getNombreUsuario();
-            request.getSession().setAttribute("usuarioLogueado", nombreusuario);
+            request.getSession().setAttribute("usuarioLogueado", nombreUsuario);
+            request.getSession().setAttribute("tipoUsuario", usuario.getTipoUsuario());
 
            
             if (usuario.getTipoUsuario() == 1) {
@@ -40,9 +41,9 @@ public class LoginServlet extends HttpServlet {
                 response.sendRedirect("error.jsp");
             }
         } else {
-          
-            request.setAttribute("mensajeError", "Usuario o contraseña incorrectos");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
+        	
+            request.setAttribute("mensajeError", "Usuario o contraseï¿½a incorrectos");
+            request.getRequestDispatcher("Login.jsp").forward(request, response);
         }
     }
 }

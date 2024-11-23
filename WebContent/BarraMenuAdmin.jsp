@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <%@ page import="entidades.Usuario" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 
@@ -17,12 +19,12 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 20px;
+    padding: 0px;
     width: 100%; 
     position: fixed; 
     top: 0;
     left: 0;
-    z-index: 1000;
+    z-index: 0;
 }
 
 .header img {
@@ -63,7 +65,17 @@
             <a href="ClienteAgregar.jsp">Agregar Cliente</a>
           <!--    <a href="AgregarCuenta.jsp">Agregar Cuenta</a> -->
         </div>
-        <div class="user-info">Usuario: <strong>acá va el usuario logueado</strong></div>
+        <div class="user-info"> <% 
+        	String usuario = (String)session.getAttribute("usuarioLogueado");
+        	if (usuario == null || usuario == "") {
+        		out.println("<a href='Login.jsp'>Ingresar sesión</a>");
+        	}
+        	else {
+        		System.out.println(usuario);
+        		out.println("Usuario: " + usuario);
+        	}
+        	%>
+        <strong></strong></div>
     </div>
 </body>
 </html>

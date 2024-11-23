@@ -18,7 +18,7 @@ public class UsuarioNegocioImpl implements UsuarioNegocio {
     }
     
     public boolean editarPassword(String usuario, String password, String newPassword) {
-    	boolean resultado = usuarioDao.EditarContraseñaUsuario(usuario, password, newPassword);
+    	boolean resultado = usuarioDao.EditarContrasenaUsuario(usuario, password, newPassword);
     	
     	return resultado;
     }
