@@ -15,6 +15,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import Excepciones.CBUrepetido;
+import Excepciones.LimiteCuentaPorCliente;
+
 import javax.servlet.RequestDispatcher;
 
 /**
@@ -58,65 +62,68 @@ public class ServletAgregarCuenta extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		 if (request.getParameter("btnAceptar") != null) {
-			   if (request.getParameter("btnAceptar") != null) {
-			        Cuenta c = new Cuenta();
-                    
-			        int idTipo = Integer.parseInt(request.getParameter("TipoCuenta"));
-			        int idCliente = Integer.parseInt(request.getParameter("IdCliente"));
-			        String numeroCuenta = request.getParameter("NumCuenta");
-			        String cbuCuenta = request.getParameter("CBU");
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
+		    throws ServletException, IOException {
+		    try {
+		        if (request.getParameter("btnAceptar") != null) {
+		            Cuenta c = new Cuenta();
+		            int idTipo = Integer.parseInt(request.getParameter("TipoCuenta"));
+		            int idCliente = Integer.parseInt(request.getParameter("IdCliente"));
+		            String numeroCuenta = request.getParameter("NumCuenta");
+		            String cbuCuenta = request.getParameter("CBU");
+		            
+		            negocioCuenta nc = new negocioCuentaImpl();
+		            negocioCliente clienteNeg = new negocioClienteImpl();
+		            negocioTipoCuenta negTipoCuenta = new negocioTipoCuentaImpl();
+		            negocioCliente negCliente = new negocioClienteImpl();
+		            
+		        
+		            validarCantidadCuentas(nc, idCliente);
+		            validarCBU(nc, cbuCuenta);
+		            
+		        
+		            if (!clienteNeg.ExisteIdCliente(idCliente)) {
+		                request.setAttribute("mensajeErrorCliente", "El ID de cliente ingresado no existe.");
+		                throw new Exception("Cliente no existe");
+		            }
+		            
+		            if (nc.repiteNroCuenta(numeroCuenta)) {
+		                request.setAttribute("mensajeErrorNroCuenta", "El número de cuenta ya existe. Ingrese otro.");
+		                throw new Exception("Número de cuenta duplicado");
+		            }
+		         
+		            c.setObjidTipoCuenta(new TipoCuenta(idTipo));
+		            c.setObjCliente(new Cliente(idCliente));
+		            c.setCBU(cbuCuenta);
+		            c.setNroCuenta(numeroCuenta);
+		            c.setSaldo(Double.parseDouble(request.getParameter("Saldo")));
+		            
+		            nc.AgregarCuenta(c);
+		            request.setAttribute("mensajeExito", "La cuenta se agregó exitosamente.");
+		        }
+		    } catch (LimiteCuentaPorCliente e) {
+		        request.setAttribute("mensajeErrorCuentas", e.getMessage());
+		    } catch (CBUrepetido e) {
+		        request.setAttribute("mensajeErrorCBU", e.getMessage());
+		    } catch (Exception e) {
+		       
+		        request.setAttribute("mensajeError", e.getMessage());
+		    } finally {
+		        request.getRequestDispatcher("AgregarCuenta.jsp").forward(request, response);
+		    }
+		}
 
-			        negocioCuenta nc = new negocioCuentaImpl();
-			        negocioCliente clienteNeg = new negocioClienteImpl();
-                    negocioTipoCuenta negTipoCuenta = new negocioTipoCuentaImpl();
-			        negocioCliente negCliente = new negocioClienteImpl();
-			        boolean cantidadCuentas = nc.CantidadCuenta(idCliente,nc.NuevaId());
-			        boolean existeIdCliente = clienteNeg.ExisteIdCliente(idCliente);
-			        boolean repiteNroCuenta = nc.repiteNroCuenta(numeroCuenta);
-			        boolean repiteCbu = nc.repiteCbu(cbuCuenta);
-                    ArrayList<TipoCuenta> listTipoCuenta = negTipoCuenta.obtenerTiposCuentas();       
-			        ArrayList<Cliente> listCliente = negCliente.ListarCliente();
-			        boolean hayError = false;
+	
+		private void validarCantidadCuentas(negocioCuenta nc, int idCliente) throws LimiteCuentaPorCliente {
+		    if (nc.CantidadCuenta(idCliente, nc.NuevaId())) {
+		        throw new LimiteCuentaPorCliente("El cliente ya tiene la cantidad máxima permitida de cuentas.");
+		    }
+		}
 
-			        if (cantidadCuentas) {
-			            request.setAttribute("mensajeErrorCuentas", "El cliente ya tiene la cantidad máxima permitida de cuentas.");
-			            hayError = true;
-			        }
-
-			        if (!existeIdCliente) {
-			            request.setAttribute("mensajeErrorCliente", "El ID de cliente ingresado no existe.");
-			            hayError = true;
-			        }
-
-			        if (repiteNroCuenta) {
-			            request.setAttribute("mensajeErrorNroCuenta", "El número de cuenta ya existe. Ingrese otro.");
-			            hayError = true;
-			        }
-
-			        if (repiteCbu) {
-			            request.setAttribute("mensajeErrorCBU", "El CBU ingresado ya está en uso. Ingrese otro.");
-			            hayError = true;
-			        }
-
-			       
-			        if (!hayError) {
-			            c.setObjidTipoCuenta(new TipoCuenta(idTipo));
-			            c.setObjCliente(new Cliente(idCliente));
-			            c.setCBU(cbuCuenta);
-			            c.setNroCuenta(numeroCuenta);
-			            c.setSaldo(Double.parseDouble(request.getParameter("Saldo")));
-
-			            nc.AgregarCuenta(c);
-			            request.setAttribute("mensajeExito", "La cuenta se agregó exitosamente.");
-			        }
-			    }
-
-			    request.getRequestDispatcher("AgregarCuenta.jsp").forward(request, response);
-		
-	 }
-	}
+		private void validarCBU(negocioCuenta nc, String cbuCuenta) throws CBUrepetido {
+		    if (nc.repiteCbu(cbuCuenta)) {
+		        throw new CBUrepetido("El CBU ingresado ya está en uso. Ingrese otro.");
+		    }
+		}
 
 }

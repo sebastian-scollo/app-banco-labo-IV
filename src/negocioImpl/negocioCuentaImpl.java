@@ -2,6 +2,7 @@ package negocioImpl;
 import java.util.ArrayList;
 import java.util.Date;
 
+import Excepciones.LimiteCuentaPorCliente;
 import dao.daoCliente;
 import dao.daoCuenta;
 import daoImpl.daoClienteImpl;
@@ -50,7 +51,8 @@ public class negocioCuentaImpl implements negocioCuenta {
 
 	@Override
 	public boolean CantidadCuenta(int idCleinte, int idCuenta) {
-	   return  dao.CantidadCuenta(idCleinte, idCuenta);
+	
+		 return  dao.CantidadCuenta(idCleinte, idCuenta);
 	}
 
 	@Override
@@ -60,7 +62,8 @@ public class negocioCuentaImpl implements negocioCuenta {
 
 	@Override
 	public boolean repiteCbu(String cbu) {
-		return dao.repiteCbu(cbu);
+
+			return dao.repiteCbu(cbu);
 	}
 
 	
