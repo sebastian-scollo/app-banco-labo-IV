@@ -429,4 +429,56 @@ public class daoCuentaImpl implements daoCuenta {
 	}
 
 
+
+
+	@Override
+	public Cuenta cuentaXcbu(String cbu) {
+		 
+	        Connection con = null;
+	        PreparedStatement stmt = null;
+	        ResultSet rs = null;
+	        Cuenta cuenta = null;
+	        try {
+		        Class.forName("com.mysql.jdbc.Driver"); 
+		        System.out.println("Driver MySQL cargado correctamente.");
+		    } catch (ClassNotFoundException e) {
+		        System.out.println("Error mi compa");
+		        e.printStackTrace();
+		    }
+              conexion cn = new conexion();
+	        try {
+	        	con = cn.obtenerConexion();
+	        	
+	            String sql = "SELECT * FROM cuentas WHERE cbu = ?";
+	            stmt = con.prepareStatement(sql);
+	            stmt.setString(1, cbu);
+
+	            rs = stmt.executeQuery();
+
+	            if (rs.next()) {
+	                cuenta = new Cuenta();
+	                cuenta.setCBU(rs.getString("cbu"));
+	                cuenta.setIdCuenta(rs.getInt("idCuenta"));
+	                cuenta.setSaldo(rs.getDouble("saldo"));
+	              
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	       
+	        } finally {
+	      
+	            try {
+	                if (rs != null) rs.close();
+	                if (stmt != null) stmt.close();
+	                if (con != null) con.close();
+	            } catch (SQLException e) {
+	                e.printStackTrace();
+	            }
+	        }
+
+	        return cuenta;
+	    }
+	
+
+
 }

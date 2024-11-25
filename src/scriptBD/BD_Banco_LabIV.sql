@@ -9,7 +9,7 @@ create table Usuarios(
     Contrasenia varchar (100) not null,
     TipoUsuario tinyint ,
     Estado bit not null default 1,
-   CONSTRAINT validarTipoUsuario CHECK (TipoUsuario=1 or TipoUsuario=2), # recordar de que 1 es ADMIN y 2 es Cliente solo vamos usar 2 valores.
+   CONSTRAINT validarTipoUsuario CHECK (TipoUsuario=1 OR TipoUsuario=2), # recordar de que 1 es ADMIN y 2 es Cliente solo vamos usar 2 valores.
     CONSTRAINT PK_usuarios PRIMARY KEY(IDUsuario)
 );
 
@@ -89,8 +89,8 @@ create table Movimientos(
 	IDMovimiento int auto_increment,
     Detalle varchar(200),
     Importe decimal(15,2) not null,
-    IDCuentaEmisor int,
-    IDCuentaReceptor int,
+    cbuEmisor char(22),
+    cbuReceptor char(22),
     TipoMovimientoID int not null,
     constraint pk_movimiento primary key(IDMovimiento),
     constraint foreign key (TipoMovimientoID) references TipoMovimientos (IDTipoMovimiento)
@@ -114,7 +114,7 @@ create table Cuotas(
     FechaAbonada datetime,
     NumeroCuota int not null,
     ImporteAbonado decimal(15,2),
-    Estado bit default 0,
+    Estado bit default 0, -- cero es no pagado, 1 es cuota ya pagada o abonada
     PrestamoID int not null,
 constraint PK_CUOTA primary key(IDCuota),
  constraint foreign key (PrestamoID) references Prestamos (IDPrestamo)
@@ -214,21 +214,21 @@ INSERT INTO TipoCuentas (IDTipoCuenta, Descripcion) VALUES
 
 
 INSERT INTO Cuentas (IDCuenta, NumeroCuenta, CBU, ClienteID, TipoCuentaID, FechaCreacion, Estado) VALUES
-(1, '123456', '12345', 1, 1, '2023-01-01', 1),
-(2, '234567', '23456', 2, 2, '2023-02-01', 1),
-(3, '345678', '34567', 3, 1, '2023-03-01', 1),
-(4, '456789', '45678', 4, 3, '2023-04-01', 1),
-(5, '567890', '56789', 5, 1, '2023-05-01', 1),
-(6, '678901', '67890', 6, 2, '2023-06-01', 1),
-(7, '789012', '78901', 7, 3, '2023-07-01', 1),
-(8, '890123', '89012', 8, 1, '2023-08-01', 1),
-(9, '901234', '90123', 9, 2, '2023-09-01', 1),
-(10, '012345', '01234', 10, 3, '2023-10-01', 1),
-(11, '123456', '1234589', 11, 1, '2023-11-01', 1),
-(12, '234567', '234569', 12, 2, '2023-12-01', 1),
-(13, '345678', '345679', 13, 3, '2023-01-01', 1),
-(14, '456789', '4567888', 14, 1, '2023-02-01', 1),
-(15, '567890', '5678989', 15, 2, '2023-03-01', 1);
+(1, '123456', '0000000000000000000001', 1, 1, '2023-01-01', 1),
+(2, '234567', '0000000000000000000002', 2, 2, '2023-02-01', 1),
+(3, '345678', '0000000000000000000003', 3, 1, '2023-03-01', 1),
+(4, '456789', '0000000000000000000004', 4, 3, '2023-04-01 ', 1),
+(5, '567890', '0000000000000000000005', 5, 1, '2023-05-01', 1),
+(6, '678901', '0000000000000000000006', 6, 2, '2023-06-01', 1),
+(7, '789012', '0000000000000000000007', 7, 3, '2023-07-01', 1),
+(8, '890123', '0000000000000000000008', 8, 1, '2023-08-01', 1),
+(9, '901234', '0000000000000000000009', 9, 2, '2023-09-01', 1),
+(10, '012345', '0000000000000000000010', 10, 3, '2023-10-01', 1),
+(11, '123456', '0000000000000000000011', 11, 1, '2023-11-01', 1),
+(12, '234567', '0000000000000000000012', 12, 2, '2023-12-01', 1),
+(13, '345678', '0000000000000000000013', 13, 3, '2023-01-01', 1),
+(14, '456789', '0000000000000000000014', 14, 1, '2023-02-01', 1),
+(15, '567890', '0000000000000000000015', 15, 2, '2023-03-01', 1);
 
 INSERT INTO TipoMovimientos (IDTipoMovimiento, Descripcion) VALUES
 (1, 'Alta de cuenta'),
@@ -237,22 +237,22 @@ INSERT INTO TipoMovimientos (IDTipoMovimiento, Descripcion) VALUES
 (4, 'Transferencia');
 
 
-INSERT INTO Movimientos (IDMovimiento, Detalle, Importe, IDCuentaEmisor, IDCuentaReceptor, TipoMovimientoID) VALUES
-(1, 'Alta de cuenta', 10000.00, 1, 2, 1),
-(2, 'Alta de cuenta', 10000.00, 2, 3, 1),
-(3, 'Alta de cuenta', 10000.00, 3, 4, 1), 
-(4, 'Alta de cuenta', 10000.00, 4, 5, 1),
-(5, 'Alta de cuenta', 10000.00, 5, 6, 1),
-(6, 'Alta de prestamo', 50000.00, 1, 6, 2),
-(7, 'Alta de prestamo', 75000.00, 2, 1, 2),
-(8, 'Alta de prestamo', 100000.00, 3, 1, 2),
-(9, 'Pago de prestamo', 5000.00, 1, 4, 3),
-(10, 'Pago de prestamo', 7500.00, 2, 5, 3),
-(11, 'Pago de prestamo', 10000.00, 3, 2, 3),
-(12, 'Transferencia', 1000.00, 1, 4, 4),
-(13, 'Transferencia', 2000.00, 2, 6, 4),
-(14, 'Transferencia', 3000.00, 3, 5, 4),
-(15, 'Transferencia', 4000.00, 4, 1, 4);
+INSERT INTO Movimientos (IDMovimiento, Detalle, Importe, cbuEmisor, cbuReceptor, TipoMovimientoID) VALUES
+(1, 'Alta de cuenta', 10000.00, '0000000000000000000001','0000000000000000000002', 1),
+(2, 'Alta de cuenta', 10000.00, '0000000000000000000002', '0000000000000000000003', 1),
+(3, 'Alta de cuenta', 10000.00, '0000000000000000000003', '0000000000000000000004', 1), 
+(4, 'Alta de cuenta', 10000.00, '0000000000000000000004', '0000000000000000000005', 1),
+(5, 'Alta de cuenta', 10000.00, '0000000000000000000005','0000000000000000000006', 1),
+(6, 'Alta de prestamo', 50000.00,'0000000000000000000001','0000000000000000000006', 2),
+(7, 'Alta de prestamo', 75000.00,'0000000000000000000002','0000000000000000000001', 2),
+(8, 'Alta de prestamo', 100000.00,'0000000000000000000003','0000000000000000000001', 2),
+(9, 'Pago de prestamo', 5000.00,'0000000000000000000001','0000000000000000000004', 3),
+(10, 'Pago de prestamo', 7500.00,'0000000000000000000002','0000000000000000000005', 3),
+(11, 'Pago de prestamo', 10000.00,'0000000000000000000003','0000000000000000000002', 3),
+(12, 'Transferencia', 1000.00,'0000000000000000000001','0000000000000000000004', 4),
+(13, 'Transferencia', 2000.00,'0000000000000000000002','0000000000000000000006', 4),
+(14, 'Transferencia', 3000.00,'0000000000000000000003','0000000000000000000005', 4),
+(15, 'Transferencia', 4000.00,'0000000000000000000004','0000000000000000000001', 4);
 
 INSERT INTO Prestamos (IDPrestamo, MontoSolitado, ImporteAPagar, Plazo, FechaSolicitado, ClienteID) VALUES
 (1, 50000.00, 55000.00, 12, '2023-04-01', 1),
@@ -316,3 +316,5 @@ INSERT INTO Cuotas (IDCuota, NumeroCuota, FechaAbonada, ImporteAbonado, Estado, 
 (41, 10, '2024-05-05', 4583.33, 1, 5),
 (42, 11, '2024-06-05', 4583.34, 1, 5),
 (43, 12, '2024-07-05', 4583.33, 1, 5);
+
+#estoy cansado jefe

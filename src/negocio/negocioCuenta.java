@@ -17,5 +17,5 @@ public interface negocioCuenta {
 	public boolean CantidadCuenta(int idCleinte, int idCuenta);
 	  public boolean repiteNroCuenta(String nroCuenta);
 	  public boolean repiteCbu(String cbu);
-
+	  Cuenta cuentaXcbu(String cbu);
 }

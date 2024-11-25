@@ -66,5 +66,10 @@ public class negocioCuentaImpl implements negocioCuenta {
 			return dao.repiteCbu(cbu);
 	}
 
+	@Override
+	public Cuenta cuentaXcbu(String cbu) {
+		return dao.cuentaXcbu(cbu);
+	}
+
 	
 }

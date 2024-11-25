@@ -15,6 +15,6 @@ public interface daoCuenta {
   public boolean CantidadCuenta(int idCliente, int idCuenta);
   public boolean repiteNroCuenta(String nroCuenta);
   public boolean repiteCbu(String cbu);
- 
+ Cuenta cuentaXcbu(String cbu);
 
 }

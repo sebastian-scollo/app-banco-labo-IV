@@ -80,34 +80,77 @@
         }
     </style>
 </head>
-
+<script>
+    function confirmarEliminacion() {
+        return confirm("¿Estimado seguro de realizar la siguiente transaccion?");
+    }
+</script>
 <body>
     <%@ include file="MenuCliente.jsp" %>
-    
 
     <div class="form-container">
-        <div class="header">
-            
-        </div>
-  
-        <form action="submitForm" method="post">
+        <form action="servletMovimientoTransferencia" method="post" onsubmit="return confirmarEliminacion();">
             <div class="form-group">
-                <label for="cbuOrigen" class="form-label">CBU Origen</label>
-                <input type="text" id="cbuOrigen" name="cbuOrigen" class="form-input" required>
+                <label for="cbuOrigen" class="form-label">CBU de tu Cuenta</label>
+                <input type="text" id="cbuOrigen" name="txtCbuEmisor" class="form-input" required>
             </div>
 
             <div class="form-group">
-                <label for="cbuDestino" class="form-label">CBU Destino</label>
-                <input type="text" id="cbuDestino" name="cbuDestino" class="form-input" required>
+                <label for="cbuDestino" class="form-label">CBU de Cuenta a transferir</label>
+                <input type="text" id="cbuDestino" name="txtCbuReceptor" class="form-input" required>
             </div>
 
             <div class="form-group">
                 <label for="monto" class="form-label">Monto</label>
-                <input type="number" id="monto" name="monto" class="form-input" required>
+                <input type="text" id="monto" name="txtMonto" class="form-input" required>
+            </div>
+
+            <div class="form-group">
+                <label for="descripcion" class="form-label">Deje alguna descripción</label>
+                <input type="text" id="descripcion" name="txtDescripcion" class="form-input" required>
             </div>
 
             <input type="submit" class="submit-btn" value="Aceptar">
         </form>
+
+        <% 
+            String mensaje = (String) request.getAttribute("mensaje");
+            if (mensaje != null) {
+        %>
+            <div class="alert">
+                <p><%= mensaje %></p>
+            </div>
+        <% } %>
     </div>
+
+    <script>
+     
+        function confirmarEliminacion() {
+            var cbuEmisor = document.getElementById('cbuOrigen').value;
+            var cbuReceptor = document.getElementById('cbuDestino').value;
+            var monto = document.getElementById('monto').value;
+            var regexCbu = /^\d{22}$/; 
+            var regexMonto = /^(?!0(\.0+)?$)(\d+(\.\d+)?|\.\d+)$/;
+
+            if (!regexCbu.test(cbuEmisor)) {
+                alert('El CBU de la cuenta a transferir debe tener 22 digitos y solo nuemero.');
+                return false;
+            }
+
+          
+            if (!regexCbu.test(cbuReceptor)) {
+                alert('El CBU de la cuenta a transferir debe tener 22 digitos y solo nuemero.');
+                return false;
+            }
+
+          
+            if (!regexMonto.test(monto)) {
+                alert('Solo se admiten montos de dinero positivos estimado.');
+                return false;
+            }
+
+            return true;
+        }
+    </script>
 </body>
 </html>
