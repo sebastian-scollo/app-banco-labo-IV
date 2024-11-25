@@ -1,4 +1,7 @@
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="entidades.Cuenta" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -93,50 +96,71 @@
             background-color: #125890;
         }
     </style>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 <body>
      <%@ include file="MenuCliente.jsp" %>
+<div class="form-container">
+    <form action="ProcesarPrestamo.jsp" method="post">
+        <div class="form-group">
+            <label for="cuenta">Cuenta para el depósito</label>
+            <select id="cuenta" name="cuenta" required>
+                <option value="">Seleccione una cuenta</option>
+                <c:if test="${not empty cuentas}">
+				    <c:forEach var="cuenta" items="${cuentas}">
+				        <option value="${cuenta.idCuenta}">${cuenta.CBU}</option>
+				    </c:forEach>
+				</c:if>
+				<c:if test="${empty cuentas}">
+    				<option value="">No hay cuentas disponibles</option>
+				</c:if>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="monto">Monto del préstamo</label>
+            <input type="number" id="monto" name="monto" placeholder="Ingrese el monto" required min="1" step="0.01">
+        </div>
+        <div class="form-group">
+            <label for="cuotas">Cantidad de cuotas</label>
+            <select id="cuotas" name="cuotas" required>
+                <option value="12">12 meses</option>
+                <option value="24">24 meses</option>
+                <option value="36">36 meses</option>
+                <option value="48">48 meses</option>
+            </select>
+        </div>
+        <div class="button-group">
+            <button type="button" id="btnSimularPrestamo" class="btn btn-primary flex-fill">Simular Préstamo</button>
+            <button type="submit" name="action" value="solicitar" class="btn btn-secondary">Solicitar Préstamo</button>
+        </div>
+    </form>
+</div>
 
-    <div class="form-container">
-        <form action="ProcesarPrestamo.jsp" method="post">
-            <div class="form-group">
-                <label for="nombre">Nombre</label>
-                <input type="text" id="nombre" name="nombre" placeholder="Ingrese su nombre" required>
-            </div>
-            <div class="form-group">
-                <label for="apellido">Apellido</label>
-                <input type="text" id="apellido" name="apellido" placeholder="Ingrese su apellido" required>
-            </div>
-            <div class="form-group">
-                <label for="idCliente">Id Cliente</label>
-                <input type="text" id="idCliente" name="idCliente" placeholder="Ingrese su ID de cliente" required>
-            </div>
-            <div class="form-group">
-                <label for="cuit">CUIT</label>
-                <input type="text" id="cuit" name="cuit" placeholder="Ingrese su CUIT" required>
-            </div>
-            <div class="form-group">
-                <label for="monto">Monto del préstamo</label>
-                <input type="number" id="monto" name="monto" placeholder="Ingrese el monto" required min="1" step="0.01">
-            </div>
-            <div class="form-group">
-                <label for="cuotas">Cantidad de cuotas</label>
-                <select id="cuotas" name="cuotas" required>
-                    <option value="12">12 meses</option>
-                    <option value="24">24 meses</option>
-                    <option value="36">36 meses</option>
-                    <option value="48">48 meses</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label for="interes">Tasa de interés (%)</label>
-                <input type="number" id="interes" name="interes" placeholder="Ingrese la tasa de interés" required min="0" step="0.1">
-            </div>
-            <div class="button-group">
-                <button type="submit" name="action" value="simular" class="btn">Simular Préstamo</button>
-                <button type="submit" name="action" value="solicitar" class="btn btn-secondary">Solicitar Préstamo</button>
-            </div>
-        </form>
-    </div>
+    
+    <!-- Modal para mostrar el préstamo simulado -->
+	<div class="modal fade" id="simularPrestamoModal" tabindex="-1" aria-labelledby="simularPrestamoLabel" aria-hidden="true">
+	    <div class="modal-dialog modal-dialog-centered">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <h5 class="modal-title" id="simularPrestamoLabel">Simulación de Préstamo</h5>
+	                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+	            </div>
+	            <div class="modal-body">
+	                <!-- Aquí se mostrarán los datos del préstamo simulado -->
+	                <p><strong>Monto solicitado:</strong> $<span id="simularMonto"></span></p>
+	                <p><strong>Cuotas:</strong> <span id="simularCuotas"></span> meses</p>
+	                <p><strong>TNA:</strong> <span id="simularInteres"></span>%</p>
+	                <p><strong>Importe total a pagar:</strong> $<span id="simularTotal"></span></p>
+	                <p><strong>Importe por cuota:</strong> $<span id="simularPorCuota"></span></p>
+	            </div>
+	            <div class="modal-footer">
+	                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="js/prestamos.js"></script>
 </body>
 </html>

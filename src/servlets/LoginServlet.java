@@ -19,32 +19,35 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-    	    	
-        String nombreUsuario = request.getParameter("usuario");
-        String contrasenia = request.getParameter("password");
-      
-        Usuario usuario = usuarioNegocio.autenticarUsuario(nombreUsuario, contrasenia);
+    	if (request.getParameter("btnLogin") != null)
+    	{
+    		String nombreUsuario = request.getParameter("usuario");
+            String contrasenia = request.getParameter("password");
+          
+            Usuario usuario = usuarioNegocio.autenticarUsuario(nombreUsuario, contrasenia);
 
-        if (usuario != null) {
-            request.getSession().setAttribute("usuarioLogueado", nombreUsuario);
-            request.getSession().setAttribute("idUsuario", usuario.getIDUsuario());
-            request.getSession().setAttribute("tipoUsuario", usuario.getTipoUsuario());
-             
-           
-            if (usuario.getTipoUsuario() == 1) {
-                
-                response.sendRedirect("MenuAdmin.jsp");
-            } else if (usuario.getTipoUsuario() == 2) {
+            if (usuario != null) {
+                request.getSession().setAttribute("usuarioLogueado", nombreUsuario);
+                request.getSession().setAttribute("idUsuario", usuario.getIDUsuario());
+                request.getSession().setAttribute("tipoUsuario", usuario.getTipoUsuario());
+                 
                
-                response.sendRedirect("MenuCliente.jsp");
+                if (usuario.getTipoUsuario() == 1) {
+                    
+                    response.sendRedirect("MenuAdmin.jsp");
+                } else if (usuario.getTipoUsuario() == 2) {
+                   
+                    response.sendRedirect("MenuCliente.jsp");
+                } else {
+                    
+                    response.sendRedirect("error.jsp");
+                }
             } else {
-                
-                response.sendRedirect("error.jsp");
+            	
+                request.setAttribute("mensajeError", "Usuario o contrasenia incorrectos");
+                request.getRequestDispatcher("Login.jsp").forward(request, response);
             }
-        } else {
-        	
-            request.setAttribute("mensajeError", "Usuario o contrase�a incorrectos");
-            request.getRequestDispatcher("Login.jsp").forward(request, response);
-        }
+    	}
+        
     }
 }

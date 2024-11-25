@@ -12,7 +12,8 @@ import entidades.Cliente;
 import entidades.Cuenta;
 import entidades.TipoCuenta;
 public class daoCuentaImpl implements daoCuenta {
-
+	
+	public daoCuentaImpl() {};
 	@Override
 	public ArrayList<Cuenta> ListarCuenta() {
      
@@ -86,7 +87,7 @@ public class daoCuentaImpl implements daoCuenta {
 		    conexion bd = new conexion();
 		    Connection cnn = bd.obtenerConexion();
 		    if (cnn == null) {
-		        System.out.println("Conexi�n fallida: la conexi�n es null.");
+		        System.out.println("Conexion fallida: la conexion es null.");
 		        return lista; 
 		    }
 

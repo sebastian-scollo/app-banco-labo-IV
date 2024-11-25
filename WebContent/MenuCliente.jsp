@@ -47,7 +47,7 @@
         <div class="menu">
             <a href="OpcionesCuenta.jsp">Eleccion Cuentas</a>
             <a href="CuentaElegida.jsp">Ver Cuenta</a>
-            <a href="SolicitudPrestamo.jsp">Solicitud Prestamo</a>
+            <a href="ServletSolicitudPrestamo?Param=1">Solicitud Prestamo</a>
             <a href="Transferencias.jsp">Transacciones</a>
             <a href="PagarCuotas.jsp">Realizar pago de Cuotas</a>
             <a href="EditarPassword.jsp?nombreUsuario=<%= usuarioLogueado %>">Cambiar Contrasenia</a> 

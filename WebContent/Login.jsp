@@ -82,7 +82,7 @@
             <h3>Iniciar Sesión</h3>
             <input name="usuario" type="text" placeholder="Usuario" required>
             <input name="password" type="password" placeholder="Contraseña" required>
-            <button type="submit" class="btn-login">Ingresar</button>
+            <button type="submit" name="btnLogin" class="btn-login">Ingresar</button>
         </form>
     </div>
 </body>
