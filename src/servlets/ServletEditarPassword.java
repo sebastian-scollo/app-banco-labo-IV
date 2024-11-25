@@ -37,19 +37,36 @@ public class ServletEditarPassword extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// Recuperar parï¿½metros del formulario
+		 // Recuperar parámetros del formulario
 	    String nombreUsuario = request.getParameter("nombreUsuario");
 	    String contrasena = request.getParameter("contrasena");
 	    String nuevaContrasena = request.getParameter("nuevaContrasena");
 	    String repContrasena = request.getParameter("repContrasena");
 
-	    // Lï¿½gica para procesar la actualizaciï¿½n de contraseï¿½a
+	    // Verificar si alguno de los parámetros es null
+	    if (nombreUsuario == null || contrasena == null || nuevaContrasena == null || repContrasena == null) {
+	        response.getWriter().println("Error: Faltan datos en el formulario.");
+	        return;
+	    }
+
+	    System.out.println("nombreUsuario: " + nombreUsuario);
+	    System.out.println("contrasena: " + contrasena);
+	    System.out.println("nuevaContrasena: " + nuevaContrasena);
+	    System.out.println("repContrasena: " + repContrasena);
+
+	    // Lógica para procesar la actualización de contraseña
 	    if (nuevaContrasena.equals(repContrasena)) {
 	        boolean resultado = usuarioNegocio.editarPassword(nombreUsuario, contrasena, nuevaContrasena);
+	        if (resultado) {
+	            response.getWriter().println("Contraseña actualizada con éxito.");
+	        } else {
+	            response.getWriter().println("Error al actualizar la contraseña.");
+	        }
 	    } else {
-	        // Manejar el error si las contraseï¿½as no coinciden
-	        response.getWriter().println("Las contraseï¿½as no coinciden.");
+	        // Manejar el error si las contraseñas no coinciden
+	        response.getWriter().println("Las contraseñas no coinciden.");
 	    }
 	}
-
 }
+
+
