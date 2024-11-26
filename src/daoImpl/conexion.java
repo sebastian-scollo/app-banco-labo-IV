@@ -65,5 +65,15 @@ public class conexion {
 	    return null;
 	}
 	
+	public void cerrarConexion() {
+        try {
+            if (cn != null && !cn.isClosed()) {
+                cn.close();
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+	
 	
 }

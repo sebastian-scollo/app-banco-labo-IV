@@ -84,7 +84,7 @@
     }
 %>
     <div class="header">
-        <img src="SLOGAN.png" alt="Logo">
+        <img src="SLOGAN.png" alt="Logo" class="rounded-circle">
         <h1>  MENU ADMINISTRADOR</h1>
         <div class="user-info">Usuario: <strong><c:out value="${usuario}"></c:out></strong></div>
     </div>

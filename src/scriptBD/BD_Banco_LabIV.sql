@@ -104,10 +104,12 @@ create table Prestamos(
     Estado varchar(50) default 'En tramite',
     FechaSolicitado datetime not null default current_timestamp,
     FechaRespuesta datetime,
-    ClienteID int not null,
+    CuentaID int not null,
     constraint pk_Prestamo primary key(IDPrestamo),
-    constraint foreign key (ClienteID) references Clientes (IDCliente)
+    constraint foreign key (CuentaID) references Cuentas (IDCuenta)
 );
+
+
 
 create table Cuotas(
 	IDCuota int auto_increment,
@@ -217,7 +219,7 @@ INSERT INTO Cuentas (IDCuenta, NumeroCuenta, CBU, ClienteID, TipoCuentaID, Fecha
 (1, '123456', '0000000000000000000001', 1, 1, '2023-01-01', 1),
 (2, '234567', '0000000000000000000002', 2, 2, '2023-02-01', 1),
 (3, '345678', '0000000000000000000003', 3, 1, '2023-03-01', 1),
-(4, '456789', '0000000000000000000004', 4, 3, '2023-04-01 ', 1),
+(4, '456789', '0000000000000000000004', 4, 3, '2023-04-01', 1),
 (5, '567890', '0000000000000000000005', 5, 1, '2023-05-01', 1),
 (6, '678901', '0000000000000000000006', 6, 2, '2023-06-01', 1),
 (7, '789012', '0000000000000000000007', 7, 3, '2023-07-01', 1),
@@ -254,7 +256,7 @@ INSERT INTO Movimientos (IDMovimiento, Detalle, Importe, cbuEmisor, cbuReceptor,
 (14, 'Transferencia', 3000.00,'0000000000000000000003','0000000000000000000005', 4),
 (15, 'Transferencia', 4000.00,'0000000000000000000004','0000000000000000000001', 4);
 
-INSERT INTO Prestamos (IDPrestamo, MontoSolitado, ImporteAPagar, Plazo, FechaSolicitado, ClienteID) VALUES
+INSERT INTO Prestamos (IDPrestamo, MontoSolitado, ImporteAPagar, Plazo, FechaSolicitado, CuentaID) VALUES
 (1, 50000.00, 55000.00, 12, '2023-04-01', 1),
 (2, 75000.00, 82500.00, 18, '2023-05-01', 2),
 (3, 100000.00, 110000.00, 24, '2023-06-01', 3),

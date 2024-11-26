@@ -12,7 +12,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import daoImpl.daoCuentaImpl;
+import daoImpl.daoPrestamoImpl;
 import entidades.Cuenta;
+import entidades.Prestamo;
 
 /**
  * Servlet implementation class ServletSolicitudPrestamo
@@ -53,8 +55,38 @@ public class ServletSolicitudPrestamo extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		String accion = request.getParameter("accion");
+		Prestamo prestamoSolicitado = new Prestamo();
+		Cuenta cuentaAsociada = new Cuenta();
+		daoPrestamoImpl dao = new daoPrestamoImpl();
+		HttpSession session = request.getSession();
+		int IDCliente = (int) session.getAttribute("idUsuario");
+		if (accion != null)
+		{
+			
+			String monto = request.getParameter("monto");
+            String cuotas = request.getParameter("cuotas");
+            String importeTotal = request.getParameter("importeTotal");
+            String importePorCuota = request.getParameter("importePorCuota");
+            String cuenta = request.getParameter("cuenta");
+            
+            cuentaAsociada.setIdCuenta(Integer.parseInt(cuenta));
+            cuentaAsociada.setClienteId(IDCliente);
+            
+            prestamoSolicitado.setCuenta(cuentaAsociada);
+            prestamoSolicitado.setPlazo(Integer.parseInt(cuotas));
+            prestamoSolicitado.setMontoSolicitado(Double.parseDouble(monto));
+            prestamoSolicitado.setImporteApagar(Double.parseDouble(importeTotal));
+            
+            boolean exito = dao.solicitarPrestamo(prestamoSolicitado);
+            if (exito) {
+                session.setAttribute("mensajeExito", "El préstamo fue enviado correctamente.");
+                response.sendRedirect("MenuCliente.jsp");
+            } else {
+                session.setAttribute("mensajeError", "Hubo un problema al enviar la solicitud del préstamo. Intente nuevamente.");
+                response.sendRedirect("MenuCliente.jsp");
+            }
+		}
 	}
 
 }

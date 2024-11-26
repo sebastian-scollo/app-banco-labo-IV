@@ -101,7 +101,7 @@
 <body>
      <%@ include file="MenuCliente.jsp" %>
 <div class="form-container">
-    <form action="ProcesarPrestamo.jsp" method="post">
+    <form action="ServletSolicitudPrestamo" method="post">
         <div class="form-group">
             <label for="cuenta">Cuenta para el depósito</label>
             <select id="cuenta" name="cuenta" required>
@@ -131,7 +131,7 @@
         </div>
         <div class="button-group">
             <button type="button" id="btnSimularPrestamo" class="btn btn-primary flex-fill">Simular Préstamo</button>
-            <button type="submit" name="action" value="solicitar" class="btn btn-secondary">Solicitar Préstamo</button>
+			<button type="button" id="btnSolicitarPrestamo" value="solicitar" class="btn btn-secondary">Solicitar Préstamo</button>
         </div>
     </form>
 </div>
@@ -159,6 +159,30 @@
 	        </div>
 	    </div>
 	</div>
+	
+	<div class="modal fade" id="confirmarPrestamoModal" tabindex="-1" aria-labelledby="modalLabel" aria-hidden="true">
+	    <div class="modal-dialog">
+	        <div class="modal-content">
+	            <div class="modal-header">
+	                <h5 class="modal-title" id="modalLabel">Confirmar Solicitud de Préstamo</h5>
+	                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	            </div>
+				<div class="modal-body">
+				    <p><strong>Monto solicitado:</strong> $<span id="confirmarMonto"></span></p>
+				    <p><strong>Cuotas:</strong> <span id="confirmarCuotas"></span> meses</p>
+				    <p><strong>TNA:</strong> <span id="confirmarInteres"></span>%</p>
+				    <p><strong>Importe total a pagar:</strong> $<span id="confirmarTotal"></span></p>
+				    <p><strong>Importe por cuota:</strong> $<span id="confirmarPorCuota"></span></p>
+				    <p><strong>Cuenta para depósito:</strong> <span id="confirmarCuenta"></span></p>
+				</div>
+	            <div class="modal-footer">
+	                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+	                <button id="btnConfirmar" type="button" class="btn btn-primary">Confirmar</button>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+	
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <script src="js/prestamos.js"></script>

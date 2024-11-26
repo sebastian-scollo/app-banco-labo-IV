@@ -9,9 +9,9 @@ public class Prestamo {
     private boolean estado;
     private String fechaSolicitado;
     private String fechaRespuesta;
-    private int clienteId;
+    private Cuenta cuenta;
 	public Prestamo(int idPrestamo, double montoSolicitado, double importeApagar, int plazo, boolean estado, String fechaSolicitado,
-			String fechaRespuesta, int clienteId) {
+			String fechaRespuesta, Cuenta cuenta) {
 		
 		this.idPrestamo = idPrestamo;
 		this.montoSolicitado = montoSolicitado;
@@ -20,8 +20,9 @@ public class Prestamo {
 		this.estado = estado;
 		this.fechaSolicitado = fechaSolicitado;
 		this.fechaRespuesta = fechaRespuesta;
-		this.clienteId = clienteId;
+		this.cuenta = cuenta;
 	}
+	public Prestamo() {}
 	public int getIdPrestamo() {
 		return idPrestamo;
 	}
@@ -58,11 +59,12 @@ public class Prestamo {
 	public void setFechaRespuesta(String fechaRespuesta) {
 		this.fechaRespuesta = fechaRespuesta;
 	}
-	public int getClienteId() {
-		return clienteId;
+	
+	public Cuenta getCuenta() {
+		return cuenta;
 	}
-	public void setClienteId(int clienteId) {
-		this.clienteId = clienteId;
+	public void setCuenta(Cuenta cuenta) {
+		this.cuenta = cuenta;
 	}
 	public double getMontoSolicitado() {
 		return montoSolicitado;
