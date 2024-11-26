@@ -39,43 +39,47 @@ public class ServletEditarPassword extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-	   // String nombreUsuario = request.getParameter("nombreUsuario");
-		UsuarioNegocio superSudo = new UsuarioNegocioImpl();
-		HttpSession session = request.getSession();
+	
+	    HttpSession session = request.getSession();
 	    String nombreUsuario = (String) session.getAttribute("usuarioLogueado");
-		int idUsuarioExiste= superSudo.buscarXid(nombreUsuario); // lo que pense es que aca es mejor buscar por ID , pero no estoy seguro si es eso mejor que nombre.
-		String contrasena = request.getParameter("contrasena");
+	    String contrasena = request.getParameter("contrasena");
 	    String nuevaContrasena = request.getParameter("nuevaContrasena");
 	    String repContrasena = request.getParameter("repContrasena");
 
-	    
-	    if (nombreUsuario == null || contrasena == null || nuevaContrasena == null || repContrasena == null) {
-	        response.getWriter().println("Error: Faltan datos en el formulario.");
-	        return;
-	    }
-	    if (idUsuarioExiste == -1) {
-	        response.getWriter().println("UPS,mi estimado el usuario no se encunetraa.");
-	        return;
-	    }
-	    System.out.println("nombreUsuario: " + nombreUsuario);
-	    System.out.println("contrasena: " + contrasena);
-	    System.out.println("nuevaContrasena: " + nuevaContrasena);
-	    System.out.println("repContrasena: " + repContrasena);
-
 	
-	    if (nuevaContrasena.equals(repContrasena)) {
-	        boolean resultado = usuarioNegocio.editarPassword(nombreUsuario, contrasena, nuevaContrasena);
-	        if (resultado) {
-	            response.getWriter().println("Contraseña actualizada con éxito.");
-	        } else {
-	            response.getWriter().println("Error al actualizar la contraseña.");
-	        }
-	    } else {
-	      
-	        response.getWriter().println("Las contraseñas no coinciden.");
+	    if (nombreUsuario == null || contrasena == null || nuevaContrasena == null || repContrasena == null ||
+	        nombreUsuario.isEmpty() || contrasena.isEmpty() || nuevaContrasena.isEmpty() || repContrasena.isEmpty()) {
+	        request.setAttribute("error", "Error: Faltan datos en el formulario.");
+	        request.getRequestDispatcher("EditarPassword.jsp").forward(request, response);
+	        return;
 	    }
-	    request.getRequestDispatcher("EditarPassword.jsp").forward(request, response);
+
+	   
+	    if (nuevaContrasena.length() < 7) {
+	       
+	        request.setAttribute("error", "La nueva contraseña debe tener al menos 7 caracteres.");
+	     
+	        request.getRequestDispatcher("EditarPassword.jsp").forward(request, response);
+	        return;
+	    }
+	    if (!nuevaContrasena.equals(repContrasena)) {
+	        request.setAttribute("error", "Error: Las contraseñas no coinciden.");
+	        request.getRequestDispatcher("EditarPassword.jsp").forward(request, response);
+	        return;
+	    }
+
+	   
+	    UsuarioNegocio usuarioNegocio = new UsuarioNegocioImpl();
+	    boolean resultado = usuarioNegocio.editarPassword(nombreUsuario, contrasena, nuevaContrasena);
+
+	    
+	    if (resultado) {
+	        request.setAttribute("success", "Contraseña actualizada con éxito.");
+	        request.getRequestDispatcher("EditarPassword.jsp").forward(request, response);
+	    } else {
+	        request.setAttribute("error", "Error al actualizar la contraseña. Verifique los datos ingresados.");
+	        request.getRequestDispatcher("EditarPassword.jsp").forward(request, response);
+	    }
 	}
 }
 

@@ -137,16 +137,23 @@
 
     </style>
 </head>
+<script>
+    function confirmarEliminacion() {
+        return confirm("¿Estas seguro de que desea editar esta cuenta?");
+    }
+</script>
 <body>
 
 <%
     String nombreUsuario = (String) session.getAttribute("nombreUsuario");
     
 %>
+   
+      
     <div class="form-container">
         
-        <!-- Campos en dos columnas -->
-        <form action="ServletEditarPassword" method="post">
+     
+        <form action="ServletEditarPassword" method="post" onsubmit="return confirmarEliminacion();" >
         <input type="hidden" name="nombreUsuario" value="<%= nombreUsuario %>">
         <div class="form-group-pair">
             <div class="form-group">
@@ -160,10 +167,25 @@
             </div>
         </div>
 
-
-        <!-- Boton de envio -->
+         
+      
         <input type="submit" class="submit-btn" value="Actualizar contraseña">
        </form> 
     </div>
+      <% 
+          
+            String error = (String) request.getAttribute("error");
+            String success = (String) request.getAttribute("success");
+         
+            if (error != null) {
+        %>
+                <p style="color: red;"><%= error %></p>
+        <% } %>
+
+        // Si existe un mensaje de éxito, mostrarlo
+        <% if (success != null) { %>
+                <p style="color: green;"><%= success %></p>
+        <% } %>
+  
 </body>
 </html>
