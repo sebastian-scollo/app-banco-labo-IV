@@ -139,7 +139,7 @@
 </head>
 <script>
     function confirmarEliminacion() {
-        return confirm("¿Estas seguro de que desea editar esta cuenta?");
+        return confirm("¿Seguro de cambiar su contrasenia mi estimado?");
     }
 </script>
 <body>

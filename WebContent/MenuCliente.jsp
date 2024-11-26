@@ -38,8 +38,8 @@
 </head>
 <body>
 		<%
-		    //String usuarioLogueado = (String) session.getAttribute("usuarioLogueado");
-		    String usuarioLogueado = "homero";
+		    String usuarioLogueado = (String) session.getAttribute("usuarioLogueado");
+		 
 		    
 		%>
 
