@@ -33,10 +33,15 @@ public class ServletTransferencias extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			 ArrayList<Movimiento> lista = nm.getMovimientosUsuario((int)request.getSession().getAttribute("idUsuario"));
-	         request.setAttribute("lista", lista);
-	         RequestDispatcher rd = request.getRequestDispatcher("HistorialTransacciones.jsp");
-	         rd.forward(request, response);
+		if(request.getParameter("Param")!=null) {
+			System.out.println("entro al if param va bien");
+			ArrayList<Movimiento> lista = nm.getMovimientosUsuario((int)request.getSession().getAttribute("idUsuario"));
+			request.setAttribute("lista", lista);
+			RequestDispatcher rd = request.getRequestDispatcher("HistorialTransacciones.jsp");
+			rd.forward(request, response);
+			
+			
+		}
 		
 	}
 

@@ -90,7 +90,7 @@
             <a href="EditarPassword.jsp?nombreUsuario=<%= usuarioLogueado %>">Cambiar Contrasenia</a> 
             <a href="servletDatosPersonales">Datos Personales</a> 
             <a href="HistorialMovimientos.jsp">Historial de movimientos</a> 
-            <a href="ServletTransacciones?Param=1">Historial de transacciones</a> 
+            <a href="ServletTransferencias?Param=1">Historial de transacciones</a> 
            
         </div>
         
