@@ -6,12 +6,38 @@ public class Movimiento {
 	private String detalle;
 	private double importe;
 	private Cuenta cuentaEmisor;
+	String cbuReceptor;
+	String cbuEmisor;
 	private Cuenta cuentaReceptor;
 	private TipoMovimiento tipomovimiento;
       
 	
 
 	
+	public String getCbuReceptor() {
+		return cbuReceptor;
+	}
+
+
+
+
+
+
+	public void setCbuReceptor(String c) {
+		this.cbuReceptor = c;
+	}
+	public String getCbuEmisor() {
+		return cbuEmisor;
+	}
+
+
+
+
+
+
+	public void setCbuEmisor(String c) {
+		this.cbuEmisor = c;
+	}
 
 
 	public int getIdMovimiento() {

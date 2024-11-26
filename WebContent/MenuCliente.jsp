@@ -89,7 +89,9 @@
             <a href="PagarCuotas.jsp">Realizar pago de Cuotas</a>
             <a href="EditarPassword.jsp?nombreUsuario=<%= usuarioLogueado %>">Cambiar Contrasenia</a> 
             <a href="servletDatosPersonales">Datos Personales</a> 
-            <a href="contact.jsp">Historial de movimientos</a> 
+            <a href="HistorialMovimientos.jsp">Historial de movimientos</a> 
+            <a href="ServletTransacciones?Param=1">Historial de transacciones</a> 
+           
         </div>
         
         

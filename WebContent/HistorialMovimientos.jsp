@@ -91,11 +91,8 @@
     </style>
 </head>
 <body>
-    <div class="header">
-        <img src="SLOGAN.png" alt="Logo">
-        <h1>HISTORIAL DE MOVIMIENTOS</h1>
-        <div class="user-info">Usuario: <strong>acá va el usuario logueado</strong></div>
-    </div>
+  		<%@ include file="MenuCliente.jsp"%>
+  	
 
     <div class="table-container">
         <!-- Campo de búsqueda por CBU -->
