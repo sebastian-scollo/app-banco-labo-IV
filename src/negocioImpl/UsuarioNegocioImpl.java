@@ -28,4 +28,9 @@ public class UsuarioNegocioImpl implements UsuarioNegocio {
 	public Cliente DatosPersonal(int idUsuario) {
 		return usuarioDao.DatosPersonal(idUsuario);
 	}
+
+	@Override
+	public int buscarXid(String nombreUsuario) {
+		return usuarioDao.buscarXid(nombreUsuario);
+	}
 }

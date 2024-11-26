@@ -59,7 +59,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
   	     
   	    }
   	
-  	  String consulta = "update usuario Set Contrasenia = ? WHERE NombreUsuario=? AND Contrasenia=?";
+  	  String consulta = "update Usuarios Set Contrasenia = ? WHERE  NombreUsuario=? AND Contrasenia=?";
   	  conexion cn = new conexion();
   	    Connection connection = cn.obtenerConexion();
   	    if (connection == null) {
@@ -70,7 +70,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
   	    	
   	    	statement.setString(1,newPassword);
   	    	statement.setString(2,usuario);
-  	    	statement.setString(3,newPassword);
+  	    	statement.setString(3,password);
               int actualizado = statement.executeUpdate();
               return actualizado >0;
   	    }catch(Exception ex) {
@@ -82,7 +82,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
 	@Override
 	public Cliente DatosPersonal(int idUsuario) {
 	    conexion bd = new conexion();
-	    Cliente cliente = null; // Inicializar como null, no crear un objeto vacío
+	    Cliente cliente = null; 
 	    Connection conn = null;
 	    PreparedStatement ps = null;
 	    ResultSet rs = null;
@@ -123,5 +123,41 @@ public class UsuarioDaoImpl implements UsuarioDao {
 	    }
 	    
 	    return cliente;
+	}
+
+	@Override
+	public int buscarXid(String nombreUsuario) {
+		  Connection conexion = null;
+		    PreparedStatement preparedStatement = null;
+		    ResultSet resultSet = null;
+		    int idUsuario = -1; 
+            conexion bd = new conexion();
+		    try {
+		        
+		        conexion = bd.obtenerConexion();
+
+		        String sql = "SELECT IDUsuario FROM Usuarios WHERE NombreUsuario = ?";
+		        preparedStatement = conexion.prepareStatement(sql);
+		        preparedStatement.setString(1, nombreUsuario);
+
+		        resultSet = preparedStatement.executeQuery();
+
+		        if (resultSet.next()) {
+		            idUsuario = resultSet.getInt("IDUsuario"); 
+		        }
+		    } catch (SQLException e) {
+		        e.printStackTrace(); 
+		    } finally {
+		    
+		        try {
+		            if (resultSet != null) resultSet.close();
+		            if (preparedStatement != null) preparedStatement.close();
+		            if (conexion != null) conexion.close();
+		        } catch (SQLException e) {
+		            e.printStackTrace();
+		        }
+		    }
+
+		    return idUsuario; 
 	}
 }

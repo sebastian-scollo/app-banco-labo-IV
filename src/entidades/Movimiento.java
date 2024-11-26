@@ -27,18 +27,9 @@ public class Movimiento {
 		this.idMovimiento = idMovimiento;
 	}
 
-
-
-
-
-
 	public String getDetalle() {
 		return detalle;
 	}
-
-
-
-
 
 
 	public void setDetalle(String detalle) {

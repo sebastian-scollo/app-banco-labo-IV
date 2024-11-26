@@ -137,33 +137,55 @@
 
     </style>
 </head>
+<script>
+    function confirmarEliminacion() {
+        return confirm("¿Seguro de cambiar su contrasenia mi estimado?");
+    }
+</script>
 <body>
 
 <%
     String nombreUsuario = (String) session.getAttribute("nombreUsuario");
     
 %>
+   
+      
     <div class="form-container">
         
-        <!-- Campos en dos columnas -->
-        <form action="ServletEditarPassword" method="post">
+     
+        <form action="ServletEditarPassword" method="post" onsubmit="return confirmarEliminacion();" >
         <input type="hidden" name="nombreUsuario" value="<%= nombreUsuario %>">
         <div class="form-group-pair">
             <div class="form-group">
-                <input type="password" id="contrasena" placeholder="Ingrese su contraseña" class="form-input"  >
+                <input type="password" id="contrasena" name="contrasena" placeholder="Ingrese su contraseña" class="form-input"  >
             </div>
              <div class="form-group">
-                <input type="password" id="nuevaContrasena" placeholder="Ingrese su nuevo contraseña" class="form-input"  >
+                <input type="password" id="nuevaContrasena" name="nuevaContrasena" placeholder="Ingrese su nuevo contraseña" class="form-input"  >
             </div>
             <div class="form-group">
-                <input type="password" id="repContrasena" placeholder="Repita su contraseña" class="form-input">
+                <input type="password" id="repContrasena" name="repContrasena" placeholder="Repita su contraseña" class="form-input">
             </div>
         </div>
 
-
-        <!-- Boton de envio -->
+         
+      
         <input type="submit" class="submit-btn" value="Actualizar contraseña">
        </form> 
     </div>
+      <% 
+          
+            String error = (String) request.getAttribute("error");
+            String success = (String) request.getAttribute("success");
+         
+            if (error != null) {
+        %>
+                <p style="color: red;"><%= error %></p>
+        <% } %>
+
+        // Si existe un mensaje de éxito, mostrarlo
+        <% if (success != null) { %>
+                <p style="color: green;"><%= success %></p>
+        <% } %>
+  
 </body>
 </html>

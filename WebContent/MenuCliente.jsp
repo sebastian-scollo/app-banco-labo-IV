@@ -75,6 +75,7 @@
     <% } %>
 		<%
 		    String usuarioLogueado = (String) session.getAttribute("usuarioLogueado");
+		 
 		    
 		%>
 

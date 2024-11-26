@@ -6,7 +6,9 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import negocio.UsuarioNegocio;
 import negocioImpl.UsuarioNegocioImpl;
 
 /**
@@ -37,19 +39,48 @@ public class ServletEditarPassword extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// Recuperar parï¿½metros del formulario
-	    String nombreUsuario = request.getParameter("nombreUsuario");
+	
+	    HttpSession session = request.getSession();
+	    String nombreUsuario = (String) session.getAttribute("usuarioLogueado");
 	    String contrasena = request.getParameter("contrasena");
 	    String nuevaContrasena = request.getParameter("nuevaContrasena");
 	    String repContrasena = request.getParameter("repContrasena");
 
-	    // Lï¿½gica para procesar la actualizaciï¿½n de contraseï¿½a
-	    if (nuevaContrasena.equals(repContrasena)) {
-	        boolean resultado = usuarioNegocio.editarPassword(nombreUsuario, contrasena, nuevaContrasena);
+	
+	    if (nombreUsuario == null || contrasena == null || nuevaContrasena == null || repContrasena == null ||
+	        nombreUsuario.isEmpty() || contrasena.isEmpty() || nuevaContrasena.isEmpty() || repContrasena.isEmpty()) {
+	        request.setAttribute("error", "Error: Faltan datos en el formulario.");
+	        request.getRequestDispatcher("EditarPassword.jsp").forward(request, response);
+	        return;
+	    }
+
+	   
+	    if (nuevaContrasena.length() < 7) {
+	       
+	        request.setAttribute("error", "La nueva contraseña debe tener al menos 7 caracteres.");
+	     
+	        request.getRequestDispatcher("EditarPassword.jsp").forward(request, response);
+	        return;
+	    }
+	    if (!nuevaContrasena.equals(repContrasena)) {
+	        request.setAttribute("error", "Error: Las contraseñas no coinciden.");
+	        request.getRequestDispatcher("EditarPassword.jsp").forward(request, response);
+	        return;
+	    }
+
+	   
+	    UsuarioNegocio usuarioNegocio = new UsuarioNegocioImpl();
+	    boolean resultado = usuarioNegocio.editarPassword(nombreUsuario, contrasena, nuevaContrasena);
+
+	    
+	    if (resultado) {
+	        request.setAttribute("success", "Contraseña actualizada con éxito.");
+	        request.getRequestDispatcher("EditarPassword.jsp").forward(request, response);
 	    } else {
-	        // Manejar el error si las contraseï¿½as no coinciden
-	        response.getWriter().println("Las contraseï¿½as no coinciden.");
+	        request.setAttribute("error", "Error al actualizar la contraseña. Verifique los datos ingresados.");
+	        request.getRequestDispatcher("EditarPassword.jsp").forward(request, response);
 	    }
 	}
-
 }
+
+
