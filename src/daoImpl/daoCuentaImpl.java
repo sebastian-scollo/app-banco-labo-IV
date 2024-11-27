@@ -36,7 +36,7 @@ public class daoCuentaImpl implements daoCuenta {
         String consulta= "SELECT IDCuenta, NumeroCuenta, CBU, Saldo, ClienteID,TipoCuentaID, FechaCreacion FROM Cuentas INNER JOIN TipoCuentas ON Cuentas.TipoCuentaID = TipoCuentas.IDTipoCuenta WHERE Estado=1";
         ArrayList<Cuenta> lista = new ArrayList<Cuenta>();
 		try {
-			//esta parte la llamo SETTEO:
+		
 		
 			Statement st=cnn.createStatement();
 			ResultSet rs = st.executeQuery(consulta);
@@ -60,7 +60,7 @@ public class daoCuentaImpl implements daoCuenta {
 
 		            lista.add(cuenta);
 			}
-			/*SELECT IDCuenta,NumeroCuenta,CBU,Saldo,ClienteID,TipoCuentaID,FechaCreacion*/
+		
 		}catch(Exception ex){
 			 System.out.println("OH NO! TP NO COMPILA EN CATCH SETTEO" + ex.getMessage());
 		        ex.printStackTrace();
@@ -461,7 +461,7 @@ public class daoCuentaImpl implements daoCuenta {
 	                cuenta.setCBU(rs.getString("cbu"));
 	                cuenta.setIdCuenta(rs.getInt("idCuenta"));
 	                cuenta.setSaldo(rs.getDouble("saldo"));
-	              
+	                cuenta.setFechaCreacion(rs.getDate("FechaCreacion"));
 	            }
 	        } catch (SQLException e) {
 	            e.printStackTrace();

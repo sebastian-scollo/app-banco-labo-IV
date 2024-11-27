@@ -82,7 +82,7 @@
     <div class="header">
         <img src="SLOGAN.png" alt="Logo" class="rounded-circle">
         <div class="menu">
-            <a href="OpcionesCuenta.jsp">Eleccion Cuentas</a>
+            <a href="servletOpcionCuenta?Param=1">Eleccion Cuentas</a>
             <a href="CuentaElegida.jsp">Ver Cuenta</a>
             <a href="ServletSolicitudPrestamo?Param=1">Solicitud Prestamo</a>
             <a href="Transferencias.jsp">Transacciones</a>

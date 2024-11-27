@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="entidades.Cuenta" %>    
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -76,25 +78,53 @@
 
 <div class="contenedor">
   <h1>Bienvenido</h1>
-  <h2>Tiene para elegir una cuenta</h2>
+  <h2>Estas son cuentas registradas</h2>
 </div>
 
 <table class="tabla-centro">
-  <tr>
-    <th>CBU cuenta</th>
-    <th>Tipo de Cuenta</th>
-    <th>IdCliente</th>
-      <th>Fecha de creacion</th>
-    <th>Saldo</th>
-    <th></th>
-  </tr>
-  <tr class="fila">
-    <td>NULL</td>
-    <td>NULL</td>
-    <td>NULL</td>
-    <td>NULL</td>
-    <td><input type="submit" name="btnCuentaElegido" value="Seleccionar" class="boton-enviar"></td>
-  </tr>
+  <thead>
+    <tr>
+      <th>CBU cuenta</th>
+      <th>Tipo de Cuenta</th>
+      <th>IdCliente</th>
+      <th>Fecha de creación</th>
+      <th>Saldo</th>
+      <th>Acción</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% 
+   
+      ArrayList<Cuenta> listadoCuenta = (ArrayList<Cuenta>) request.getAttribute("listadoCuenta");
+
+    
+      if (listadoCuenta != null && !listadoCuenta.isEmpty()) {
+          for (Cuenta cuenta : listadoCuenta) {
+    %>
+          <tr class="fila">
+            <td><%= cuenta.getCBU() %></td>
+            <td><%= cuenta.getObjidTipoCuenta().getIdTipoCuenta() %></td>
+            <td><%= cuenta.getObjCliente().getIdCliente() %></td>
+            <td><%= cuenta.getFechaCreacion() %></td>
+            <td><%= cuenta.getSaldo() %></td>
+            <td>
+              <form action="servletCuentaElegida" method="post">
+    <input type="hidden" name="cbu" value="<%= cuenta.getCBU() %>">
+    <input type="submit" name="btnCuentaElegido" value="Seleccionar" class="boton-enviar">
+</form>
+            </td>
+          </tr>
+    <%
+          }
+      } else {
+    %>
+          <tr>
+            <td colspan="3" style="text-align: center;">No hay cuentas registradas</td>
+          </tr>
+    <% 
+      }
+    %>
+  </tbody>
 </table>
 
 </body>

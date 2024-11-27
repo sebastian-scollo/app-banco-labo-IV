@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page import="entidades.Cuenta" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,9 +14,10 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: flex-start;
             width: 100%;
             background-color: #ecf0f1;
+            padding-top: 100px;
         }
 
         .header {
@@ -42,19 +44,15 @@
             font-size: 24px;
         }
 
-        .user-info {
-            font-size: 16px;
-        }
-
         .contenedor {
             background-color: #ffffff;
             padding: 20px;
-            max-width: 500px;
+            max-width: 600px;
             width: 90%;
             text-align: left;
             border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            margin-top: 100px; /* Ajustado para evitar solapamiento con el encabezado */
+            margin-top: 20px;
         }
 
         .titulo {
@@ -86,24 +84,89 @@
             font-weight: bold;
             color: #27ae60;
         }
+
+        /* Estilo para la tabla con 4 columnas */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #2980b9;
+            color: white;
+            font-weight: bold;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        tr:hover {
+            background-color: #f1c40f;
+        }
+
+        td {
+            background-color: #ffffff;
+        }
+
+        td, th {
+            font-size: 1rem;
+            color: #34495e;
+        }
+
+       
+        th, td {
+            width: 25%; 
+        }
+
+     
+        .tabla-container {
+            width: 80%; 
+            margin-top: 40px; 
+        }
+
     </style>
 </head>
 <body>
-   <%@ include file="MenuCliente.jsp" %>
-   
+<%@ include file="MenuCliente.jsp" %>
 
-    <div class="contenedor">
-        <div class="titulo">Cuenta (CBU de la cuenta)</div>
+<div class="tabla-container">
+    <h1>Bienvienido a ver Cuenta, esta es la elegida</h1>
 
-        <div class="seccion">
-            <h2>Saldo</h2>
-            <p class="saldo">Valor Saldo</p>
-        </div>
+    <%
+        Cuenta cuenta = (Cuenta) session.getAttribute("cuentaElegida");
 
-        <div class="seccion">
-            <h2>Tipo de cuenta</h2>
-            <p>(Tipo de cuenta)</p>
-        </div>
-    </div>
+        if (cuenta != null) {
+    %>
+        <table>
+            <tr>
+                <th>CBU</th>
+                <td><%= cuenta.getCBU() %></td>
+                <th>IdCuenta</th>
+                <td><%= cuenta.getIdCuenta() %></td>
+            </tr>
+            <tr>
+                <th>Saldo</th>
+                <td><%= cuenta.getSaldo() %></td>
+                <th>Fecha de Creación</th>
+                <td><%= cuenta.getFechaCreacion() %></td>
+            </tr>
+        </table>
+    <%
+        } else {
+    %>
+        <p>No se encontraron detalles de la cuenta.</p>
+    <%
+        }
+    %>
+</div>
+
 </body>
 </html>
