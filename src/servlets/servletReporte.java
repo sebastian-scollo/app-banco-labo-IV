@@ -43,6 +43,7 @@ public class servletReporte extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//Buscar X IDProvincia -- Informes
 		if (request.getParameter("btnBuscarIdp") != null) {
 	           
 			int provinciaID = Integer.parseInt(request.getParameter("txtBuscarIdProvincia"));
@@ -56,7 +57,7 @@ public class servletReporte extends HttpServlet {
         }
 		
 		
-		
+		//Buscar X rango fecha -- InformesCuentaCreadas
 		    String fechaInicio = request.getParameter("txtFechaInicio");
 
 		    String fechaFinal = request.getParameter("txtFechaFinal");
@@ -90,5 +91,37 @@ public class servletReporte extends HttpServlet {
 		            dispatcher.forward(request, response);
 	 	        }
 	 }
+		    
+		    //Buscar X rango de saldo -- InformeCuentaCreada
+		    
+		    if (request.getParameter("btnBuscarIntervaloSaldo") != null) {
+		        try {
+		        	String saldoInicio = request.getParameter("txtSaldoInicio");
+
+				    String saldoFinal = request.getParameter("txtSaldoFinal");
+		        	
+				    
+		            if (Integer.parseInt(saldoInicio) == Integer.parseInt(saldoFinal)) {
+		                request.setAttribute("error", "Saldo Final no puede ser igual a la Saldo de Inicio.");
+		            } else if (Integer.parseInt(saldoFinal)<Integer.parseInt(saldoInicio)) {
+		                request.setAttribute("error", "Saldo Final debe ser anterior a la Saldo de Inicio.");
+		            } else {
+		               
+		                List<Cuenta> listaCuentasXsaldo = negReporte.BusquedaIntervaloSaldo(Integer.parseInt(saldoInicio), Integer.parseInt(saldoFinal));
+		                request.setAttribute("listaCuentas", listaCuentasXsaldo);
+		            }
+
+		           
+		            RequestDispatcher dispatcher = request.getRequestDispatcher("InformeCuentaCreadas.jsp");
+		            dispatcher.forward(request, response);
+
+		        } catch (Exception ex) {
+		            ex.printStackTrace();
+		            request.setAttribute("error", "Ocurrió un error al procesar los saldos.");
+		            RequestDispatcher dispatcher = request.getRequestDispatcher("InformeCuentaCreadas.jsp");
+		            dispatcher.forward(request, response);
+	 	        }
+	 }
+		    
 	}
 }

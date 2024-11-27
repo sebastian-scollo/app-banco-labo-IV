@@ -21,4 +21,8 @@ public class negocioReporteImpl implements negocioReporte {
 	public ArrayList<Cuenta> BusquedaIntervaloFecha(Date fechaInicio, Date fechaFinal) {
 		return dao.BusquedaIntervaloFecha(fechaInicio, fechaFinal);
 	}
+	
+	public ArrayList<Cuenta> BusquedaIntervaloSaldo(int saldoInicio, int saldoFinal) {
+		return dao.BusquedaIntervaloSaldo(saldoInicio, saldoFinal);
+	}
 }

@@ -9,29 +9,47 @@
     <link rel="stylesheet" href="EstiloGrid.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <style>
-        .form-input {
-            width: 200px;
-            padding: 8px;
-            font-size: 14px;
-            border: 1px solid #666;
-            border-radius: 4px;
-            color: #666;
-        }
+    /* Estilo del contenedor principal */
+    .form-container {
+        display: flex;
+        gap: 20px; /* Espacio entre los formularios */
+        justify-content: center; /* Centra los formularios horizontalmente */
+        align-items: flex-start; /* Alinea los formularios verticalmente en la parte superior */
+        margin-top: 20px; /* Espacio superior */
+    }
 
-        .search-button {
-            padding: 8px 12px;
-            background-color: #1464a5;
-            color: white;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            font-size: 14px;
-        }
+    /* Estilo de los formularios individuales */
+    form {
+        border: 1px solid #ccc; /* Borde para distinguir los formularios */
+        border-radius: 8px;
+        padding: 15px;
+        background-color: #f9f9f9; /* Fondo claro */
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra */
+    }
 
-        .search-button:hover {
-            background-color: #0b4d94;
-        }
-    </style>
+    .form-input {
+        width: 200px;
+        padding: 8px;
+        font-size: 14px;
+        border: 1px solid #666;
+        border-radius: 4px;
+        color: #666;
+    }
+
+    .search-button {
+        padding: 8px 12px;
+        background-color: #1464a5;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 14px;
+    }
+
+    .search-button:hover {
+        background-color: #0b4d94;
+    }
+</style>
 </head>
 <body>
 
@@ -39,23 +57,45 @@
 
 <div class="search-container">
     <h1>Cuentas Creadas</h1>
-   <form action="servletReporte" method="post">
-    <div style="display: flex; align-items: center; gap: 10px;">
-        <div>
-            <label for="txtFechaInicio" style="display: block;">Fecha Inicio:</label>
-            <input type="date" id="txtFechaInicio" name="txtFechaInicio" class="form-input" placeholder="Fecha inicio">
+   <div class="form-container">
+    <!-- Primer formulario -->
+    <form action="servletReporte" method="post">
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+            <div>
+                <label for="txtFechaInicio" style="display: block;">Fecha Inicio:</label>
+                <input type="date" id="txtFechaInicio" name="txtFechaInicio" class="form-input" placeholder="Fecha inicio">
+            </div>
+            <div>
+                <label for="txtFechaFinal" style="display: block;">Fecha Final:</label>
+                <input type="date" id="txtFechaFinal" name="txtFechaFinal" class="form-input" placeholder="Fecha Final">
+            </div>
+            <div>
+                <button type="submit" name="btnBuscarIntervalo" class="search-button">
+                    <i class="bi bi-search"></i> Ingrese el intervalo de Fechas
+                </button>
+            </div>
         </div>
-        <div>
-            <label for="txtFechaFinal" style="display: block;">Fecha Final:</label>
-            <input type="date" id="txtFechaFinal" name="txtFechaFinal" class="form-input" placeholder="Fecha Final">
+    </form>
+
+    <!-- Segundo formulario -->
+    <form action="servletReporte" method="post">
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+            <div>
+                <label for="txtSaldoInicio" style="display: block;">Saldo Inicio:</label>
+                <input type="text" id="txtSaldoInicio" name="txtSaldoInicio" class="form-input" placeholder="Saldo Inicio">
+            </div>
+            <div>
+                <label for="txtSaldoFinal" style="display: block;">Saldo Final:</label>
+                <input type="text" id="txtSaldoFinal" name="txtSaldoFinal" class="form-input" placeholder="Saldo Final">
+            </div>
+            <div>
+                <button type="submit" name="btnBuscarIntervaloSaldo" class="search-button">
+                    <i class="bi bi-search"></i> Ingrese el intervalo de Saldos
+                </button>
+            </div>
         </div>
-        <div>
-            <button type="submit" name="btnBuscarIntervalo" class="search-button">
-                <i class="bi bi-search"></i> Ingrese el intervalo de Fechas
-            </button>
-        </div>
-    </div>
-</form>
+    </form>
+</div>
 <!-- Para un mensajito de error -->
 <% 
   String error = (String) request.getAttribute("error");
