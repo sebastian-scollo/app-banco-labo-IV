@@ -129,6 +129,45 @@ public class daoReporteImpl implements daoReporte {
 		    return lista;
 
 		}
+		
+		public ArrayList<Cuenta> BusquedaIntervaloSaldo(int saldoInicio, int saldoFinal) {
+		    try {
+		        Class.forName("com.mysql.jdbc.Driver"); 
+		        System.out.println("Driver MySQL cargado correctamente.");
+		    } catch (ClassNotFoundException e) {
+		        System.out.println("Error mi compa");
+		        e.printStackTrace();
+		    }
+		    
+		    String consulta = "SELECT CBU, ClienteID, Saldo, FechaCreacion FROM Cuentas WHERE Saldo BETWEEN ? And ? ORDER BY SALDO";
+		    conexion cn = new conexion();
+		    Connection connection = cn.obtenerConexion();
+		    ArrayList<Cuenta> lista = new ArrayList<>();
+
+		    try (PreparedStatement ps = connection.prepareStatement(consulta)) {
+		      
+		    	ps.setInt(1, saldoInicio); 
+		    	ps.setInt(2, saldoFinal); 
+
+		       
+		        ResultSet rs = ps.executeQuery();
+
+		        while (rs.next()) {
+		            Cuenta cuenta = new Cuenta();
+		            cuenta.setCBU(rs.getString("CBU"));
+		            cuenta.setClienteId(rs.getInt("ClienteID"));
+		            cuenta.setSaldo(rs.getDouble("Saldo"));
+		            cuenta.setFechaCreacion(rs.getDate("FechaCreacion"));
+		            lista.add(cuenta);
+		        }
+
+		    } catch (Exception ex) {
+		        ex.printStackTrace();
+		    }
+
+		    return lista;
+
+		}
 	
 	
 }
