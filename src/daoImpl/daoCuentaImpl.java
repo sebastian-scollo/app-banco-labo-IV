@@ -479,6 +479,30 @@ public class daoCuentaImpl implements daoCuenta {
 
 	        return cuenta;
 	    }
+	@Override
+	public boolean actualizarSaldoCuenta(int idPrestamo, double monto) {
+		String sql = "UPDATE Cuentas " +
+                "SET Saldo = Saldo - ? " +
+                "WHERE IDCuenta = (SELECT CuentaID FROM Prestamos WHERE IDPrestamo = ?)";
+   conexion bd = new conexion();
+   boolean resultado = false;
+
+   try (Connection conn = bd.obtenerConexion();
+        PreparedStatement ps = conn.prepareStatement(sql)) {
+       ps.setDouble(1, monto);
+       ps.setInt(2, idPrestamo);
+
+       int filasActualizadas = ps.executeUpdate();
+       if (filasActualizadas > 0) {
+           resultado = true;
+       }
+   } catch (SQLException e) {
+       e.printStackTrace();
+   }
+
+   return resultado;
+	}
+	
 	
 
 

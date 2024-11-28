@@ -6,6 +6,13 @@ public class Cuota {
 	private String fechaAbonada;
 	private double importeAbonado;
 	private boolean estado;
+	private int nroCuota;
+	public int getNroCuota() {
+		return nroCuota;
+	}
+	public void setNroCuota(int nroCuota) {
+		this.nroCuota = nroCuota;
+	}
 	//private int prestamoId;
 	private Prestamo prestamo;
 
@@ -40,6 +47,17 @@ public class Cuota {
 	public void setEstado(boolean estado) {
 		this.estado = estado;
 	}
+	public Cuota(int idCuota, String fechaAbonada, double importeAbonado, boolean estado, int nroCuota,
+			Prestamo prestamo) {
+	
+		this.idCuota = idCuota;
+		this.fechaAbonada = fechaAbonada;
+		this.importeAbonado = importeAbonado;
+		this.estado = estado;
+		this.nroCuota = nroCuota;
+		this.prestamo = prestamo;
+	}
+	public Cuota() {}
 
 	
 }

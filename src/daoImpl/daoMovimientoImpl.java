@@ -140,7 +140,7 @@ public class daoMovimientoImpl implements daoMovimiento {
 					ex.printStackTrace();
 				}
 			}
-			System.out.println("Error durante la transacci�n: " + e.getMessage());
+			System.out.println("Error durante la transaccioon: " + e.getMessage());
 			e.printStackTrace();
 		} finally {
 
@@ -162,5 +162,28 @@ public class daoMovimientoImpl implements daoMovimiento {
 		return lista;
 
 	}
+
+	@Override
+	public boolean registrarMovimiento(Movimiento movimiento) {
+		 Connection conn = null;
+		    PreparedStatement ps = null;
+            conexion bd = new conexion();
+		    try {
+		        conn = bd.obtenerConexion();
+		        String sql = "INSERT INTO Movimientos (Detalle, Importe, cbuEmisor, cbuReceptor, TipoMovimientoID) VALUES (?, ?, ?, ?, ?)";
+		        ps = conn.prepareStatement(sql);
+		        ps.setString(1, movimiento.getDetalle());
+		        ps.setDouble(2, movimiento.getImporte());
+		        ps.setString(3, movimiento.getCbuEmisor());
+		        ps.setString(4, movimiento.getCbuReceptor());
+		        ps.setInt(5, movimiento.getTipomovimiento().getIdTipoMovimiento());
+
+		        return ps.executeUpdate() > 0;
+		    } catch (SQLException e) {
+		        e.printStackTrace();
+		        return false;
+		    }
+	}
+	
 
 }

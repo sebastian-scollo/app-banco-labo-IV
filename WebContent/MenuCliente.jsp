@@ -86,7 +86,8 @@
             <a href="CuentaElegida.jsp">Ver Cuenta</a>
             <a href="ServletSolicitudPrestamo?Param=1">Solicitud Prestamo</a>
             <a href="Transferencias.jsp">Transacciones</a>
-            <a href="PagarCuotas.jsp">Realizar pago de Cuotas</a>
+          <!--    <a href="servletCuota">Realizar pago de Cuotas</a>-->
+        <a href="servletCuota">Realizar pago de Cuotas</a>
             <a href="EditarPassword.jsp?nombreUsuario=<%= usuarioLogueado %>">Cambiar Contrasenia</a> 
             <a href="servletDatosPersonales">Datos Personales</a> 
             <a href="HistorialMovimientos.jsp">Historial de movimientos</a> 

@@ -17,4 +17,9 @@ public class negocioMovimientoImpl implements negocioMovimiento{
 	public ArrayList<Movimiento> getMovimientosUsuario(int id) {
 		return daoMovimiento.getMovimientosUsuario(id);
 	}
+
+	@Override
+	public boolean registrarMovimiento(Movimiento movimiento) {
+		return daoMovimiento.registrarMovimiento(movimiento);
+	}
 }

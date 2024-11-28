@@ -71,5 +71,10 @@ public class negocioCuentaImpl implements negocioCuenta {
 		return dao.cuentaXcbu(cbu);
 	}
 
+	@Override
+	public boolean actualizarSaldoCuenta(int idPrestamo, double monto) {
+		return dao.actualizarSaldoCuenta(idPrestamo, monto);
+	}
+
 	
 }

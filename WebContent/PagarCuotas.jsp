@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html lang="en">
 <head>
@@ -71,17 +72,43 @@
 <body>
 <%@ include file="MenuCliente.jsp" %>
     <div class="form-group-pair">
-    <h1>Efectuar Cuotas</h1>
-        <div class="form-group">
-            <input type="text" id="codigo de Prestamo" placeholder="codigo de Prestamo" class="form-input" required>
+        <h1>Efectuar Cuotas</h1>
+          <c:if test="${not empty mensaje}">
+        <div class="mensaje ${mensaje.contains('error') ? 'error' : 'exito'}">
+            ${mensaje}
         </div>
-        <div class="form-group">
-            <input type="text" id="codigo cuota" placeholder="codigo cuota" class="form-input" required>
-        </div>
-        <div class="form-group">
-            <input type="text" id="importe" placeholder="importe" class="form-input" required>
-        </div>
-        <input type="submit" class="submit-btn" value="Realizar">
+    </c:if>
+        <form action="servletPagarCuota" method="post">
+            <input type="hidden" name="action" value="realizarPago">
+            <div class="form-group">
+                <label>ID Préstamo:</label>
+                <input type="text" name="idPrestamo" value="${idPrestamo}" readonly class="form-input" required>
+            </div>
+            <div class="form-group">
+                <label>Cuotas Pendientes:</label>
+                <select name="idCuota" class="form-input" required>
+                    <option value="">Seleccione una cuota</option>
+                    <c:forEach var="cuota" items="${cuotasPendientes}">
+                        <option value="${cuota.idCuota}">
+                            Cuota ${cuota.nroCuota} - Importe: ${cuota.importeAbonado}
+                        </option>
+                    </c:forEach>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Importe Total:</label>
+                <input type="text" name="importeTotal" value="${importeTotal}" readonly class="form-input" required>
+            </div>
+            <div class="form-group">
+                <label>Valor de la Cuota:</label>
+                <input type="text" value="${valorCuotaIndividual}" readonly class="form-input">
+            </div>
+            <div class="form-group">
+                <label>Importe a Pagar:</label>
+                <input type="text" name="importePagar" placeholder="Importe a pagar" class="form-input" required>
+            </div>
+            <input type="submit" class="submit-btn" value="Realizar Pago">
+        </form>
     </div>
 </body>
 </html>

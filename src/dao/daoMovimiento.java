@@ -7,5 +7,6 @@ public interface daoMovimiento {
 	
   boolean AsigarTransaccion(Movimiento movimiento);
   public ArrayList<Movimiento> getMovimientosUsuario(int id);
+  public boolean registrarMovimiento(Movimiento movimiento) ;
   
 }
