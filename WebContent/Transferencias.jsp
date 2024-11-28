@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page import="entidades.Cuenta" %>
 <html>
 <head>
     <meta charset="ISO-8859-1">
@@ -80,6 +81,15 @@
         }
     </style>
 </head>
+<%
+    Cuenta cuentaElegida = (Cuenta) session.getAttribute("cuentaElegida");
+    if (cuentaElegida == null) {
+    	System.out.println("Entramos la if null");
+      
+        response.sendRedirect("servletOpcionCuenta?Param=1");
+        return;
+    }
+%>
 <script>
     function confirmarEliminacion() {
         return confirm("¿Estimado seguro de realizar la siguiente transaccion?");
@@ -90,10 +100,17 @@
 
     <div class="form-container">
         <form action="servletMovimientoTransferencia" method="post" onsubmit="return confirmarEliminacion();">
-            <div class="form-group">
+          <div class="form-group">
+    <label for="cbuOrigen" class="form-label">CBU de tu Cuenta</label>
+    <input type="text" id="cbuOrigen" name="txtCbuEmisor" class="form-input" 
+           value="<%= ((Cuenta) session.getAttribute("cuentaElegida")).getCBU() %>" 
+           readonly>
+</div>
+          
+          <!--   <div class="form-group">
                 <label for="cbuOrigen" class="form-label">CBU de tu Cuenta</label>
                 <input type="text" id="cbuOrigen" name="txtCbuEmisor" class="form-input" required>
-            </div>
+            </div>  -->
 
             <div class="form-group">
                 <label for="cbuDestino" class="form-label">CBU de Cuenta a transferir</label>
@@ -153,4 +170,5 @@
         }
     </script>
 </body>
+
 </html>

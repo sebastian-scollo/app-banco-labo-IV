@@ -30,7 +30,23 @@ public class servletCuota extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		   HttpSession session = request.getSession();
+		 HttpSession session = request.getSession();
+		    Cuenta cuentaElegida = (Cuenta) session.getAttribute("cuentaElegida");
+
+		    if (cuentaElegida == null) {
+		        // Redirigir a la página para seleccionar una cuenta
+		        response.sendRedirect("servletOpcionCuenta?Param=1");
+		        return;
+		    }
+
+		    // Lógica existente si la cuenta está seleccionada
+		    String cbu = cuentaElegida.getCBU();
+		    negocioCuotas negCuota = new negocioCuotaImpl();
+		    ArrayList<Prestamo> prestamos = negCuota.ListarPrestamos(cbu);
+
+		    request.setAttribute("listadoPrestamos", prestamos);
+		    request.getRequestDispatcher("verPrestamos.jsp").forward(request, response);  
+		/* HttpSession session = request.getSession();
 		    Cuenta cuentaElegida = (Cuenta) session.getAttribute("cuentaElegida");
 		    
 		    if (cuentaElegida != null) {
@@ -43,7 +59,7 @@ public class servletCuota extends HttpServlet {
 		        request.getRequestDispatcher("verPrestamos.jsp").forward(request, response);
 		    } else {
 		        response.sendRedirect("opcionCuotas.jsp");
-		    }
+		    }*/
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

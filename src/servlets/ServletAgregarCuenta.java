@@ -1,11 +1,15 @@
 package servlets;
 import entidades.Cliente;
 import entidades.Cuenta;
+import entidades.Movimiento;
 import negocio.negocioCliente;
 import negocio.negocioCuenta;
+import negocio.negocioMovimiento;
 import negocioImpl.negocioClienteImpl;
 import negocioImpl.negocioCuentaImpl;
+import negocioImpl.negocioMovimientoImpl;
 import entidades.TipoCuenta;
+import entidades.TipoMovimiento;
 import negocio.negocioTipoCuenta;
 import negocioImpl.negocioTipoCuentaImpl;
 import java.util.ArrayList;
@@ -56,12 +60,6 @@ public class ServletAgregarCuenta extends HttpServlet {
 		            throw new ServletException(e);
 		        }
 		    }
-		
-	
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 		    throws ServletException, IOException {
 		    try {
@@ -98,7 +96,20 @@ public class ServletAgregarCuenta extends HttpServlet {
 		            c.setNroCuenta(numeroCuenta);
 		            c.setSaldo(Double.parseDouble(request.getParameter("Saldo")));
 		            
-		            nc.AgregarCuenta(c);
+		            boolean exitoAgregar = nc.AgregarCuenta(c);
+		            if(exitoAgregar) {
+		            	negocioMovimiento negMov = new negocioMovimientoImpl();
+		            	Movimiento nuevoMovimiento = new Movimiento();
+		            	nuevoMovimiento.setDetalle("Alta Cuenta");
+		            	nuevoMovimiento.setImporte(Double.parseDouble(request.getParameter("Saldo")));
+		            	nuevoMovimiento.setCbuEmisor("AUSENTE");
+		            	nuevoMovimiento.setCbuReceptor("AUSENTE"); 
+
+		            
+		            	TipoMovimiento tipoMovimiento = new TipoMovimiento(1, "Alta de Cuenta"); 
+		            	nuevoMovimiento.setTipomovimiento(tipoMovimiento);
+		                negMov.registrarMovimiento(nuevoMovimiento);
+		            }
 		            request.setAttribute("mensajeExito", "La cuenta se agregó exitosamente.");
 		        }
 		    } catch (LimiteCuentaPorCliente e) {

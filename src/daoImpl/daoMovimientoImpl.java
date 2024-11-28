@@ -21,7 +21,7 @@ public class daoMovimientoImpl implements daoMovimiento {
 			conn = bd.obtenerConexion();
 			conn.setAutoCommit(false);
 
-			System.out.println("Iniciando transacci�n con importe: " + movimiento.getImporte());
+			System.out.println("El impote es: " + movimiento.getImporte());
 			System.out.println("CBU Emisor: " + movimiento.getCuentaEmisor().getCBU());
 			System.out.println("CBU Receptor: " + movimiento.getCuentaReceptor().getCBU());
 			System.out.println("Tipo de Movimiento: " + movimiento.getTipomovimiento().getDescripcion());
@@ -70,7 +70,7 @@ public class daoMovimientoImpl implements daoMovimiento {
 			System.out.println("Movimiento insertado exitosamente.");
 
 			conn.commit();
-			System.out.println("Transacci�n completada con �xito.");
+			System.out.println("Transaccionn completada con exito.");
 			return true;
 
 		} catch (Exception e) {

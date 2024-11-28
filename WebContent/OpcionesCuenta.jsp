@@ -78,7 +78,7 @@
 
 <div class="contenedor">
   <h1>Bienvenido</h1>
-  <h2>Estas son cuentas registradas</h2>
+  <h2>Estas son sus cuentas registradas por favor debe Seleccionar una</h2>
 </div>
 
 <table class="tabla-centro">

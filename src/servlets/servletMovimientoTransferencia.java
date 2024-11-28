@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import entidades.Cuenta;
 import entidades.Movimiento;
@@ -29,8 +30,19 @@ public class servletMovimientoTransferencia extends HttpServlet {
 
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		 // Validar si existe una cuenta seleccionada en la sesión
+        HttpSession session = request.getSession();
+        Cuenta cuenta = (Cuenta) session.getAttribute("cuentaElegida");
+        
+        if (cuenta == null) {
+            // Si no hay cuenta seleccionada, redirigir con mensaje de error
+            request.setAttribute("error", "Debes seleccionar una cuenta antes de realizar una transferencia.");
+            request.getRequestDispatcher("OpcionesCuenta.jsp").forward(request, response);
+            return;
+        }
+
+        // Si la cuenta está seleccionada, mostrar la página de transferencias
+        request.getRequestDispatcher("Transferencias.jsp").forward(request, response);
 	}
 
 
