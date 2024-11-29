@@ -13,22 +13,17 @@
 			<attribute name="owner.project.facets" value="java"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/taglibs-standard-spec-1.2.5.jar">
+	<classpathentry kind="lib" path="C:/Users/nahue/Downloads/gson-2.11.0.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/matias duran/Desktop/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/TPINT_GRUPO_8_LAB4/WEB-INF/lib/gson-2.11.0.jar">
+	<classpathentry kind="lib" path="C:/Users/nahue/Downloads/mysql-connector-java-5.1.47-bin.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/matias duran/Desktop/.metadata/.plugins/org.eclipse.wst.server.core/tmp0/wtpwebapps/TPINT_GRUPO_8_LAB4/WEB-INF/lib/mysql-connector-java-5.1.47-bin.jar">
-		<attributes>
-			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
-		</attributes>
-	</classpathentry>
-	<classpathentry kind="lib" path="D:/taglibs-standard-impl-1.2.5.jar">
+	<classpathentry kind="lib" path="C:/Users/nahue/Downloads/taglibs-standard-impl-1.2.5.jar">
 		<attributes>
 			<attribute name="org.eclipse.jst.component.dependency" value="/WEB-INF/lib"/>
 		</attributes>

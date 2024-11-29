@@ -19,7 +19,7 @@ public class daoReporteImpl implements daoReporte {
 		 List<Cliente> clientes = new ArrayList<>();
 	        
 	        String query = "SELECT c.IDCliente, c.DNI, c.Nombre, c.Apellido, c.Sexo, c.Nacionalidad, c.FechaNacimiento, "
-	                     + "c.Telefono, c.CorreoElectronico "
+	                     + "c.Telefono, c.CorreoElectronico, c.CUIL "
 	                     + "FROM Clientes c "
 	                     + "INNER JOIN Direcciones d ON c.IDCliente = d.ClienteID "
 	                     + "INNER JOIN Localidades l ON d.LocalidadID = l.IDLocalidad "
@@ -47,6 +47,7 @@ public class daoReporteImpl implements daoReporte {
 	                        cliente.setFechaNacimiento(rs.getDate("FechaNacimiento"));
 	                        cliente.setTelefono(rs.getString("Telefono"));
 	                        cliente.setCorreo(rs.getString("CorreoElectronico"));   
+	                        cliente.setCuil(rs.getString("CUIL"));
 	                        clientes.add(cliente);
 	                    }
 	                }
