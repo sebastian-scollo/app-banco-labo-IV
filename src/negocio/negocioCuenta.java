@@ -19,4 +19,5 @@ public interface negocioCuenta {
 	  public boolean repiteCbu(String cbu);
 	  Cuenta cuentaXcbu(String cbu);
 	   boolean actualizarSaldoCuenta(int idPrestamo, double monto);
+	   public ArrayList<Cuenta>ListarIDCuenta(int idCuenta);
 }

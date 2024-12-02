@@ -94,7 +94,7 @@
         <a href="ServletListarCliente?Param=1">Administrar Clientes</a>lo
         <a href="Informes.jsp">Reportes de Clientes</a>
         <a href="contact.jsp">Ver Solicitudes de préstamos</a>
-        <a href="AgregarCuenta.jsp">Agregar Cuenta</a>
+        <a href="ServletAgregarCuenta?Param=1">Agregar Cuenta</a>
     </div>
     
     <div class="content">

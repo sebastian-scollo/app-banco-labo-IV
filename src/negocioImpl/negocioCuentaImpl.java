@@ -76,5 +76,10 @@ public class negocioCuentaImpl implements negocioCuenta {
 		return dao.actualizarSaldoCuenta(idPrestamo, monto);
 	}
 
+	@Override
+	public ArrayList<Cuenta> ListarIDCuenta(int idCuenta) {
+		return dao.ListarIDCuenta(idCuenta);
+	}
+
 	
 }

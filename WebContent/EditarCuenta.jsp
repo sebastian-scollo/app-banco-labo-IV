@@ -2,7 +2,8 @@
     pageEncoding="ISO-8859-1"%>
 <%@ page import="java.util.ArrayList" %>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@ page import="entidades.TipoCuenta, java.util.ArrayList" %>
+<%@ page import="entidades.Cuenta" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -139,43 +140,88 @@
 </script>
 <body>
     <div class="form-container">
-       
         <% 
-            String mensaje = (String) request.getAttribute("mensaje");
-            if (mensaje != null) { 
+           
+            String mensajeError = (String) request.getAttribute("mensajeError");
+            if (mensajeError != null) { 
         %>
             <div style="color: red; text-align: center; margin-bottom: 15px;">
-                <%= mensaje %>
+                <%= mensajeError %>
             </div>
         <% } %>
-        <form action="ServletModificarCuenta" method="post" onsubmit="return confirmarEliminacion();" >
-       
-       
+
+        <% 
+            ArrayList<TipoCuenta> tiposCuenta = (ArrayList<TipoCuenta>) request.getAttribute("listTipo");
+            ArrayList<Cuenta> cuentas = (ArrayList<Cuenta>) request.getAttribute("cuenta");
+            Cuenta cuenta = (cuentas != null && !cuentas.isEmpty()) ? cuentas.get(0) : null; 
+        %>
+         
+        
+        <form action="ServletModificarCuenta" method="post" onsubmit="return confirmarEliminacion();" onsubmit="return validarFormulario();" >
             <div class="form-group">
                 <label for="txtSaldo" class="form-label">Saldo:</label>
-                <input type="text" id="txtSaldo" name="txtSaldo" placeholder="Ingrese el saldo" class="form-input" required />
+                <input type="text" id="txtSaldo" name="txtSaldo" 
+                       placeholder="Ingrese el saldo" 
+                       class="form-input" 
+                       value="<%= cuenta != null ? cuenta.getSaldo() : "" %>" required />
             </div>
 
             <div class="form-group">
                 <label for="txtClienteId" class="form-label">ID Cliente:</label>
-                <input type="text" id="txtClienteId" name="txtClienteId" placeholder="Ingrese el ID del cliente" class="form-input" required />
+                <input type="text" id="txtClienteId" name="txtClienteId" 
+                       placeholder="Ingrese el ID del cliente" 
+                       class="form-input" 
+                       value="<%= cuenta != null ? cuenta.getObjCliente().getIdCliente() : "" %>" required />
             </div>
-<div class="form-group">
-    <label for="txtIdCuenta" class="form-label">ID Cuenta:</label>
-    <input type="text" id="txtIdCuenta" name="txtIdCuenta" placeholder="Ingrese el ID de la cuenta a editar" class="form-input" required />
-</div>
 
+            <div class="form-group">
+                <label for="txtIdCuenta" class="form-label">ID Cuenta:</label>
+                <input type="text" id="txtIdCuenta" name="txtIdCuenta" 
+                       placeholder="Ingrese el ID de la cuenta a editar" 
+                       class="form-input" 
+                       value="<%= cuenta != null ? cuenta.getIdCuenta() : "" %>" 
+                       readonly required />
+            </div>
 
-          <div class="form-group">
-    <label for="selectTipoCuenta" class="form-label">Tipo de Cuenta:</label>
-    <select id="selectTipoCuenta" name="selectTipoCuenta" class="form-input" required>
-        <option value="1">Ahorro</option>
-        <option value="2">Corriente</option>
-        <option value="3">Plazo fijo</option>
-    </select>
-</div>
+            <div class="form-group">
+                <label for="TipoCuenta" class="form-label">Tipo de Cuenta:</label>
+                <select name="TipoCuenta" class="form-input" required>
+                    <% if (tiposCuenta != null) {
+                        for (TipoCuenta tipo : tiposCuenta) { 
+                            boolean isSelected = cuenta != null && tipo.getIdTipoCuenta() == cuenta.getObjidTipoCuenta().getIdTipoCuenta();
+                    %>
+                        <option value="<%= tipo.getIdTipoCuenta() %>" <%= isSelected ? "selected" : "" %>>
+                            <%= tipo.getDescripcion() %>
+                        </option>
+                    <%  } 
+                    } %>
+                </select>
+            </div>
+ 
             <input type="submit" class="submit-btn" value="Aceptar" />
+            <% 
+    String mensajeExito = (String) request.getAttribute("mensajeExito");
+    if (mensajeExito != null) { 
+%>
+    <script type="text/javascript">
+        alert("<%= mensajeExito %>");
+    </script>
+<% } %>
         </form>
     </div>
+ <script type="text/javascript">
+       
+        function validarFormulario() {
+            var saldo = document.getElementById("txtSaldo").value;
+            var regex = /^\d+(\.\d{1,2})?$/; 
+
+            if (!regex.test(saldo)) {
+                alert("El saldo debe ser un número positivo o cero.");
+                return false; 
+            }
+
+            return true; 
+        }
+    </script>   
 </body>
 </html>

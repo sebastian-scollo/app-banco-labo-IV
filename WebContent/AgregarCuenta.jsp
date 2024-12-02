@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ page import="entidades.TipoCuenta, java.util.ArrayList" %>
-<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 
 <!DOCTYPE html>
 <html lang="es">
@@ -183,8 +184,8 @@
                    
                     <select name="TipoCuenta" class="form-input" required>
                         <c:forEach var="tipo" items="${listTipo}">
-                        <option value="${tipo.getIdTipoCuenta()}">
-                            ${ tipo.getDescripcion()}
+                        <option value="${tipo.idTipoCuenta}">
+                            ${ tipo.descripcion}
                         </option>
                     </c:forEach>
                     </select>

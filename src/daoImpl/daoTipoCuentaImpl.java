@@ -33,6 +33,7 @@ public class daoTipoCuentaImpl implements daoTipoCuenta{
 				tipoCuenta.setDescripcion(rs.getString("Descripcion"));
 				listado.add(tipoCuenta);
 			}
+			 System.out.println("Tipos de Cuenta encontrados: " + listado.size());
 		}catch(Exception ex) {
 			ex.printStackTrace();
 			

@@ -114,7 +114,7 @@ public class servletPagarCuota extends HttpServlet {
 		        request.setAttribute("mensaje", "Error en los datos ingresados");
 		        request.getRequestDispatcher("PagarCuotas.jsp").forward(request, response);
 		    } catch (Exception e) {
-		        request.setAttribute("mensaje", "Ocurrió un error inesperado: " + e.getMessage());
+		        request.setAttribute("mensaje", "Ocurre un error inesperado: " + e.getMessage());
 		        request.getRequestDispatcher("PagarCuotas.jsp").forward(request, response);
 		    }
 		}

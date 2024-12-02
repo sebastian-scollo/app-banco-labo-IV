@@ -502,6 +502,46 @@ public class daoCuentaImpl implements daoCuenta {
 
    return resultado;
 	}
+	@Override
+	public ArrayList<Cuenta> ListarIDCuenta(int idCuenta) {
+		  conexion bd = new conexion();
+		    Connection cnn = bd.obtenerConexion();
+		    if (cnn == null) {
+		        System.out.println("Conexión fallida: la conexión es null.");
+		        return new ArrayList<>();
+		    }
+
+		    String consulta = "SELECT IDCuenta, Saldo, TipoCuentaID, ClienteID FROM Cuentas WHERE IDCuenta = ?";
+		    ArrayList<Cuenta> lista = new ArrayList<>();
+
+		    try (PreparedStatement ps = cnn.prepareStatement(consulta)) {
+		        ps.setInt(1, idCuenta);
+		        try (ResultSet rs = ps.executeQuery()) {
+		            while (rs.next()) {
+		                Cuenta cuenta = new Cuenta();
+
+		                Cliente cliente = new Cliente();
+		                cliente.setIdCliente(rs.getInt("ClienteID")); 
+		                cuenta.setObjCliente(cliente);
+
+		             
+		                TipoCuenta tipoCuenta = new TipoCuenta();
+		                tipoCuenta.setIdTipoCuenta(rs.getInt("TipoCuentaID"));
+		                cuenta.setObjidTipoCuenta(tipoCuenta);
+
+		                cuenta.setIdCuenta(rs.getInt("IDCuenta"));
+		                cuenta.setSaldo(rs.getDouble("Saldo"));
+
+		                lista.add(cuenta);
+		            }
+		        }
+		    } catch (Exception ex) {
+		        System.out.println("Error al listar cuentas por ID: " + ex.getMessage());
+		        ex.printStackTrace();
+		    }
+
+		    return lista;
+	}
 	
 	
 

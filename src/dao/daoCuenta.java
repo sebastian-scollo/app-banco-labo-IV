@@ -17,4 +17,5 @@ public interface daoCuenta {
   public boolean repiteCbu(String cbu);
  Cuenta cuentaXcbu(String cbu);
  public boolean actualizarSaldoCuenta(int idPrestamo, double monto);
+ public ArrayList<Cuenta>ListarIDCuenta(int idCuenta);
 }

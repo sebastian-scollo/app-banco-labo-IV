@@ -130,9 +130,12 @@
             <td><%= cuenta.getObjidTipoCuenta().getIdTipoCuenta() %></td>
             <td><%= cuenta.getFechaCreacion() %></td>
             <td>
-                <button onclick="window.location.href='EditarCuenta.jsp?id=<%= cuenta.getIdCuenta()%>'">
+            <button onclick="window.location.href='ServletModificarCuenta?idCuenta=<%= cuenta.getIdCuenta() %>'">
+    <i class="bi bi-pencil"></i> Editar
+</button>
+                <!-- <button onclick="window.location.href='ServletModificarCuenta?Param=1'">
                     <i class="bi bi-pencil"></i> Editar
-                </button>
+                </button> -->
                 <button onclick="window.location.href='EliminarCuenta.jsp?id=<%= cuenta.getIdCuenta()%>'">
                     <i class="bi bi-trash"></i>
                 </button>

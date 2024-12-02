@@ -44,24 +44,14 @@ public class ServletAgregarCuenta extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		        negocioTipoCuenta dao = new negocioTipoCuentaImpl();
-		 
-		        try {
-		 
-		            ArrayList<TipoCuenta> listTipo = dao.obtenerTiposCuentas();
-		            request.setAttribute("listTipo", listTipo);
-		 
-		            RequestDispatcher dispatcher = request.getRequestDispatcher("AgregarCuenta.jsp");
-		            dispatcher.forward(request, response);
-		 
-		        } catch (Exception e) {
-		            e.printStackTrace();
-		            throw new ServletException(e);
-		        }
+		if(request.getParameter("Param")!=null) {
+		cargarTiposCuenta(request, response);
+		 request.getRequestDispatcher("AgregarCuenta.jsp").forward(request, response);
+		}
 		    }
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) 
 		    throws ServletException, IOException {
+		cargarTiposCuenta(request, response);
 		    try {
 		        if (request.getParameter("btnAceptar") != null) {
 		            Cuenta c = new Cuenta();
@@ -86,8 +76,8 @@ public class ServletAgregarCuenta extends HttpServlet {
 		            }
 		            
 		            if (nc.repiteNroCuenta(numeroCuenta)) {
-		                request.setAttribute("mensajeErrorNroCuenta", "El n�mero de cuenta ya existe. Ingrese otro.");
-		                throw new Exception("N�mero de cuenta duplicado");
+		                request.setAttribute("mensajeErrorNroCuenta", "El numero de cuenta ya existe. Ingrese otro.");
+		                throw new Exception("Nummero de cuenta duplicado");
 		            }
 		         
 		            c.setObjidTipoCuenta(new TipoCuenta(idTipo));
@@ -127,13 +117,31 @@ public class ServletAgregarCuenta extends HttpServlet {
 	
 		private void validarCantidadCuentas(negocioCuenta nc, int idCliente) throws LimiteCuentaPorCliente {
 		    if (nc.CantidadCuenta(idCliente, nc.NuevaId())) {
-		        throw new LimiteCuentaPorCliente("El cliente ya tiene la cantidad m�xima permitida de cuentas.");
+		        throw new LimiteCuentaPorCliente("El cliente ya tiene la cantidad maxiima permitida de cuentas.");
 		    }
 		}
+		private void cargarTiposCuenta(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+			  negocioTipoCuenta dao = new negocioTipoCuentaImpl();
+
+		        try {
+		            ArrayList<TipoCuenta> listTipo = dao.obtenerTiposCuentas();
+		            System.out.println("Tipos de Cuenta encontrados: " + listTipo.size());
+
+		          
+		            if (listTipo.isEmpty()) {
+		                request.setAttribute("errorMessage", "No se encontraron tipos de cuenta");
+		            }
+
+		            request.setAttribute("listTipo", listTipo);
+		        } catch (Exception e) {
+		            e.printStackTrace();
+		            request.setAttribute("errorMessage", "Error al cargar tipos de cuenta: " + e.getMessage());
+		        }
+	    }
 
 		private void validarCBU(negocioCuenta nc, String cbuCuenta) throws CBUrepetido {
 		    if (nc.repiteCbu(cbuCuenta)) {
-		        throw new CBUrepetido("El CBU ingresado ya est� en uso. Ingrese otro.");
+		        throw new CBUrepetido("El CBU ingresado ya esta en uso. Ingrese otro.");
 		    }
 		}
 
