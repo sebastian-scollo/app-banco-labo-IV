@@ -1,6 +1,7 @@
 package daoImpl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -8,6 +9,7 @@ import java.sql.ResultSet;
 
 import dao.daoMovimiento;
 import entidades.Movimiento;
+import entidades.TipoMovimiento;
 
 public class daoMovimientoImpl implements daoMovimiento {
 
@@ -113,10 +115,10 @@ public class daoMovimientoImpl implements daoMovimiento {
 			conn = bd.obtenerConexion();
 			conn.setAutoCommit(false);
 
-			String sql = "SELECT Importe, cbuEmisor, cbuReceptor FROM Movimientos "
+			String sql = "SELECT Importe, cbuEmisor, cbuReceptor, TipoMovimientoID FROM Movimientos "
 					+ "INNER JOIN Cuentas ON cbuEmisor = CBU or cbuReceptor = CBU "
 					+ "INNER JOIN Clientes ON ClienteID = IDCliente " + "INNER JOIN Usuarios ON IDUsuario = UsuarioID "
-					+ "WHERE IDUsuario = ? AND TipoMovimientoID = 4;";
+					+ "WHERE IDUsuario = ?";
 			ps = conn.prepareStatement(sql);
 			ps.setInt(1, id);
 
@@ -128,6 +130,71 @@ public class daoMovimientoImpl implements daoMovimiento {
 				m.setImporte(rs.getInt("Importe"));
 				m.setCbuReceptor(rs.getString("cbuReceptor"));
 				m.setCbuEmisor(rs.getString("cbuEmisor"));
+				TipoMovimiento tm = new TipoMovimiento(rs.getInt("TipoMovimientoID"), "");
+				m.setTipomovimiento(tm);
+				lista.add(m);
+
+			}
+
+		} catch (Exception e) {
+			if (conn != null) {
+				try {
+					conn.rollback();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			}
+			System.out.println("Error durante la transaccioon: " + e.getMessage());
+			e.printStackTrace();
+		} finally {
+
+			if (ps != null) {
+				try {
+					ps.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if (conn != null) {
+				try {
+					conn.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return lista;
+
+	}
+	
+	public ArrayList<Movimiento> getMovimientosUsuarioPorCBU(int id, String cbu) {
+		Connection conn = null;
+		PreparedStatement ps = null;
+		ArrayList<Movimiento> lista = new ArrayList<Movimiento>();
+		try {
+			conexion bd = new conexion();
+			conn = bd.obtenerConexion();
+			conn.setAutoCommit(false);
+
+			String sql = "SELECT Importe, cbuEmisor, cbuReceptor, TipoMovimientoID FROM Movimientos "
+					+ "INNER JOIN Cuentas ON cbuEmisor = CBU or cbuReceptor = CBU "
+					+ "INNER JOIN Clientes ON ClienteID = IDCliente " + "INNER JOIN Usuarios ON IDUsuario = UsuarioID "
+					+ "WHERE IDUsuario = ? AND ( cbuEmisor = ? OR cbuReceptor = ? )";
+			ps = conn.prepareStatement(sql);
+			ps.setInt(1, id);
+			ps.setString(2, cbu);
+			ps.setString(3, cbu);
+
+			ResultSet rs = ps.executeQuery();
+
+			while (rs.next()) {
+
+				Movimiento m = new Movimiento();
+				m.setImporte(rs.getInt("Importe"));
+				m.setCbuReceptor(rs.getString("cbuReceptor"));
+				m.setCbuEmisor(rs.getString("cbuEmisor"));
+				TipoMovimiento tm = new TipoMovimiento(rs.getInt("TipoMovimientoID"), "");
+				m.setTipomovimiento(tm);
 				lista.add(m);
 
 			}

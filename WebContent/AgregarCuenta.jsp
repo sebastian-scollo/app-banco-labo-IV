@@ -140,6 +140,8 @@
         String mensajeErrorNroCuenta = (String) request.getAttribute("mensajeErrorNroCuenta");
         String mensajeErrorCBU = (String) request.getAttribute("mensajeErrorCBU");
         String mensajeExito = (String) request.getAttribute("mensajeExito");
+        
+        ArrayList<TipoCuenta> cuentas = (ArrayList<TipoCuenta>) request.getAttribute("listTipo");
       %>
     
       <% if (mensajeErrorCuentas != null && !mensajeErrorCuentas.isEmpty()) { %>
@@ -180,9 +182,11 @@
                     <label for="TipoCuenta" class="form-label">Tipo de Cuenta:</label>
                    
                     <select name="TipoCuenta" class="form-input" required>
-                        <option value="1">Ahorro</option>
-                        <option value="2">Corriente</option>
-                        <option value="3">Plazo fijo</option>
+                        <c:forEach var="tipo" items="${listTipo}">
+                        <option value="${tipo.getIdTipoCuenta()}">
+                            ${ tipo.getDescripcion()}
+                        </option>
+                    </c:forEach>
                     </select>
                 </div>
                 <div class="form-group">

@@ -49,7 +49,7 @@ public class ServletAgregarCuenta extends HttpServlet {
 		 
 		        try {
 		 
-		            String listTipo = dao.obtenerOpcionesDDL();
+		            ArrayList<TipoCuenta> listTipo = dao.obtenerTiposCuentas();
 		            request.setAttribute("listTipo", listTipo);
 		 
 		            RequestDispatcher dispatcher = request.getRequestDispatcher("AgregarCuenta.jsp");
@@ -86,8 +86,8 @@ public class ServletAgregarCuenta extends HttpServlet {
 		            }
 		            
 		            if (nc.repiteNroCuenta(numeroCuenta)) {
-		                request.setAttribute("mensajeErrorNroCuenta", "El número de cuenta ya existe. Ingrese otro.");
-		                throw new Exception("Número de cuenta duplicado");
+		                request.setAttribute("mensajeErrorNroCuenta", "El nï¿½mero de cuenta ya existe. Ingrese otro.");
+		                throw new Exception("Nï¿½mero de cuenta duplicado");
 		            }
 		         
 		            c.setObjidTipoCuenta(new TipoCuenta(idTipo));
@@ -110,7 +110,7 @@ public class ServletAgregarCuenta extends HttpServlet {
 		            	nuevoMovimiento.setTipomovimiento(tipoMovimiento);
 		                negMov.registrarMovimiento(nuevoMovimiento);
 		            }
-		            request.setAttribute("mensajeExito", "La cuenta se agregó exitosamente.");
+		            request.setAttribute("mensajeExito", "La cuenta se agregï¿½ exitosamente.");
 		        }
 		    } catch (LimiteCuentaPorCliente e) {
 		        request.setAttribute("mensajeErrorCuentas", e.getMessage());
@@ -127,13 +127,13 @@ public class ServletAgregarCuenta extends HttpServlet {
 	
 		private void validarCantidadCuentas(negocioCuenta nc, int idCliente) throws LimiteCuentaPorCliente {
 		    if (nc.CantidadCuenta(idCliente, nc.NuevaId())) {
-		        throw new LimiteCuentaPorCliente("El cliente ya tiene la cantidad máxima permitida de cuentas.");
+		        throw new LimiteCuentaPorCliente("El cliente ya tiene la cantidad mï¿½xima permitida de cuentas.");
 		    }
 		}
 
 		private void validarCBU(negocioCuenta nc, String cbuCuenta) throws CBUrepetido {
 		    if (nc.repiteCbu(cbuCuenta)) {
-		        throw new CBUrepetido("El CBU ingresado ya está en uso. Ingrese otro.");
+		        throw new CBUrepetido("El CBU ingresado ya estï¿½ en uso. Ingrese otro.");
 		    }
 		}
 

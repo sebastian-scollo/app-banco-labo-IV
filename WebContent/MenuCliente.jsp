@@ -90,14 +90,17 @@
         <a href="servletCuota">Realizar pago de Cuotas</a>
             <a href="EditarPassword.jsp?nombreUsuario=<%= usuarioLogueado %>">Cambiar Contrasenia</a> 
             <a href="servletDatosPersonales">Datos Personales</a> 
-            <a href="HistorialMovimientos.jsp">Historial de movimientos</a> 
-            <a href="ServletTransferencias?Param=1">Historial de transacciones</a> 
-           
+            <a href="ServletMovimientos?Param=1">Historial de movimientos</a>            
         </div>
         
         
         
-        <div class="user-info">Usuario: <strong><%= usuarioLogueado %></strong></div>
+        <div class="user-info"><strong><% if (usuarioLogueado == null) { 
+        	%> <a href="Login.jsp">Iniciar sesion</a> <%
+        } 
+        else {
+        	%>Usuario: <%= usuarioLogueado %>
+        <%} %></strong></div>
     </div>
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>

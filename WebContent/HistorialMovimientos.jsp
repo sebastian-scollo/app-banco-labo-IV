@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page import="java.util.ArrayList"%>
+<%@ page import="entidades.Movimiento"%>
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
@@ -50,7 +52,7 @@
             background-color: transparent;
             outline: none;
             box-sizing: border-box;
-            color: #666;
+            color: #021ff7;
         }
         .search-container {
             display: flex;
@@ -95,47 +97,100 @@
   	
 
     <div class="table-container">
-        <!-- Campo de búsqueda por CBU -->
+       
+        
         <div class="search-container">
-            <input type="text" class="form-input" placeholder="Buscar por CBU">
-            <button class="search-button">
+        	<form action="ServletMovimientos?Param=1" method="post">
+	            <button class="show-all-button" name="btnMostrarTodo">
+	                <i class="bi bi-eye"></i> Mostrar todo
+	            </button>
+	        </form>
+        </div>
+         <!-- Campo de búsqueda por CBU -->
+        <div class="search-container">
+        	<form action="ServletMovimientos" method="post">
+            <input type="text" class="form-input" placeholder="Buscar por CBU" name="txtCBU">
+            <button class="search-button" name="btnBuscarCBU">
                 <i class="bi bi-search"></i> Buscar CBU
             </button>
+            </form>
         </div>
         
-        <!-- Campo de búsqueda por Fecha -->
-        <div class="search-container">
-            <input type="date" class="form-input" placeholder="Buscar por Fecha">
-            <button class="search-button">
-                <i class="bi bi-search"></i> Buscar Fecha
-            </button>
-        </div>
-
         <!-- Tabla con las columnas modificadas sin botones de acciones -->
         <table id="miTabla">
             <thead>
                 <tr>
                     <th>CBU Cuenta Destinataria</th>
+                    <th>CBU del Emisor</th>
                     <th>Importe</th>
-                    <th>Fecha</th>
                     <th>Tipo de Movimiento</th>
                 </tr>
             </thead>
-            <tbody>
-                <tr>
-                    <td>nulo</td>
-                    <td>nulo</td>
-                    <td>nulo</td>
-                    <td>nulo</td>
-                </tr>
-            </tbody>
-        </table>
+			<tbody>
 
-        <!-- Paginación -->
-        <div id="pagination">
-            <button onclick="previousPage()">Anterior</button>
-            <button onclick="nextPage()">Siguiente</button>
-        </div>
-    </div>
+				<%
+            ArrayList<Movimiento> listadoMovimiento = (ArrayList<Movimiento>) request.getAttribute("lista");
+            if (listadoMovimiento != null && !listadoMovimiento.isEmpty()) {
+                for (Movimiento m : listadoMovimiento) {
+        %>
+				<tr>
+					<td><%= m.getCbuReceptor() %></td>
+					<td><%= m.getCbuEmisor() %></td>
+					<td><%= m.getImporte() %></td>
+					<td><%= m.getTipomovimiento().getIdTipoMovimiento() %></td>
+				</tr>
+				<% 
+                }
+            } else { 
+        %>
+				<tr>
+					<td colspan="8">No se encontraron transferencias.</td>
+				</tr>
+				<% } %>
+			</tbody>
+		</table>
+
+		<div id="pagination">
+			<button onclick="changePage(-1)">Anterior</button>
+			<span id="pageInfo"></span>
+			<button onclick="changePage(1)">Siguiente</button>
+		</div>
+	</div>
 </body>
+<script>
+   
+    const rowsPerPage = 3; 
+    let currentPage = 1;
+
+    function showPage(page) {
+        const table = document.getElementById('miTabla');
+        const rows = table.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+        const totalPages = Math.ceil(rows.length / rowsPerPage);
+
+       
+        if (page < 1) page = 1;
+        if (page > totalPages) page = totalPages;
+
+     
+        for (let i = 0; i < rows.length; i++) {
+            rows[i].style.display = 'none';
+        }
+
+       
+        for (let i = (page - 1) * rowsPerPage; i < (page * rowsPerPage) && i < rows.length; i++) {
+            rows[i].style.display = '';
+        }
+
+       
+        document.getElementById('pageInfo').innerText = `Página ${page} de ${totalPages}`;
+        currentPage = page;
+    }
+
+    function changePage(direction) {
+        showPage(currentPage + direction);
+    }
+
+    
+    showPage(currentPage);
+</script>
 </html>

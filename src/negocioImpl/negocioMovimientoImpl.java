@@ -18,6 +18,10 @@ public class negocioMovimientoImpl implements negocioMovimiento{
 		return daoMovimiento.getMovimientosUsuario(id);
 	}
 
+	public ArrayList<Movimiento> getMovimientosUsuarioPorCBU(int id, String cbu) { 
+		return daoMovimiento.getMovimientosUsuarioPorCBU(id, cbu);
+	}
+	
 	@Override
 	public boolean registrarMovimiento(Movimiento movimiento) {
 		return daoMovimiento.registrarMovimiento(movimiento);

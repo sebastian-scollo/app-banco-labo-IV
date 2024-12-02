@@ -58,6 +58,7 @@
         <img src="images/sinfondo.png" alt="Logo">
         <h1>ADMINISTRADOR</h1> 
         <div class="menu">
+                    <a href="ServletAgregarCuenta">Agregar Cuenta</a>
             <a href="ServletListarCliente?Param=1">Administrar Clientes</a>
             <a href="servletCuenta?Param=1">Administrar Cuentas</a>
             <a href="AceptarPrestamo.jsp">Ver solicitud Prestamo</a>
