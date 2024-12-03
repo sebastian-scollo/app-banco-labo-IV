@@ -91,6 +91,7 @@ create table Movimientos(
     Importe decimal(15,2) not null,
     cbuEmisor char(22),
     cbuReceptor char(22),
+	fecha DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     TipoMovimientoID int not null,
     constraint pk_movimiento primary key(IDMovimiento),
     constraint foreign key (TipoMovimientoID) references TipoMovimientos (IDTipoMovimiento)
