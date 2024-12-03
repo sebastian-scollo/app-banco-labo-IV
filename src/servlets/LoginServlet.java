@@ -36,7 +36,7 @@ public class LoginServlet extends HttpServlet {
                
                 if (usuario.getTipoUsuario() == 1) {
                     
-                    url = "BarraMenuAdmin.jsp";
+                    url = "MenuAdmin.jsp";
                 } else if (usuario.getTipoUsuario() == 2) {
                    
                     url = "MenuCliente.jsp";

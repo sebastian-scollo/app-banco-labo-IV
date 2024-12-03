@@ -64,6 +64,8 @@
             <a href="servletCuenta?Param=1">Administrar Cuentas</a>
             <a href="AceptarPrestamo.jsp">Ver solicitud Prestamo</a>
             <a href="Informes.jsp">Informes</a>
+             <a href="TipoMovimientoTotalconPorcentaje.jsp">Informe TipoMovimiento</a>
+        <a href="InformeCuentaCreadas.jsp">Informe Cuenta</a>
           <!--   <a href="ClienteAgregar.jsp">Agregar Cliente</a>-->
           <!--    <a href="AgregarCuenta.jsp">Agregar Cuenta</a> -->
         </div>
