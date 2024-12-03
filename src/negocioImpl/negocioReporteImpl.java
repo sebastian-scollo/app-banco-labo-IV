@@ -8,6 +8,7 @@ import dao.daoReporte;
 import daoImpl.daoReporteImpl;
 import entidades.Cliente;
 import entidades.Cuenta;
+import entidades.Movimiento;
 import negocio.negocioReporte;
 
 public class negocioReporteImpl implements negocioReporte {
@@ -24,5 +25,10 @@ public class negocioReporteImpl implements negocioReporte {
 	
 	public ArrayList<Cuenta> BusquedaIntervaloSaldo(int saldoInicio, int saldoFinal) {
 		return dao.BusquedaIntervaloSaldo(saldoInicio, saldoFinal);
+	}
+
+	@Override
+	public ArrayList<Object> TotalYPorcentaje(int idTipoMovimiento){
+		return dao.TotalYPorcentaje(idTipoMovimiento);
 	}
 }

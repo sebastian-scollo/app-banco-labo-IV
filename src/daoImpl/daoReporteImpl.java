@@ -12,7 +12,9 @@ import java.util.List;
 import dao.daoReporte;
 import entidades.Cliente;
 import entidades.Cuenta;
+import entidades.Movimiento;
 import entidades.Provincia;
+import entidades.TipoMovimiento;
 
 public class daoReporteImpl implements daoReporte {
 	public List<Cliente> obtenerClientesPorProvincia(int provinciaID){
@@ -169,6 +171,46 @@ public class daoReporteImpl implements daoReporte {
 		    return lista;
 
 		}
-	
+		@Override
+		public ArrayList<Object> TotalYPorcentaje(int idTipoMovimiento) {
+			 ArrayList<Movimiento> listaMovimientos = new ArrayList<>();
+			 ArrayList<Double> listaPorcentaje = new ArrayList<>();
+
+			    String sql = "SELECT tm.Descripcion AS TipoMovimiento,SUM(m.Importe) AS TotalMovimiento,(SUM(m.Importe) / (SELECT SUM(Importe) FROM Movimientos) * 100) AS Porcentaje FROM Movimientos m JOIN TipoMovimientos tm ON m.TipoMovimientoID = tm.IDTipoMovimiento WHERE m.TipoMovimientoID = ? GROUP BY tm.Descripcion";
+			       
+                conexion bd = new conexion();
+			    try (Connection conn = bd.obtenerConexion();
+			         PreparedStatement ps = conn.prepareStatement(sql)) {
+
+			        ps.setInt(1, idTipoMovimiento);
+			   
+			        try (ResultSet rs = ps.executeQuery()) {
+			            while (rs.next()) {
+			                TipoMovimiento tipoMovimiento = new TipoMovimiento(
+			                    idTipoMovimiento,
+			                    rs.getString("TipoMovimiento")
+			                );
+
+			                Movimiento movimiento = new Movimiento();
+			                movimiento.setTipomovimiento(tipoMovimiento);
+			                movimiento.setImporte(rs.getDouble("TotalMovimiento"));
+
+			              
+			                listaMovimientos.add(movimiento);
+			                if (listaPorcentaje.isEmpty()) {
+			                    listaPorcentaje.add(rs.getDouble("Porcentaje"));
+			                }
+			            }
+			        }
+			    } catch (SQLException ex) {
+			        ex.printStackTrace();
+			    }
+
+			    ArrayList<Object> resultado = new ArrayList<>();
+			    resultado.add(listaMovimientos); 
+			    resultado.add(listaPorcentaje);  
+
+			    return resultado;
+		}
 	
 }

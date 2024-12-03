@@ -70,7 +70,7 @@
     </style>
 </head>
 <body>
-<% if (session.getParameter("usuarioLogueado") == null){
+<% if (session.getAttribute("usuarioLogueado") == null){
 		
 		response.sendRedirect("Login.jsp");
 	} 
