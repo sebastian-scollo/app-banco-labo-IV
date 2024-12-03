@@ -74,6 +74,14 @@
 </style>
 </head>
 <body>
+<% if (session.getAttribute("usuarioLogueado") == null){
+		
+		response.sendRedirect("Login.jsp");
+	} 
+	
+
+	
+	%>
 <%@ include file="MenuCliente.jsp" %>
 
 <div class="contenedor">

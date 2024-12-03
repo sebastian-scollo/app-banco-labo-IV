@@ -143,7 +143,12 @@
     }
 </script>
 <body>
-
+<% if (session.getAttribute("usuarioLogueado") == null){
+		
+		response.sendRedirect("Login.jsp");
+	} 
+	
+	%>
 <%
     String nombreUsuario = (String) session.getAttribute("nombreUsuario");
     

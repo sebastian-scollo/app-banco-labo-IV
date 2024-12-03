@@ -70,6 +70,13 @@
     </style>
 </head>
 <body>
+<% if (session.getParameter("usuarioLogueado") == null){
+		
+		response.sendRedirect("Login.jsp");
+	} 
+
+	
+	%>
 <%@ include file="MenuCliente.jsp" %>
     <div class="form-group-pair">
         <h1>Efectuar Cuotas</h1>

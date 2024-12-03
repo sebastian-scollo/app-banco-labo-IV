@@ -21,6 +21,7 @@ public class LoginServlet extends HttpServlet {
             throws ServletException, IOException {
     	if (request.getParameter("btnLogin") != null)
     	{
+    		 String url = "";
     		String nombreUsuario = request.getParameter("usuario");
             String contrasenia = request.getParameter("password");
           
@@ -31,22 +32,25 @@ public class LoginServlet extends HttpServlet {
                 request.getSession().setAttribute("idUsuario", usuario.getIDUsuario());
                 request.getSession().setAttribute("tipoUsuario", usuario.getTipoUsuario());
                
+                System.out.println(usuario.getTipoUsuario());
+               
                 if (usuario.getTipoUsuario() == 1) {
                     
-                    response.sendRedirect("MenuAdmin.jsp");
+                    url = "BarraMenuAdmin.jsp";
                 } else if (usuario.getTipoUsuario() == 2) {
                    
-                    response.sendRedirect("MenuCliente.jsp");
+                    url = "MenuCliente.jsp";
                 } else {
                     
-                    response.sendRedirect("error.jsp");
+                    url = "error.jsp";
                 }
             } else {
             	
                 request.setAttribute("mensajeError", "Usuario o contrasenia incorrectos");
-                request.getRequestDispatcher("Login.jsp").forward(request, response);
+                url = "Login.jsp";
             }
+            request.getRequestDispatcher(url).forward(request, response);
+
     	}
-        
     }
 }

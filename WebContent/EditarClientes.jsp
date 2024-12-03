@@ -1,3 +1,12 @@
+
+<% if (session.getAttribute("usuarioLogueado") == null){
+		
+		response.sendRedirect("Login.jsp");
+	} 
+	
+else if ((int)session.getAttribute("tipoUsuario") != 1) {
+	response.sendRedirect("MenuCliente.jsp");
+}%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <%@ page import="entidades.Cliente" %>
@@ -134,6 +143,7 @@
     }
 </script>
 <body>
+
 
     <%@ include file="BarraMenuAdmin.jsp" %>
     

@@ -11,6 +11,12 @@
 
 </head>
 <body>
+<% if (session.getAttribute("usuarioLogueado") == null){
+		
+		response.sendRedirect("Login.jsp");
+	} 
+	
+	%>
     <%@ include file="MenuCliente.jsp" %> <!-- Incluir el menú -->
 
     <div class="table-container">

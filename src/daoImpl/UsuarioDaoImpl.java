@@ -32,6 +32,7 @@ public class UsuarioDaoImpl implements UsuarioDao {
                     usuario.setIDUsuario(rs.getInt("IDUsuario"));
                     usuario.setPassword(rs.getString("Contrasenia")); 
                     usuario.setTipoUsuario(rs.getInt("TipoUsuario"));
+                    System.out.println(usuario.getTipoUsuario());
                     usuario.setEstado(rs.getBoolean("Estado"));
                 }
             }

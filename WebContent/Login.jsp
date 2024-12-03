@@ -73,10 +73,21 @@
             width: 200px; /* Ajusta el tamaño según sea necesario */
             margin-bottom: 20px; /* Mayor espacio debajo del logo */
         }
+        
+        .error {
+        	color: #f22;
+        	background-color: #faa;
+        	padding-block: 20px;
+        	text-align: center;
+        }
     </style>
 </head>
 <body>
+	<% String message = (String)request.getAttribute("mensajeError"); %>
     <div class="login-container">
+    <% if (message != null) {
+    	%> <div class="error"> <%= message %> </div>  <% 
+    }%>
         <form action="LoginServlet" method="post">
         	<h1>Banco Nejo</h1>
             <h3>Iniciar Sesión</h3>

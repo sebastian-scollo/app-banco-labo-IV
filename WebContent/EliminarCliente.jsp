@@ -66,6 +66,14 @@
     }
 </script>
 <body>
+<% if (session.getAttribute("usuarioLogueado") == null){
+		
+		response.sendRedirect("Login.jsp");
+	} 
+	
+else if ((int)session.getAttribute("tipoUsuario") != 1) {
+	response.sendRedirect("MenuCliente.jsp");
+}%>
  <%@ include file="BarraMenuAdmin.jsp" %>
 <h1>Eliminar Cliente</h1>
 

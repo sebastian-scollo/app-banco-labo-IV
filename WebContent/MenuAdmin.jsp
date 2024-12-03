@@ -75,6 +75,16 @@
     </style>
 </head>
 <body>
+<% if (session.getAttribute("usuarioLogueado") == null){
+		
+		response.sendRedirect("Login.jsp");
+	} 
+	
+else if ((int)session.getAttribute("tipoUsuario") != 1) {
+	response.sendRedirect("MenuCliente.jsp");
+}
+	
+	%>
 <% 
     String usuario = (String) session.getAttribute("usuarioLogueado");
 	int tipo = (int) session.getAttribute("tipoUsuario");

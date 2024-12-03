@@ -54,6 +54,7 @@
   </style>
 </head>
 <body>
+
 <div class="header">
         <img src="images/sinfondo.png" alt="Logo">
         <h1>ADMINISTRADOR</h1> 
