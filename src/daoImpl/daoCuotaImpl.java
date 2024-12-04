@@ -46,7 +46,7 @@ public class daoCuotaImpl implements daoCuota{
 	  ArrayList<Prestamo> lista = new ArrayList<Prestamo>();
 	  Connection cnn = null;
 	  conexion bd = new conexion();
-	  String sql ="SELECT IDPrestamo,ImporteAPagar,Plazo,CBU,IDCuenta,Saldo FROM Prestamos INNER JOIN Cuentas oN Prestamos.CuentaID = Cuentas.IDCuenta WHERE Cuentas.CBU = ?";
+	  String sql ="SELECT IDPrestamo,ImporteAPagar,Plazo,CBU,IDCuenta,Saldo FROM Prestamos INNER JOIN Cuentas oN Prestamos.CuentaID = Cuentas.IDCuenta WHERE Cuentas.CBU = ?AND Prestamos.Estado = 'Aprobado'";
 	  try {cnn = bd.obtenerConexion();}catch(Exception ex) {System.out.println("F mi compa"+ex.getMessage());}
 		try {
 			 PreparedStatement ps = cnn.prepareStatement(sql);
@@ -162,8 +162,8 @@ public class daoCuotaImpl implements daoCuota{
 	       
 	        for (int i = 1; i <= prestamo.getPlazo(); i++) {
 	            psCuota = cn.prepareStatement(sqlInsertCuota);
-	            psCuota.setInt(1, i); // Número de cuota
-	            psCuota.setInt(2, prestamo.getIdPrestamo()); // ID del préstamo
+	            psCuota.setInt(1, i); 
+	            psCuota.setInt(2, prestamo.getIdPrestamo()); 
 	            psCuota.executeUpdate();
 	        }
 	        cn.commit();
