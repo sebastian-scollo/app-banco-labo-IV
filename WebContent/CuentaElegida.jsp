@@ -6,6 +6,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
     <title>Cuenta Actual</title>
     <style>
+    
+
+    
         body {
             font-family: 'Roboto', sans-serif;
             color: #ff6633;

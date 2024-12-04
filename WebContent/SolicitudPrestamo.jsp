@@ -7,13 +7,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Solicitud de Préstamo</title>
+    <title>Solicitud de Prestamo</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
     <style>
         body {
             font-family: Arial, Helvetica, sans-serif;
             margin: 0;
             background-color: #e9ecef;
+        }
+        
+          body {        	
+        	padding-top: 250px;
         }
         .header {
             background-color: #1464a5;

@@ -2,6 +2,7 @@ package negocioImpl;
 
 import daoImpl.daoMovimientoImpl;
 import entidades.Movimiento;
+import entidades.Prestamo;
 import negocio.negocioMovimiento;
 
 import java.util.ArrayList;
@@ -25,5 +26,10 @@ public class negocioMovimientoImpl implements negocioMovimiento{
 	@Override
 	public boolean registrarMovimiento(Movimiento movimiento) {
 		return daoMovimiento.registrarMovimiento(movimiento);
+	}
+
+	@Override
+	public boolean altaPrestamo(Prestamo prestamo) {
+		return daoMovimiento.altaPrestamo(prestamo);
 	}
 }

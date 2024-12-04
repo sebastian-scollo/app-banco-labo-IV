@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="entidades.Prestamo" %>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -104,33 +106,40 @@
             <thead>
                 <tr>
                     <th>CBU</th>
-                    <th>Nombre Cliente</th>
-                    <th>Codigo Tipo Cuenta</th>
                     <th>Monto Pedido</th>
                     <th>Cantidad Cuotas</th>
-                    <th>IdCliente</th>
                     <th>Fecha</th>
                     <th>Opciones</th>
                 </tr>
             </thead>
             <tbody>
+              <%
+            ArrayList<Prestamo> listadoCuenta = (ArrayList<Prestamo>) request.getAttribute("prestamosEnTramite");
+            if (listadoCuenta != null && !listadoCuenta.isEmpty()) {
+                for (Prestamo prestamo : listadoCuenta) {
+        %>
                 <tr>
-                    <td>Dato 1</td>
-                    <td>Dato 2</td>
-                    <td>Dato 3</td>
-                    <td>Dato 4</td>
-                    <td>Dato 5</td>
-                    <td>Dato 6</td>
-                    <td>Dato 7</td>
+                    <td><%= prestamo.getCuenta().getCBU()%></td>
+                    <td><%= prestamo.getMontoSolicitado() %></td>
+                    <td><%= prestamo.getPlazo()%></td>     
+                    <td><%=prestamo.getFechaSolicitado() %></td>
+                    
                     <td>
-                        <button class="action-button accept-button" onclick="window.location.href='.jsp'">
+                     <form action="ServletProcesarPrestamo?idPrestamo=<%= prestamo.getIdPrestamo()%>" method="post">
+                        <button class="action-button accept-button" name="btnAprobar" >
+                            
                             <i class="btn btn-success"></i> Aceptar
                         </button>
-                        <button class="action-button reject-button" onclick="window.location.href='RechazarCuenta.jsp'">
+                        </form>
+                        <form action="ServletProcesarPrestamo" method="post">
+                        <button class="action-button reject-button" name="btnRechazar">
                             <i class="bi bi-x-circle"></i> Rechazar
                         </button>
+                        </form>
                     </td>
                 </tr>
+                <%}%>
+                 <%}%>
             </tbody>
         </table>
 

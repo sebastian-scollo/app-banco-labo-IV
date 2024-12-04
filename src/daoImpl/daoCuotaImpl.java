@@ -149,4 +149,46 @@ public class daoCuotaImpl implements daoCuota{
 
     return saldo;
 	}
+
+	@Override
+	public boolean registrarCuotas(Prestamo prestamo) {
+	    conexion con = new conexion();
+	    Connection cn = null;
+	    PreparedStatement psCuota = null;
+	    String sqlInsertCuota = "INSERT INTO Cuotas (NumeroCuota, PrestamoID) VALUES (?, ?)";
+	    try {
+	        cn = con.obtenerConexion();
+	        cn.setAutoCommit(false);
+	       
+	        for (int i = 1; i <= prestamo.getPlazo(); i++) {
+	            psCuota = cn.prepareStatement(sqlInsertCuota);
+	            psCuota.setInt(1, i); // Número de cuota
+	            psCuota.setInt(2, prestamo.getIdPrestamo()); // ID del préstamo
+	            psCuota.executeUpdate();
+	        }
+	        cn.commit();
+	        return true;
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	        try {
+	            if (cn != null) {
+	                cn.rollback();
+	            }
+	        } catch (SQLException ex) {
+	            ex.printStackTrace();
+	        }
+	        return false;
+	    } finally {
+	        try {
+	            if (psCuota != null) psCuota.close();
+	            if (cn != null) {
+	                cn.setAutoCommit(true);
+	                con.cerrarConexion();
+	            }
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
+	    }
+		
+	}
 }

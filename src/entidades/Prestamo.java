@@ -1,17 +1,45 @@
 package entidades;
 
+import java.sql.Date;
+
 public class Prestamo {
 	
-	private int idPrestamo;
+	/*private int idPrestamo;
 	private double montoSolicitado;
     private double importeApagar;
     private int plazo;
     private boolean estado;
     private String fechaSolicitado;
     private String fechaRespuesta;
+    private Cuenta cuenta;*/
+	private int idPrestamo;
+	private double montoSolicitado;
+    private double importeApagar;
+    private int plazo;
+    private String estado;
+    public String getEstado() {
+		return estado;
+	}
+	public void setEstado(String estado) {
+		this.estado = estado;
+	}
+	public Date getFechaSolicitado() {
+		return fechaSolicitado;
+	}
+	public void setFechaSolicitado(Date fechaSolicitado) {
+		this.fechaSolicitado = fechaSolicitado;
+	}
+	public Date getFechaRespuesta() {
+		return fechaRespuesta;
+	}
+	public void setFechaRespuesta(Date fechaRespuesta) {
+		this.fechaRespuesta = fechaRespuesta;
+	}
+	private Date fechaSolicitado;
+    private Date fechaRespuesta;
     private Cuenta cuenta;
-	public Prestamo(int idPrestamo, double montoSolicitado, double importeApagar, int plazo, boolean estado, String fechaSolicitado,
-			String fechaRespuesta, Cuenta cuenta) {
+    public Prestamo(int idPrestamo, double montoSolicitado, double importeApagar, int plazo, String estado, Date fechaSolicitado,
+			Date fechaRespuesta, Cuenta cuenta) {
 		
 		this.idPrestamo = idPrestamo;
 		this.montoSolicitado = montoSolicitado;
@@ -41,24 +69,7 @@ public class Prestamo {
 	public void setPlazo(int plazo) {
 		this.plazo = plazo;
 	}
-	public boolean isEstado() {
-		return estado;
-	}
-	public void setEstado(boolean estado) {
-		this.estado = estado;
-	}
-	public String getFechaSolicitado() {
-		return fechaSolicitado;
-	}
-	public void setFechaSolicitado(String fechaSolicitado) {
-		this.fechaSolicitado = fechaSolicitado;
-	}
-	public String getFechaRespuesta() {
-		return fechaRespuesta;
-	}
-	public void setFechaRespuesta(String fechaRespuesta) {
-		this.fechaRespuesta = fechaRespuesta;
-	}
+	
 	
 	public Cuenta getCuenta() {
 		return cuenta;

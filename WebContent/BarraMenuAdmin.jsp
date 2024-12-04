@@ -8,7 +8,9 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 <style>
+
         body{
             font-family: Arial, Helvetica, sans-serif;
         }
@@ -51,35 +53,32 @@
 .header a:hover {
     background-color: #0b4d94;
 }
+
   </style>
 </head>
 <body>
 
 <div class="header">
-        <img src="images/sinfondo.png" alt="Logo">
-        <h1>ADMINISTRADOR</h1> 
-        <div class="menu">
-                    <a href="ServletAgregarCuenta?Param=1">Agregar Cuenta</a>
-            <a href="ServletListarCliente?Param=1">Administrar Clientes</a>
-            <a href="servletCuenta?Param=1">Administrar Cuentas</a>
-            <a href="AceptarPrestamo.jsp">Ver solicitud Prestamo</a>
-            <a href="Informes.jsp">Informes</a>
-             <a href="TipoMovimientoTotalconPorcentaje.jsp">Informe TipoMovimiento</a>
-        <a href="InformeCuentaCreadas.jsp">Informe Cuenta</a>
-          <!--   <a href="ClienteAgregar.jsp">Agregar Cliente</a>-->
-          <!--    <a href="AgregarCuenta.jsp">Agregar Cuenta</a> -->
-        </div>
-        <div class="user-info"> <% 
-        	String usuario = (String)session.getAttribute("usuarioLogueado");
-        	if (usuario == null || usuario == "") {
-        		out.println("<a href='Login.jsp'>Ingresar sesión</a>");
-        	}
-        	else {
-        		System.out.println(usuario);
-        		out.println("Usuario: " + usuario);
-        	}
-        	%>
-        <strong></strong></div>
+         <img src="images/sinfondo.png" alt="Logo">
+    <h1>ADMINISTRADOR</h1> 
+    <div class="menu">
+        <a href="ServletListarCliente?Param=1">Administrar Clientes</a>
+        <a href="servletCuenta?Param=1">Administrar Cuentas</a>
+        <a href="servletListarPrestamos">Administrar Prestamo</a>
+        <a href="Informes.jsp">Informes</a>
+        <a href="ClienteAgregar.jsp">Agregar Cliente</a>
+        <!-- <a href="AgregarCuenta.jsp">Agregar Cuenta</a> -->
     </div>
+    <div class="user-info"> 
+        <% 
+            String usuario = (String) session.getAttribute("usuarioLogueado");
+            if (usuario == null || usuario.isEmpty()) {
+                out.println("<a href='Login.jsp'>Ingresar sesión</a>");
+            } else {
+                out.println("Usuario: " + usuario + " <a href='CerrarSesionServlet'>Cerrar sesión</a>");
+            }
+        %>
+    </div>
+</div>
 </body>
 </html>

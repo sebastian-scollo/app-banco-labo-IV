@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 
 import dao.daoMovimiento;
 import entidades.Movimiento;
+import entidades.Prestamo;
 import entidades.TipoMovimiento;
 
 public class daoMovimientoImpl implements daoMovimiento {
@@ -251,6 +252,71 @@ public class daoMovimientoImpl implements daoMovimiento {
 		        return false;
 		    }
 	}
-	
+
+	@Override
+	public boolean altaPrestamo(Prestamo prestamo) {
+		conexion con = new conexion();
+		
+        Connection cn = null;
+        PreparedStatement psMovimiento = null;
+        PreparedStatement psCuenta = null;
+        
+        String sqlInsertMovimiento = "INSERT INTO Movimientos (Detalle, Importe, cbuReceptor, TipoMovimientoID) VALUES (?, ?, ?, ?)";
+        String sqlUpdateCuenta = "UPDATE Cuentas SET Saldo = Saldo + ? WHERE IDCuenta = ?";
+        final int ID_ALTA_PRESTAMO = 2;
+        final String DETALLE_MOVIMIENTO = "Alta de prestamo";
+        daoCuotaImpl generarCuotas = new daoCuotaImpl();
+        try {
+        	if (prestamo == null || prestamo.getCuenta() == null || prestamo.getMontoSolicitado() <= 0) {
+                System.err.println("Datos de préstamo inválidos.");
+                return false;
+            }
+            // Obtener conexión y desactivar auto-commit
+            cn = con.obtenerConexion();
+            cn.setAutoCommit(false);
+            // Insertar movimiento
+            psMovimiento = cn.prepareStatement(sqlInsertMovimiento);
+            psMovimiento.setString(1, DETALLE_MOVIMIENTO);
+            psMovimiento.setDouble(2, prestamo.getMontoSolicitado());
+            psMovimiento.setString(3, prestamo.getCuenta().getCBU());
+            psMovimiento.setInt(4, ID_ALTA_PRESTAMO);
+            psMovimiento.executeUpdate();
+            // Actualizar saldo de la cuenta
+            psCuenta = cn.prepareStatement(sqlUpdateCuenta);
+            psCuenta.setDouble(1, prestamo.getMontoSolicitado());
+            psCuenta.setInt(2, prestamo.getCuenta().getIdCuenta());
+            psCuenta.executeUpdate();
+            // Insertar cuotas segun el plazo
+            if (!generarCuotas.registrarCuotas(prestamo)) {
+                System.err.println("Error al generar las cuotas para el préstamo con ID: " + prestamo.getIdPrestamo());
+                return false;
+            }
+            
+            // Confirmar transacción
+            cn.commit();
+            return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            try {
+                if (cn != null) {
+                    cn.rollback(); // Revertir cambios si ocurre un error
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+            return false;
+        } finally {
+            try {
+                if (psMovimiento != null) psMovimiento.close();
+                if (psCuenta != null) psCuenta.close();
+                if (cn != null) {
+                    cn.setAutoCommit(true); 
+                    con.cerrarConexion();
+                }
+            } catch (SQLException e) {
+                System.err.println("Error al realizar alta de préstamo: " + e.getMessage());
+            }
+        }		
+	}
 
 }

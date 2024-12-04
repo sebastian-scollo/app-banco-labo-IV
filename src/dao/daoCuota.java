@@ -9,4 +9,5 @@ public interface daoCuota {
    ArrayList<Cuota> getCuotaPendiente(int idPrestamo);
    boolean pagarCuota(int idCuota, double importe);
     double obtenerSaldoCuentaPorPrestamo(int idPrestamo);
+    public boolean registrarCuotas(Prestamo prestamo);
 }

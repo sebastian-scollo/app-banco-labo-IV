@@ -384,6 +384,7 @@ public boolean EditarCliente(Cliente cliente) {
 	    	ex.printStackTrace();
 	    	return false;
 	    }
+	    
   }
 @Override
 public boolean ExisteIdCliente(int idCliente) {

@@ -43,6 +43,7 @@ public class servletEditarCliente extends HttpServlet {
 	            }
 	        }
 	        
+	        
 	        request.getRequestDispatcher("EditarClientes.jsp").forward(request, response);
 	}
 

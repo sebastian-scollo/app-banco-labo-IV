@@ -12,4 +12,7 @@ public interface negocioCuotas {
 	   ArrayList<Cuota> getCuotaPendiente(int idPrestamo);   
 	   boolean pagarCuota(int idCuota, double importe);
 	   double obtenerSaldoCuentaPorPrestamo(int idPrestamo);
+
+
 }
+

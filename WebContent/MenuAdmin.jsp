@@ -101,11 +101,11 @@ else if ((int)session.getAttribute("tipoUsuario") != 1) {
     
     <div class="menu-container">
         <a href="servletCuenta?Param=1">Administrar Cuenta</a>
-        <a href="ServletListarCliente?Param=1">Administrar Clientes</a>lo
+      <a href="ServletListarCliente?Param=1">Administrar Clientes</a>
         <a href="Informes.jsp">Reportes de Clientes</a>
         <a href="TipoMovimientoTotalconPorcentaje.jsp">Informe TipoMovimiento</a>
         <a href="InformeCuentaCreadas.jsp">Informe Cuenta</a>
-        <a href="contact.jsp">Ver Solicitudes de préstamos</a>
+         <a href="servletListarPrestamos">Administrar préstamos</a>
         <a href="ServletAgregarCuenta?Param=1">Agregar Cuenta</a>
         
     </div>

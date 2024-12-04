@@ -21,6 +21,7 @@
     background-color: #f7f3f3;
   }
 
+
   .contenedor {
     padding: 20px;
     max-width: 600px;
