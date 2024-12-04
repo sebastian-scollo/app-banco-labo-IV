@@ -95,11 +95,11 @@
                 <label>Cuotas Pendientes:</label>
                 <select name="idCuota" class="form-input" required>
                     <option value="">Seleccione una cuota</option>
-                    <c:forEach var="cuota" items="${cuotasPendientes}">
-                        <option value="${cuota.idCuota}">
-                            Cuota ${cuota.nroCuota} - Importe: ${cuota.importeAbonado}
-                        </option>
-                    </c:forEach>
+                   <c:forEach var="cuota" items="${cuotasPendientes}">
+                         <option value="${cuota.idCuota}">
+                                       ${cuota.nroCuota}
+                          </option>
+                   </c:forEach>
                 </select>
             </div>
             <div class="form-group">

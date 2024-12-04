@@ -93,6 +93,16 @@
 	else if ((int)session.getAttribute("tipoUsuario") != 1) {
 		response.sendRedirect("MenuCliente.jsp");
 	}%>
+	    <% if (request.getAttribute("mensaje") != null) { %>
+        <div class="alert alert-success">
+            <%= request.getAttribute("mensaje") %>
+        </div>
+    <% } %>
+    <% if (request.getAttribute("error") != null) { %>
+        <div class="alert alert-danger">
+            <%= request.getAttribute("error") %>
+        </div>
+    <% } %>
    <%@ include file="BarraMenuAdmin.jsp" %>
       
     <div class="table-container">
@@ -107,6 +117,7 @@
                 <tr>
                     <th>CBU</th>
                     <th>Monto Pedido</th>
+                    <th>Monto Definitivo a pagar</th>
                     <th>Cantidad Cuotas</th>
                     <th>Fecha</th>
                     <th>Opciones</th>
@@ -121,6 +132,7 @@
                 <tr>
                     <td><%= prestamo.getCuenta().getCBU()%></td>
                     <td><%= prestamo.getMontoSolicitado() %></td>
+                    <td><%= prestamo.getImporteApagar() %></td>
                     <td><%= prestamo.getPlazo()%></td>     
                     <td><%=prestamo.getFechaSolicitado() %></td>
                     
@@ -132,10 +144,11 @@
                         </button>
                         </form>
                         <form action="ServletProcesarPrestamo" method="post">
-                        <button class="action-button reject-button" name="btnRechazar">
-                            <i class="bi bi-x-circle"></i> Rechazar
-                        </button>
-                        </form>
+                              <input type="hidden" name="idPrestamo" value="<%= prestamo.getIdPrestamo() %>">
+                   <button class="action-button reject-button" name="btnRechazar">
+                      <i class="bi bi-x-circle"></i> Rechazar
+                 </button>
+                  </form>
                     </td>
                 </tr>
                 <%}%>
